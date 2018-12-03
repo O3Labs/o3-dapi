@@ -6,6 +6,11 @@ body {
   overflow: hidden;
 }
 
+textarea {
+  width: 100%;
+  height: 10rem;
+}
+
 .nav {
   position: absolute;
   top: 0;

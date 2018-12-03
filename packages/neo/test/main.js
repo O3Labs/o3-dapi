@@ -189,7 +189,7 @@ o3dapi.NEO.addEventListener(o3dapi.NEO.Constants.EventName.READY, onReady);
 
 function onReady() {
   o3dapi.NEO.getNetworks()
-  .then(networks => {
+  .then(({networks}) => {
     networks.forEach(network => {
       const option = document.createElement('option');
       if (network === 'TestNet') {

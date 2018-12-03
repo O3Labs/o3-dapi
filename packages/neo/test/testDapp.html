@@ -15,7 +15,7 @@
   <!-- <script type="text/javascript" src="../build/bundle.js"></script> -->
 
   <script src="https://cdn.jsdelivr.net/npm/o3-dapi-core@0.0.7/lib/o3-dapi-core.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/o3-dapi-neo@0.0.4/lib/o3-dapi-neo.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/o3-dapi-neo@0.0.5/lib/o3-dapi-neo.min.js"></script>
 </head>
 
 <body>
@@ -60,7 +60,7 @@
           <p class="text">
             <p>Return balance of a specific asset for the given account, or all balances for an account. Also takes multiple entries.</p>
           </p>
-          <textarea id='balanceInput' name="name" rows="4" cols="80">[{"address":"AScKxyXmNtEnTLTvbVhNQyTJmgytxhwSnM","asset":"GAS"}]</textarea>
+          <textarea id='balanceInput' name="name">[{"address":"AScKxyXmNtEnTLTvbVhNQyTJmgytxhwSnM","assets":["GAS"]}]</textarea>
           <button type="button" class="btn btn-primary" onclick="getBalance()">Get Balance</button>
         </div>
 
@@ -89,7 +89,7 @@
           <input id='invokeReadOperation' type="text" value="balanceOf"/>
           <br/>
           <p>Arguments:</p>
-          <textarea id='invokeReadArgs' rows="4" cols="80">[{"type":"ByteArray","value":"bd097b2fcf70e1fd30a5c3ef51e662feeafeba01"}]</textarea>
+          <textarea id='invokeReadArgs'>[{"type":"ByteArray","value":"bd097b2fcf70e1fd30a5c3ef51e662feeafeba01"}]</textarea>
           <button type="button" class="btn btn-primary" onclick="invokeRead()">Invoke read</button>
         </div>
 
@@ -106,7 +106,7 @@
           <input id='invokeOperation' type="text" value="transfer"/>
           <br/>
           <p>Arguments:</p>
-          <textarea id='invokeArgs' rows="4" cols="80">[{"type":"ByteArray","value":""},{"type":"ByteArray","value":""},{"type":"ByteArray","value":"0100000000000000"}]</textarea>
+          <textarea id='invokeArgs'>[{"type":"ByteArray","value":""},{"type":"ByteArray","value":""},{"type":"ByteArray","value":"0100000000000000"}]</textarea>
           <br/>
           <p>Attached assets: (Optional)</p>
           <input id='invokeAttachedAssets' type="text"/>
@@ -114,7 +114,7 @@
           <p>Fee: (Optional)</p>
           <input id='invokeFee' type="text" placeholder="eg. 0.00000001"/>
           <p>Asset Intent Overrides:</p>
-          <textarea id='assetIntentOverrides' rows="4" cols="80"></textarea>
+          <textarea id='assetIntentOverrides'></textarea>
           <br/>
           <p>Trigger contract verification:</p>
           <input id='triggerContractVerification' type="checkbox" />

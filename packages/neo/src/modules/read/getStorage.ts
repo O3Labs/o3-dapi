@@ -7,7 +7,11 @@ interface GetStorageArgs {
   network?: string;
 }
 
-export function getStorage(data: GetStorageArgs): Promise<string> {
+interface GetStorageOutput {
+  result: string;
+}
+
+export function getStorage(data: GetStorageArgs): Promise<GetStorageOutput> {
   return sendMessage({
     command: Command.getStorage,
     data,

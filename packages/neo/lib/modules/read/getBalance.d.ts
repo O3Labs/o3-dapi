@@ -1,6 +1,7 @@
 interface BalanceRequest {
     address: string;
-    asset?: string;
+    assets?: string[];
+    fetchUTXO?: boolean;
 }
 interface GetBalanceArgs {
     params: BalanceRequest | BalanceRequest[];

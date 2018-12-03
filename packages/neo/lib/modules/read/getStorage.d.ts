@@ -3,6 +3,9 @@ interface GetStorageArgs {
     key: string;
     network?: string;
 }
-export declare function getStorage(data: GetStorageArgs): Promise<string>;
+interface GetStorageOutput {
+    result: string;
+}
+export declare function getStorage(data: GetStorageArgs): Promise<GetStorageOutput>;
 export {};
 //# sourceMappingURL=getStorage.d.ts.map
