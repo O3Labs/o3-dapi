@@ -5,6 +5,9 @@ import {
   addEventsListener,
 } from './messages';
 
+import { initSocket } from './socket';
+initSocket();
+
 const o3dapiCore: any = {};
 
 o3dapiCore.initPlugins = (plugins: Plugin[]) => {

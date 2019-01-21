@@ -14,7 +14,8 @@ const messageQueue = {};
 const eventsListeners: {[blockchain: string]: EventHandler} = {};
 
 window._o3dapi = window._o3dapi ? window._o3dapi : {};
-_o3dapi.receiveMessage = (message: IncomingMessage) => {
+
+function receiveMessage(message: IncomingMessage) {
   try {
     if (typeof message === 'string') {
       message = JSON.parse(message);
@@ -56,7 +57,9 @@ _o3dapi.receiveMessage = (message: IncomingMessage) => {
       error ? reject(error) : resolve(data);
     }
   } catch (err) {}
-};
+}
+
+_o3dapi.receiveMessage = receiveMessage;
 
 export function addEventsListener({blockchain, callback}: AddEventsListenerArgs) {
   eventsListeners[blockchain] = callback;
@@ -82,9 +85,13 @@ export function sendMessage({
   };
 
   return new Promise((resolve, reject) => {
+
     const messageHandler = get(window, 'window._o3dapi.messageHandler');
+
     const webkitPostMessage = get(window, 'window.webkit.messageHandlers.sendMessageHandler.postMessage');
+
     const isIOS = Boolean(webkitPostMessage) && typeof webkitPostMessage === 'function';
+
     if (messageHandler) {
       try {
         window._o3dapi.messageHandler(JSON.stringify(message));
