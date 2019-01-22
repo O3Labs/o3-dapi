@@ -8,6 +8,7 @@ import {
   AddEventsListenerArgs,
   SendMessageArgs,
 } from './types';
+import { isSocketConnected, sendSocketMessage } from './socket';
 
 const PLATFORM = 'o3-dapi';
 const messageQueue = {};
@@ -15,7 +16,7 @@ const eventsListeners: {[blockchain: string]: EventHandler} = {};
 
 window._o3dapi = window._o3dapi ? window._o3dapi : {};
 
-function receiveMessage(message: IncomingMessage) {
+export function receiveMessage(message: IncomingMessage) {
   try {
     if (typeof message === 'string') {
       message = JSON.parse(message);
@@ -92,7 +93,9 @@ export function sendMessage({
 
     const isIOS = Boolean(webkitPostMessage) && typeof webkitPostMessage === 'function';
 
-    if (messageHandler) {
+    if (isSocketConnected()) {
+      sendSocketMessage(message);
+    } else if (messageHandler) {
       try {
         window._o3dapi.messageHandler(JSON.stringify(message));
       } catch (err) {
@@ -108,7 +111,7 @@ export function sendMessage({
       reject(`O3 dapi provider not found.`);
     }
 
-    if (messageHandler || webkitPostMessage) {
+    if (messageHandler || webkitPostMessage || isSocketConnected()) {
       messageQueue[messageId] = {
         resolve,
         reject,

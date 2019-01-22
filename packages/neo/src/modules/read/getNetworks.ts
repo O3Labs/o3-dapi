@@ -9,6 +9,6 @@ interface GetNetworksOutput {
 export function getNetworks(): Promise<GetNetworksOutput> {
   return sendMessage({
     command: Command.getNetworks,
-    timeout: 2500,
+    // timeout: 2500,
   });
 }

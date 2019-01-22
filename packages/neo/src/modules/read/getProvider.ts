@@ -12,6 +12,6 @@ interface Provider {
 export function getProvider(): Promise<Provider> {
   return sendMessage({
     command: Command.getProvider,
-    timeout: 2500,
+    // timeout: 2500,
   });
 }
