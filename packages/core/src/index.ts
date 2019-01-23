@@ -6,7 +6,6 @@ import {
 } from './messages';
 
 import { initSocket } from './socket';
-initSocket();
 
 const o3dapiCore: any = {};
 
@@ -17,5 +16,9 @@ o3dapiCore.initPlugins = (plugins: Plugin[]) => {
 };
 
 o3dapiCore.isAvailable = Boolean((window as any)._o3dapi.isAvailable);
+
+if (!o3dapiCore.isAvailable) {
+  initSocket();
+}
 
 export default o3dapiCore;

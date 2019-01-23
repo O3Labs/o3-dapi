@@ -2,22 +2,21 @@ import openSocket from 'socket.io-client';
 import { receiveMessage } from './messages';
 
 let socket;
+let isConnected;
 
 export function initSocket() {
   socket = openSocket('http://127.0.0.1:50005');
 
   socket.on('connect', res => {
-    console.warn('CONNECTION!!!!!!!', res);
+    isConnected = true;
   });
 
   socket.on('event', res => {
-    console.warn('EVENT!!!!!!!', res);
     receiveMessage(res);
   });
 
   socket.on('disconnect', res => {
-    console.error('DISCONNECTION!!!!!!!', res);
-    socket = null;
+    isConnected = false;
   });
 
   setTimeout(() => {
@@ -26,7 +25,7 @@ export function initSocket() {
 }
 
 export function isSocketConnected() {
-  return Boolean(socket);
+  return isConnected;
 }
 
 export function sendSocketMessage(message) {
