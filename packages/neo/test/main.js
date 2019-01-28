@@ -90,7 +90,11 @@ function getAccount() {
   }
 
   o3dapi.NEO.getAccount(data)
-  .then(handleSuccess)
+  .then(accountData => {
+    accountEle.innerHTML = `Connected Account: ${data.label ? data.label + ' - ' : ''}${data.address}`;
+    disconnectEle.innerHTML = 'disconnect';
+    handleSuccess(accountData);
+  })
   .catch(handleError);
 }
 

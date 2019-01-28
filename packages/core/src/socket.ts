@@ -5,7 +5,7 @@ let socket;
 let isConnected;
 
 export function initSocket() {
-  socket = openSocket('http://127.0.0.1:50005');
+  socket = openSocket('https://dapi.o3.app:63333');
 
   socket.on('connect', res => {
     isConnected = true;
