@@ -8,7 +8,7 @@ import * as stake from './modules/stake';
 import * as oep4 from './modules/oep4';
 
 import { getProvider } from './modules/getProvider';
-import { getAccount } from './modules/getAccount';
+import { getAccount, getPublicKey } from './modules/account';
 import { getNetworks } from './modules/getNetworks';
 import { disconnect } from './modules/disconnect';
 
@@ -31,6 +31,7 @@ class O3dapiOnt {
   getProvider = getProvider;
   getNetworks = getNetworks;
   getAccount = getAccount;
+  getPublicKey = getPublicKey;
   disconnect = disconnect;
 
   identity = {

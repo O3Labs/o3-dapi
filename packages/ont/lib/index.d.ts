@@ -7,7 +7,7 @@ import * as network from './modules/network';
 import * as stake from './modules/stake';
 import * as oep4 from './modules/oep4';
 import { getProvider } from './modules/getProvider';
-import { getAccount } from './modules/getAccount';
+import { getAccount, getPublicKey } from './modules/account';
 import { getNetworks } from './modules/getNetworks';
 import { disconnect } from './modules/disconnect';
 import { ParameterType } from './modules/sc/common';
@@ -19,6 +19,7 @@ declare class O3dapiOnt {
     getProvider: typeof getProvider;
     getNetworks: typeof getNetworks;
     getAccount: typeof getAccount;
+    getPublicKey: typeof getPublicKey;
     disconnect: typeof disconnect;
     identity: {
         getIdentity: typeof identity.getIdentity;

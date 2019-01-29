@@ -10,8 +10,12 @@ o3dapi.ONT.getProvider()
     website,
     version,
     compatibility,
-    theme,
+    extra,
   } = provider;
+
+  const {
+    theme,
+  } = extra;
 
   console.log('Provider name: ' + name);
   console.log('Provider website: ' + website);
@@ -41,7 +45,9 @@ o3dapi.ONT.getProvider()
   compatibility: [
     'OEP-6',
   ],
-  theme: 'Dark Mode'
+  extra: {
+    theme: 'Dark Mode'
+  }
 }
 ```
 
@@ -58,7 +64,12 @@ None
 | website       | String   | The website of the wallet provider                               |
 | version       | String   | The version of the dAPI that the the wallet supports             |
 | compatibility | String[] | A list of all applicable NEPs which the wallet provider supports |
-| theme         | String   | UI theme of the provider                                         |
+| extra         | Object   | Provider specific attributes                                     |
+
+##### extra
+| Parameter | Type   | Description              |
+| --------- | ------ | ------------------------ |
+| theme     | string | UI theme of the provider |
 
 
 ### Error Response
@@ -132,6 +143,56 @@ o3dapi.ONT.getAccount()
 .then((account: Account) => {
   const {
     address,
+    label,
+  } = account;
+
+  console.log('Provider address: ' + address);
+  console.log('Account label: ' + label);
+})
+.catch(({type: string, description: string, data: any}) => {
+  switch(type) {
+    case NO_PROVIDER:
+      console.log('No provider available.');
+      break;
+    case CONNECTION_DENIED:
+      console.log('The user rejected the request to connect with your dApp');
+      break;
+  }
+});
+```
+
+> Example Response
+
+```typescript
+{
+  address: 'AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru',
+  label: 'My Spending Wallet'
+}
+```
+
+Return the Account that is currently connected to the dApp.
+
+### Success Response
+| Parameter | Type   | Description                                                        |
+|:--------- |:------ |:------------------------------------------------------------------ |
+| address   | String | The address of the account that is currently connected to the dapp |
+| label     | String | A label the users has set to identify their wallet                 |
+
+### Error Response
+| Parameter   | Type    | Description                                  |
+|:----------- |:------- |:-------------------------------------------- |
+| type        | String  | The type of error which has occured          |
+| description | String  | A description of the error which has occured |
+| data        | String? | Any raw data associated with the error       |
+
+
+## getPublicKey
+
+```typescript
+o3dapi.ONT.getPublicKey()
+.then((account: AccountPublicKey) => {
+  const {
+    address,
     publicKey,
   } = account;
 
@@ -159,7 +220,7 @@ o3dapi.ONT.getAccount()
 }
 ```
 
-Return the Account that is currently connected to the dApp.
+Return the AccountPublicKey that is currently connected to the dApp.
 
 ### Success Response
 | Parameter | Type   | Description                                                           |

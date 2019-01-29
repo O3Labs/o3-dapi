@@ -5,8 +5,6 @@ const networksEle = document.getElementById("networks");
 const accountEle = document.getElementById("account");
 const disconnectEle = document.getElementById("disconnect");
 
-const returnAccountPublicKeyEle = document.getElementById("returnAccountPublicKey");
-
 const getMerkleProofInputEle = document.getElementById("getMerkleProofInput");
 
 const getTransactionInputEle = document.getElementById("getTransactionInput");
@@ -95,15 +93,20 @@ function getNetworks() {
 
 function getAccount() {
   startLoading();
-  let data;
 
-  if (returnAccountPublicKeyEle.checked) {
-    data = {
-      publicKey: true,
-    };
-  }
+  o3dapi.ONT.getAccount()
+  .then(accountData => {
+    accountEle.innerHTML = `Connected Account: ${accountData.address}`;
+    disconnectEle.innerHTML = 'disconnect';
+    handleSuccess(accountData);
+  })
+  .catch(handleError);
+}
 
-  o3dapi.ONT.getAccount(data)
+function getPublicKey() {
+  startLoading();
+
+  o3dapi.ONT.getPublicKey()
   .then(handleSuccess)
   .catch(handleError);
 }
@@ -346,9 +349,20 @@ if (o3dapi.ONT.isAvailable) {
 
 o3dapi.ONT.addEventListener(o3dapi.ONT.Constants.EventName.READY, onReady);
 
+o3dapi.ONT.addEventListener(o3dapi.ONT.Constants.EventName.CONNECTED, data => {
+  accountEle.innerHTML = `Connected Account: ${data.address}`;
+  disconnectEle.innerHTML = 'disconnect';
+});
+
 o3dapi.ONT.addEventListener(o3dapi.ONT.Constants.EventName.ACCOUNT_CHANGED, data => {
   accountEle.innerHTML = `Connected Account: ${data.address}`;
   disconnectEle.innerHTML = 'disconnect';
+});
+
+o3dapi.ONT.addEventListener(o3dapi.ONT.Constants.EventName.DISCONNECTED, data => {
+  accountEle.innerHTML = '';
+  disconnectEle.innerHTML = '';
+  clearText();
 });
 
 function onReady() {

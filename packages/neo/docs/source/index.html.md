@@ -97,15 +97,19 @@ Read methods do not alter the state of the blockchain. It can help you query inf
 ## getProvider
 
 ```typescript
-getProvider()
+o3dapi.NEO.getProvider()
 .then((provider: Provider) => {
   const {
     name,
     website,
     version,
     compatibility,
-    theme,
+    extra,
   } = provider;
+
+  const {
+    theme,
+  } = extra;
 
   console.log('Provider name: ' + name);
   console.log('Provider website: ' + website);
@@ -137,7 +141,9 @@ getProvider()
     'NEP-23',
     'NEP-29'
   ],
-  theme: 'Dark Mode'
+  extra: {
+    theme: 'Dark Mode'
+  }
 }
 ```
 
@@ -154,8 +160,12 @@ None
 | website       | String   | The website of the wallet provider                               |
 | version       | String   | The version of the dAPI that the the wallet supports             |
 | compatibility | String[] | A list of all applicable NEPs which the wallet provider supports |
-| theme         | String   | UI theme of the provider                                         |
+| extra         | Object   | Provider specific attributes                                     |
 
+##### extra
+| Parameter | Type   | Description              |
+| --------- | ------ | ------------------------ |
+| theme     | string | UI theme of the provider |
 
 ### Error Response
 | Parameter   | Type    | Description                                  |
@@ -167,7 +177,7 @@ None
 ## getNetworks
 
 ```typescript
-getNetworks()
+dapi.NEO.getNetworks()
 .then(response => {
   const {
     networks,
@@ -224,15 +234,15 @@ None
 ## getAccount
 
 ```typescript
-getAccount()
+o3dapi.NEO.getAccount()
 .then((account: Account) => {
   const {
     address,
-    publicKey,
+    label,
   } = account;
 
-  console.log('Provider address: ' + address);
-  console.log('Provider public key: ' + publicKey);
+  console.log('Account address: ' + address);
+  console.log('Account label: ' + label);
 })
 .catch(({type: string, description: string, data: any}) => {
   switch(type) {
@@ -251,17 +261,17 @@ getAccount()
 ```typescript
 {
   address: 'AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru',
-  publicKey: '03d43468721ef8936548878071b534d8228c313e02e6d90cef8c65fd3c2d4eaeed'
+  label: 'My Spending Wallet'
 }
 ```
 
 Return the Account that is currently connected to the dApp.
 
 ### Success Response
-| Parameter | Type   | Description                                                           |
-|:--------- |:------ |:--------------------------------------------------------------------- |
-| address   | String | The address of the account that is currently connected to the dapp    |
-| publicKey | String | The public key of the account that is currently connected to the dapp |
+| Parameter | Type   | Description                                                        |
+|:--------- |:------ |:------------------------------------------------------------------ |
+| address   | String | The address of the account that is currently connected to the dapp |
+| label     | String | A label the users has set to identify their wallet                 |
 
 ### Error Response
 | Parameter   | Type    | Description                                  |
@@ -273,7 +283,7 @@ Return the Account that is currently connected to the dApp.
 ## getBalance
 
 ```typescript
-getBalance({
+o3dapi.NEO.getBalance({
   params: {
     address: 'AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru',
     assets: ['NKN']
@@ -467,7 +477,7 @@ The amount of addresses is n where n is the number of addresses specified in you
 ## getStorage
 
 ```typescript
-getStorage({
+o3dapi.NEO.getStorage({
   scriptHash: '505663a29d83663a838eee091249abd167e928f5',
   key: 'game.status',
   network: 'TestNet'
@@ -524,7 +534,7 @@ Returns the raw value located in contract storage
 ## invokeRead
 
 ```typescript
-invokeRead({
+o3dapi.NEO.invokeRead({
   scriptHash: '505663a29d83663a838eee091249abd167e928f5',
   operation: 'calculatorAdd',
   arguments: [
@@ -618,7 +628,7 @@ Write methods will alter the state on the blockchain, and require a user signatu
 ## send
 
 ```typescript
-send({
+o3dapi.NEO.send({
   fromAddress: 'ATaWxfUAiBcQixNPq6TvKHEHPQum9bx79d',
   toAddress: 'ATaWxfUAiBcQixNPq6TvKHEHPQum9bx79d',
   asset: 'GAS',
@@ -694,7 +704,7 @@ It is reccommended that the DAPP take appropriate levels of risk prevention when
 
 ## Invoke
 ```typescript
-invoke({
+o3dapi.NEO.invoke({
   scriptHash: '505663a29d83663a838eee091249abd167e928f5',
   operation: 'storeData',
   arguments: [
@@ -750,7 +760,7 @@ Invoke allows for the generic execution of smart contracts on behalf of the user
 | fee                         | String?              | If a fee is specified then the wallet SHOULD NOT override it, if a fee is not specified the wallet SHOULD allow the user to attach an optional fee |
 | network                     | String               | Network alias to submit this request to.                                                                                                           |
 | assets                      | AttachedAssets?      | Describes the assets to attach with the smart contract, e.g. attaching assets to mint tokens during a token sale                                   |
-| assetIntentOverrides        | AssetIntentOverrides | Used to specify the exact the exact UTXO's to use for attached assets. If this is provided fee and attachedAssets will be ignored                  |
+| assetIntentOverrides        | AssetIntentOverrides | Used to specify the exact UTXO's to use for attached assets. If this is provided fee and attachedAssets will be ignored                            |
 | triggerContractVerification | Boolean?             | Adds the instruction to invoke the contract verifican trigger                                                                                      |
 
 #### Argument
@@ -805,21 +815,42 @@ Available types are "String"|"Boolean"|"Hash160"|"Integer"|"ByteArray"|"Array"|"
 # Events
 Events are a way for the wallet to asynchronously with the DAPP when certain changes occur to the state of the wallet that might be relevant for the
 
+
 ## READY
 On a READY event, the callback will fire with a single argument with information about the wallet provider. At any time a READY event listener is added, it will immidiately be called if the provider is already in a ready state. This provides a single flow for dapp developers since this listener should start any and all interactions with the dapi protocol.
 
-| Parameter     | Type     | Description                                        |
-|:------------- |:-------- |:-------------------------------------------------- |
-| name          | String   | Name of the provider                               |
-| website       | String   | Website of the provider                            |
-| version       | String   | Version of the dAPI whih the provider supports     |
-| compatibility | String[] | List of NEP's which the dAPI provider will support |
+| Parameter     | Type     | Description                                                      |
+|:------------- |:-------- |:---------------------------------------------------------------- |
+| name          | String   | The name of the wallet provider                                  |
+| website       | String   | The website of the wallet provider                               |
+| version       | String   | The version of the dAPI that the the wallet supports             |
+| compatibility | String[] | A list of all applicable NEPs which the wallet provider supports |
+| extra         | Object   | Provider specific attributes                                     |
 
+##### extra
+| Parameter | Type   | Description              |
+| --------- | ------ | ------------------------ |
+| theme     | string | UI theme of the provider |
 
 ## ACCOUNT_CHANGED
-On a ACCOUNT_CHANGED event, the callback will fire with a single argument of the new account. In the case that the user logs out without providing a new account to connect, this will be null.
+On a ACCOUNT_CHANGED event, the callback will fire with a single argument of the new account. This occurs when an account is already connected to the dapp, and the user has changed the connected account from the dapi provider side.
 
-| Parameter | Type   | Description                   |
-|:--------- |:------ |:----------------------------- |
-| address   | String | Address of the new account    |
-| publicKey | String | Public Key of the new account |
+| Parameter | Type   | Description                                        |
+|:--------- |:------ |:-------------------------------------------------- |
+| address   | String | Address of the new account                         |
+| label     | String | A label the users has set to identify their wallet |
+
+
+## CONNECTED
+
+On a CONNECTED event, the user has approved the connection of the dapp with one of their accounts. This will fire the first time any of one of the following methods are called from the dapp: `getAccount`, `invoke`, `send`.
+
+| Parameter | Type   | Description                                        |
+|:--------- |:------ |:-------------------------------------------------- |
+| address   | String | Address of the new account                         |
+| label     | String | A label the users has set to identify their wallet |
+
+
+## DISCONNECTED
+
+On a DISCONNECTED event, the account connected to the dapp via the dapi provider has been disconnected (logged out).

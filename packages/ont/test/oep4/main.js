@@ -263,9 +263,20 @@ if (o3dapi.ONT.isAvailable) {
 
 o3dapi.ONT.addEventListener(o3dapi.ONT.Constants.EventName.READY, onReady);
 
+o3dapi.ONT.addEventListener(o3dapi.ONT.Constants.EventName.CONNECTED, data => {
+  accountEle.innerHTML = `Connected Account: ${data.address}`;
+  disconnectEle.innerHTML = 'disconnect';
+});
+
 o3dapi.ONT.addEventListener(o3dapi.ONT.Constants.EventName.ACCOUNT_CHANGED, data => {
   accountEle.innerHTML = `Connected Account: ${data.address}`;
   disconnectEle.innerHTML = 'disconnect';
+});
+
+o3dapi.ONT.addEventListener(o3dapi.ONT.Constants.EventName.DISCONNECTED, data => {
+  accountEle.innerHTML = '';
+  disconnectEle.innerHTML = '';
+  clearText();
 });
 
 function onReady() {

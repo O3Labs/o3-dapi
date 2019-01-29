@@ -4,9 +4,6 @@ const loadingEle = document.getElementById("loading");
 const accountEle = document.getElementById("account");
 const disconnectEle = document.getElementById("disconnect");
 
-const returnAccountPublicKeyEle = document.getElementById("returnAccountPublicKey");
-
-
 const balanceInputEle = document.getElementById("balanceInput");
 
 const getStorageScriptHashEle = document.getElementById("getStorageScriptHash");
@@ -81,17 +78,10 @@ function getNetworks() {
 
 function getAccount() {
   startLoading();
-  let data;
 
-  if (returnAccountPublicKeyEle.checked) {
-    data = {
-      publicKey: true,
-    };
-  }
-
-  o3dapi.NEO.getAccount(data)
+  o3dapi.NEO.getAccount()
   .then(accountData => {
-    accountEle.innerHTML = `Connected Account: ${data.label ? data.label + ' - ' : ''}${data.address}`;
+    accountEle.innerHTML = `Connected Account: ${accountData.address}`;
     disconnectEle.innerHTML = 'disconnect';
     handleSuccess(accountData);
   })
@@ -215,9 +205,20 @@ if (o3dapi.NEO.isAvailable) {
 
 o3dapi.NEO.addEventListener(o3dapi.NEO.Constants.EventName.READY, onReady);
 
+o3dapi.NEO.addEventListener(o3dapi.NEO.Constants.EventName.CONNECTED, data => {
+  accountEle.innerHTML = `Connected Account: ${data.address}`;
+  disconnectEle.innerHTML = 'disconnect';
+});
+
 o3dapi.NEO.addEventListener(o3dapi.NEO.Constants.EventName.ACCOUNT_CHANGED, data => {
   accountEle.innerHTML = `Connected Account: ${data.address}`;
   disconnectEle.innerHTML = 'disconnect';
+});
+
+o3dapi.NEO.addEventListener(o3dapi.NEO.Constants.EventName.DISCONNECTED, data => {
+  accountEle.innerHTML = '';
+  disconnectEle.innerHTML = '';
+  clearText();
 });
 
 function onReady() {

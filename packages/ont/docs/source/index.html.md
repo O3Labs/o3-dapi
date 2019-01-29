@@ -18,6 +18,7 @@ includes:
   - scMethods
   - stakeMethods
   - oep4Methods
+  - events
   - errors
   - devEnv
 

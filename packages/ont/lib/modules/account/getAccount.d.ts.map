@@ -1,1 +1,1 @@
-{"version":3,"file":"getAccount.d.ts","sourceRoot":"","sources":["../../../src/modules/account/getAccount.ts"],"names":[],"mappings":"AAGA,wBAAgB,UAAU,IAAI,OAAO,CAAC,MAAM,CAAC,CAI5C"}
+{"version":3,"file":"getAccount.d.ts","sourceRoot":"","sources":["../../../src/modules/account/getAccount.ts"],"names":[],"mappings":"AAGA,UAAU,aAAa;IACrB,OAAO,EAAE,MAAM,CAAC;IAChB,KAAK,EAAE,MAAM,CAAC;CACf;AAED,wBAAgB,UAAU,IAAI,OAAO,CAAC,aAAa,CAAC,CAInD"}
