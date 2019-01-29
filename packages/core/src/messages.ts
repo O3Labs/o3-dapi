@@ -8,7 +8,7 @@ import {
   AddEventsListenerArgs,
   SendMessageArgs,
 } from './types';
-import { isSocketConnected, sendSocketMessage } from './socket';
+import { isSocketConnected, sendSocketMessage, initSocket } from './socket';
 
 const PLATFORM = 'o3-dapi';
 const messageQueue = {};
@@ -108,7 +108,21 @@ export function sendMessage({
         reject(`O3 dapi provider not found.`);
       }
     } else {
-      reject(`O3 dapi provider not found.`);
+      initSocket()
+      .then(() => {
+        sendSocketMessage(message);
+        messageQueue[messageId] = {
+          resolve,
+          reject,
+          timeout: timeout && setTimeout(() => {
+            delete messageQueue[messageId];
+            reject('Request timeout.');
+          }, timeout),
+        };
+      })
+      .catch(() => {
+        reject(`O3 dapi provider not found.`);
+      });
     }
 
     if (messageHandler || webkitPostMessage || isSocketConnected()) {

@@ -18,7 +18,8 @@ o3dapiCore.initPlugins = (plugins: Plugin[]) => {
 o3dapiCore.isAvailable = Boolean((window as any)._o3dapi.isAvailable);
 
 if (!o3dapiCore.isAvailable) {
-  initSocket();
+  initSocket()
+  .catch(() => {});
 }
 
 export default o3dapiCore;

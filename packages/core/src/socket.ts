@@ -4,24 +4,41 @@ import { receiveMessage } from './messages';
 let socket;
 let isConnected;
 
-export function initSocket() {
-  socket = openSocket('https://dapi.o3.app:63333');
+export function initSocket(isHTTPS = true): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const url = isHTTPS ?
+      'https://dapi.o3.app:60003' :
+      'http://127.0.0.1:60003';
+    socket = openSocket(url);
 
-  socket.on('connect', res => {
-    isConnected = true;
+    socket.on('connect', res => {
+      isConnected = true;
+      resolve();
+    });
+
+    socket.on('event', res => {
+      receiveMessage(res);
+    });
+
+    socket.on('disconnect', res => {
+      isConnected = false;
+    });
+
+    socket.on('connect_error', err => {
+      socket.close();
+      if (isHTTPS) {
+        initSocket(false)
+        .then(() => resolve())
+        .catch(() => { reject(); });
+      } else {
+        reject();
+      }
+    });
+
+    setTimeout(() => {
+      socket.emit('ping');
+    }, 1000);
   });
-
-  socket.on('event', res => {
-    receiveMessage(res);
-  });
-
-  socket.on('disconnect', res => {
-    isConnected = false;
-  });
-
-  setTimeout(() => {
-    socket.emit('ping');
-  }, 1000);
 }
 
 export function isSocketConnected() {
