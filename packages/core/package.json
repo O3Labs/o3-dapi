@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/O3Labs/o3-dapi/tree/master/packages/core",
   "devDependencies": {
+    "@types/lodash-es": "4.17.1",
     "ts-loader": "5.2.2",
     "tslint": "5.11.0",
     "tslint-loader": "3.5.4",
@@ -28,9 +29,6 @@
     "webpack-cli": "3.1.2"
   },
   "dependencies": {
-    "@types/lodash-es": "4.17.1",
-    "bs58": "~4.0.1",
-    "crypto-js": "~3.1.9-1",
     "lodash-es": "4.17.11",
     "socket.io-client": "~2.2.0"
   },

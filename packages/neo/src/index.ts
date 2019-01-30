@@ -1,11 +1,11 @@
-import { getProvider } from './modules/read/getProvider';
-import { getNetworks } from './modules/read/getNetworks';
-import { getAccount } from './modules/read/getAccount';
-import { getBalance } from './modules/read/getBalance';
-import { getStorage } from './modules/read/getStorage';
-import { invokeRead } from './modules/read/invokeRead';
-import { send } from './modules/write/send';
-import { invoke } from './modules/write/invoke';
+import { getProvider, Provider } from './modules/read/getProvider';
+import { getNetworks, GetNetworksOutput } from './modules/read/getNetworks';
+import { getAccount, Account } from './modules/read/getAccount';
+import { getBalance, GetBalanceArgs, BalanceResults } from './modules/read/getBalance';
+import { getStorage, GetStorageArgs, GetStorageOutput } from './modules/read/getStorage';
+import { invokeRead, InvokeReadArgs } from './modules/read/invokeRead';
+import { send, SendArgs, SendOutput } from './modules/write/send';
+import { invoke, InvokeArgs, InvokeOutput } from './modules/write/invoke';
 import { disconnect } from './modules/disconnect';
 import { addEventListener, removeEventListener } from './modules/eventListener';
 import { ArgumentDataType, EventName, BLOCKCHAIN } from './constants';
@@ -43,3 +43,14 @@ class O3dapiNeo {
 }
 
 export default O3dapiNeo;
+export type getProvider = () => Promise<Provider>;
+export type getNetworks = () => Promise<GetNetworksOutput>;
+export type getAccount = () => Promise<Account>;
+export type getBalance = (data: GetBalanceArgs) => Promise<BalanceResults>;
+export type getStorage = (data: GetStorageArgs) => Promise<GetStorageOutput>;
+export type invokeRead = (data: InvokeReadArgs) => Promise<any>;
+export type send = (data: SendArgs) => Promise<SendOutput>;
+export type invoke = (data: InvokeArgs) => Promise<InvokeOutput>;
+export type disconnect = () => Promise<boolean>;
+export type addEventListener = (event: EventName, callback: Function) => void;
+export type removeEventListener = (event: EventName) => void;

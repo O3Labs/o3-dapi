@@ -1,7 +1,7 @@
 import { sendMessage } from '../../messaging';
 import { Command } from '../../constants';
 
-interface SendArgs {
+export interface SendArgs {
   fromAddress: string;
   toAddress: string;
   asset: string;
@@ -11,7 +11,7 @@ interface SendArgs {
   network: string;
 }
 
-interface SendOutput {
+export interface SendOutput {
   txid: string;
   nodeUrl: string;
 }

@@ -1,1 +1,1 @@
-{"version":3,"file":"getAccount.d.ts","sourceRoot":"","sources":["../../../src/modules/read/getAccount.ts"],"names":[],"mappings":"AAGA,UAAU,OAAO;IACf,OAAO,EAAE,MAAM,CAAC;IAChB,KAAK,EAAE,MAAM,CAAC;CACf;AAED,wBAAgB,UAAU,IAAI,OAAO,CAAC,OAAO,CAAC,CAI7C"}
+{"version":3,"file":"getAccount.d.ts","sourceRoot":"","sources":["../../../src/modules/read/getAccount.ts"],"names":[],"mappings":"AAGA,MAAM,WAAW,OAAO;IACtB,OAAO,EAAE,MAAM,CAAC;IAChB,KAAK,EAAE,MAAM,CAAC;CACf;AAED,wBAAgB,UAAU,IAAI,OAAO,CAAC,OAAO,CAAC,CAI7C"}

@@ -1,7 +1,7 @@
 import { sendMessage } from '../../messaging';
 import { Command } from '../../constants';
 
-interface Account {
+export interface Account {
   address: string;
   label: string;
 }

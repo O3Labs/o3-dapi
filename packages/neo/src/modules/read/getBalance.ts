@@ -7,12 +7,12 @@ interface BalanceRequest {
   fetchUTXO?: boolean;
 }
 
-interface GetBalanceArgs {
+export interface GetBalanceArgs {
   params: BalanceRequest|BalanceRequest[];
   network: string;
 }
 
-interface BalanceResults {
+export interface BalanceResults {
   [address: string]: Balance[];
 }
 

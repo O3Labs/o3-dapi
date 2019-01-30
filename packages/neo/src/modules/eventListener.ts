@@ -7,7 +7,7 @@ interface Listeners {
 
 const listeners: Listeners = {};
 
-export function addEventListener(event: EventName, callback: Function) {
+export function addEventListener(event: EventName, callback: Function): void {
   const currentListeners = listeners[event] || [];
   currentListeners.push(callback);
   listeners[event] = currentListeners;
@@ -20,7 +20,7 @@ export function addEventListener(event: EventName, callback: Function) {
   }
 }
 
-export function removeEventListener(event: EventName) {
+export function removeEventListener(event: EventName): void {
   listeners[event] = [];
 }
 

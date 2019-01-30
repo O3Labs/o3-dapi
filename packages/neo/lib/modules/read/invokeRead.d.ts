@@ -1,5 +1,5 @@
 import { ArgumentDataType } from '../../constants';
-interface InvokeReadArgs {
+export interface InvokeReadArgs {
     scriptHash: string;
     operation: string;
     args: Argument[];

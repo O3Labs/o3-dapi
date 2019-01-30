@@ -1,7 +1,7 @@
 import { sendMessage } from '../../messaging';
 import { Command } from '../../constants';
 
-interface GetNetworksOutput {
+export interface GetNetworksOutput {
   networks: string[];
   defaultNetwork: string;
 }

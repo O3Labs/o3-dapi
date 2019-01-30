@@ -1,7 +1,7 @@
 import { sendMessage } from '../../messaging';
 import { ArgumentDataType, Command } from '../../constants';
 
-interface InvokeArgs {
+export interface InvokeArgs {
   scriptHash: string;
   operation: string;
   args?: Argument[];
@@ -37,7 +37,7 @@ interface AssetOutput {
   value: string;
 }
 
-interface InvokeOutput {
+export interface InvokeOutput {
   txid: string;
   nodeUrl: string;
 }

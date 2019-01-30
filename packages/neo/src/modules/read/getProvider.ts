@@ -1,12 +1,12 @@
 import { sendMessage } from '../../messaging';
 import { Command } from '../../constants';
 
-interface Provider {
+export interface Provider {
   name: string;
   website: string;
   version: string;
   compatibility: string[];
-  theme: string;
+  extra: { theme: string };
 }
 
 export function getProvider(): Promise<Provider> {

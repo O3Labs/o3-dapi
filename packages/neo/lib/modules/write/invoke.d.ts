@@ -1,5 +1,5 @@
 import { ArgumentDataType } from '../../constants';
-interface InvokeArgs {
+export interface InvokeArgs {
     scriptHash: string;
     operation: string;
     args?: Argument[];
@@ -29,7 +29,7 @@ interface AssetOutput {
     address: number;
     value: string;
 }
-interface InvokeOutput {
+export interface InvokeOutput {
     txid: string;
     nodeUrl: string;
 }

@@ -1,4 +1,4 @@
-interface SendArgs {
+export interface SendArgs {
     fromAddress: string;
     toAddress: string;
     asset: string;
@@ -7,10 +7,9 @@ interface SendArgs {
     fee?: string;
     network: string;
 }
-interface SendOutput {
+export interface SendOutput {
     txid: string;
     nodeUrl: string;
 }
 export declare function send(data: SendArgs): Promise<SendOutput>;
-export {};
 //# sourceMappingURL=send.d.ts.map

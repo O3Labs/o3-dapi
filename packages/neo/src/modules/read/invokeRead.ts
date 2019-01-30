@@ -1,7 +1,7 @@
 import { sendMessage } from '../../messaging';
 import { ArgumentDataType, Command } from '../../constants';
 
-interface InvokeReadArgs {
+export interface InvokeReadArgs {
   scriptHash: string;
   operation: string;
   args: Argument[];

@@ -1,13 +1,13 @@
 import { sendMessage } from '../../messaging';
 import { Command } from '../../constants';
 
-interface GetStorageArgs {
+export interface GetStorageArgs {
   scriptHash: string;
   key: string;
   network: string;
 }
 
-interface GetStorageOutput {
+export interface GetStorageOutput {
   result: string;
 }
 
