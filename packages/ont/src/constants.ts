@@ -58,6 +58,7 @@ export enum EventName {
   ACCOUNT_CHANGED = 'ACCOUNT_CHANGED',
   CONNECTED = 'CONNECTED',
   DISCONNECTED = 'DISCONNECTED',
+  NETWORK_CHANGED = 'NETWORK_CHANGED',
 }
 
 export type Asset = 'ONT' | 'ONG' | string;

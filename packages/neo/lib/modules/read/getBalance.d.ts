@@ -11,7 +11,7 @@ export interface BalanceResults {
     [address: string]: Balance[];
 }
 interface Balance {
-    scriptHash: string;
+    assetID: string;
     symbol: string;
     amount: string;
 }

@@ -294,10 +294,10 @@ o3dapi.NEO.getBalance({
   Object.keys(results).forEach(address => {
     const { balances } = results[address];
     Object.keys(balances).forEach(balance => {
-      const { scriptHash, symbol, amount } = balance
+      const { assetID, symbol, amount } = balance
 
       console.log('Address: ' + address);
-      console.log('Asset scriptHash: ' + scriptHash);
+      console.log('Asset ID: ' + assetID);
       console.log('Asset symbol: ' + symbol);
       console.log('Amount: ' + amount);
     });
@@ -331,7 +331,7 @@ o3dapi.NEO.getBalance({
 {
   AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru: [
     {
-      scriptHash: 'c36aee199dbba6c3f439983657558cfb67629599',
+      assetID: 'c36aee199dbba6c3f439983657558cfb67629599',
       symbol: 'NKN',
       amount: '0.00000233',
     }
@@ -354,22 +354,22 @@ o3dapi.NEO.getBalance({
 {
   AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru: [
     {
-      scriptHash: 'c56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b',
+      assetID: 'c56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b',
       symbol: 'NEO',
       amount: '10',
     },
     {
-      scriptHash: '602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7',
+      assetID: '602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7',
       symbol: 'GAS',
       amount: '777.0001',
     },
     {
-      scriptHash: 'c36aee199dbba6c3f439983657558cfb67629599',
+      assetID: 'c36aee199dbba6c3f439983657558cfb67629599',
       symbol: 'NKN',
       amount: '0.00000233',
     },
     {
-      scriptHash: 'fc732edee1efdf968c23c20a9628eaa5a6ccb934',
+      assetID: 'fc732edee1efdf968c23c20a9628eaa5a6ccb934',
       symbol: 'NNC',
       amount: '2000',
     }
@@ -398,29 +398,29 @@ o3dapi.NEO.getBalance({
 {
   AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru: [
     {
-      scriptHash: 'c56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b',
+      assetID: 'c56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b',
       symbol: 'NEO',
       amount: '10',
     },
     {
-      scriptHash: '602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7',
+      assetID: '602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7',
       symbol: 'GAS',
       amount: '777.0001',
     },
     {
-      scriptHash: 'c36aee199dbba6c3f439983657558cfb67629599',
+      assetID: 'c36aee199dbba6c3f439983657558cfb67629599',
       symbol: 'NKN',
       amount: '0.00000233',
     },
     {
-      scriptHash: 'fc732edee1efdf968c23c20a9628eaa5a6ccb934',
+      assetID: 'fc732edee1efdf968c23c20a9628eaa5a6ccb934',
       symbol: 'NNC',
       amount: '2000',
     }
   ],
   AbKNY45nRDy6B65YPVz1B6YXiTnzRqU2uQ: [
     {
-      scriptHash: '1578103c13e39df15d0d29826d957e85d770d8c9',
+      assetID: '1578103c13e39df15d0d29826d957e85d770d8c9',
       symbol: 'PHX',
       amount: '11000',
     }
@@ -457,12 +457,12 @@ The amount of addresses is n where n is the number of addresses specified in you
 
 
 #### BalanceResponse
-| Parameter  | Type    | Description                                                                                          |
-|:---------- |:------- |:---------------------------------------------------------------------------------------------------- |
-| scriptHash | String  | Script hash of the given asset                                                                       |
-| symbol     | String  | Symbol of the given asset                                                                            |
-| amount     | String  | Double Value of the balance represented as a String                                                  |
-| unspent    | UTXO[]? | If fetch utxo's was turned on then the utxo array will be returned for the native assets NEO and GAS |
+| Parameter | Type    | Description                                                                                          |
+|:--------- |:------- |:---------------------------------------------------------------------------------------------------- |
+| assetID   | String  | ID of the given asset                                                                                |
+| symbol    | String  | Symbol of the given asset                                                                            |
+| amount    | String  | Double Value of the balance represented as a String                                                  |
+| unspent   | UTXO[]? | If fetch utxo's was turned on then the utxo array will be returned for the native assets NEO and GAS |
 
 #### UTXO
 | Parameter      | Type   | Description                                                           |
@@ -854,3 +854,13 @@ On a CONNECTED event, the user has approved the connection of the dapp with one 
 ## DISCONNECTED
 
 On a DISCONNECTED event, the account connected to the dapp via the dapi provider has been disconnected (logged out).
+
+
+## NETWORK_CHANGED
+
+On a NETWORK_CHANGED event, the user has changed the network their provider wallet is connected to. The event will return the updated network details.
+
+| Parameter      | Type     | Description                                                        |
+|:-------------- |:-------- |:------------------------------------------------------------------ |
+| networks       | String[] | A list of all networks which this wallet provider allows access to |
+| defaultNetwork | String   | Network the wallet is currently set to                             |

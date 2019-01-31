@@ -40,3 +40,13 @@ On a CONNECTED event, the user has approved the connection of the dapp with one 
 ## DISCONNECTED
 
 On a DISCONNECTED event, the account connected to the dapp via the dapi provider has been disconnected (logged out).
+
+
+## NETWORK_CHANGED
+
+On a NETWORK_CHANGED event, the user has changed the network their provider wallet is connected to. The event will return the updated network details.
+
+| Parameter      | Type     | Description                                                        |
+|:-------------- |:-------- |:------------------------------------------------------------------ |
+| networks       | String[] | A list of all networks which this wallet provider allows access to |
+| defaultNetwork | String   | Network the wallet is currently set to                             |

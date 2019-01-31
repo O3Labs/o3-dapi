@@ -26,6 +26,7 @@ export declare enum EventName {
     READY = "READY",
     ACCOUNT_CHANGED = "ACCOUNT_CHANGED",
     CONNECTED = "CONNECTED",
-    DISCONNECTED = "DISCONNECTED"
+    DISCONNECTED = "DISCONNECTED",
+    NETWORK_CHANGED = "NETWORK_CHANGED"
 }
 //# sourceMappingURL=constants.d.ts.map

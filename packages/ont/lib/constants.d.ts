@@ -42,7 +42,8 @@ export declare enum EventName {
     READY = "READY",
     ACCOUNT_CHANGED = "ACCOUNT_CHANGED",
     CONNECTED = "CONNECTED",
-    DISCONNECTED = "DISCONNECTED"
+    DISCONNECTED = "DISCONNECTED",
+    NETWORK_CHANGED = "NETWORK_CHANGED"
 }
 export declare type Asset = 'ONT' | 'ONG' | string;
 export declare enum TransactionType {

@@ -224,17 +224,22 @@ o3dapi.ONT.addEventListener(o3dapi.ONT.Constants.EventName.DISCONNECTED, data =>
   clearText();
 });
 
+o3dapi.ONT.addEventListener(o3dapi.ONT.Constants.EventName.NETWORK_CHANGED, handleNewNetworks);
+
+function handleNewNetworks({networks, defaultNetwork}) {
+  [].slice.call(networksEle.children).forEach(child => networksEle.remove(child));
+  networks.forEach(network => {
+    const option = document.createElement('option');
+    if (network === defaultNetwork) {
+      option.selected = 'selected';
+    }
+    option.value = network;
+    option.label = network;
+    networksEle.append(option);
+  });
+}
+
 function onReady() {
   o3dapi.ONT.getNetworks()
-  .then(({networks, defaultNetwork}) => {
-    networks.forEach(network => {
-      const option = document.createElement('option');
-      if (network === defaultNetwork) {
-        option.selected = 'selected';
-      }
-      option.value = network;
-      option.label = network;
-      networksEle.append(option);
-    });
-  });
+  .then(handleNewNetworks);
 };

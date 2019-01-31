@@ -17,7 +17,7 @@ export interface BalanceResults {
 }
 
 interface Balance {
-  scriptHash: string;
+  assetID: string;
   symbol: string;
   amount: string;
 }
@@ -40,5 +40,18 @@ export function getBalance(data: GetBalanceArgs): Promise<BalanceResults> {
   return sendMessage({
     command: Command.getBalance,
     data,
-  });
+  })
+  .then(data => (
+    // Update to dapi protocol, change scriptHash to assetID
+    // can be removed in the case that all wallets update to assetID,
+    // and none left using scriptHash, including already deployed versions
+    Object.keys(data).reduce((accum, key) => {
+      accum[key] = data[key].map(({scriptHash, symbol, amount}) => ({
+        assetID: scriptHash,
+        symbol,
+        amount,
+      }));
+      return accum;
+    }, {})
+  ));
 }
