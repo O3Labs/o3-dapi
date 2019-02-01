@@ -1,8 +1,10 @@
 import openSocket from 'socket.io-client';
 import { receiveMessage } from './messages';
+import MessageEncryption from './messageEncryption';
 
 let socket;
 let isConnected;
+let messageEncryption;
 
 export function initSocket(isHTTPS = true): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -17,11 +19,30 @@ export function initSocket(isHTTPS = true): Promise<void> {
     });
 
     socket.on('event', res => {
-      receiveMessage(res);
+      if (res && res.eventName === 'READY' && !messageEncryption && res.key) {
+        messageEncryption = new MessageEncryption();
+        messageEncryption.setSharedKey(res.key);
+        socket.emit('register', messageEncryption.getPublicKey());
+        receiveMessage(res);
+      } else {
+        const data = messageEncryption.decrypt(res);
+        if (!data.error) {
+          receiveMessage(data.message);
+        } else {
+          receiveMessage({
+            ...data.message,
+            error: {
+              type: 'MESSAGE_ENCRYPTION_ERROR',
+              data: data.error,
+            },
+          });
+        }
+      }
     });
 
     socket.on('disconnect', res => {
       isConnected = false;
+      messageEncryption = null;
     });
 
     socket.on('connect_error', err => {
@@ -46,5 +67,6 @@ export function isSocketConnected() {
 }
 
 export function sendSocketMessage(message) {
-  socket.emit('event', message);
+  const encryptedMessage = messageEncryption.encrypt(message);
+  socket.emit('event', encryptedMessage);
 }

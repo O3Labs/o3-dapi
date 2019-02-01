@@ -29,6 +29,8 @@
     "webpack-cli": "3.1.2"
   },
   "dependencies": {
+    "browserify-cipher": "^1.0.1",
+    "create-ecdh": "^4.0.3",
     "lodash-es": "4.17.11",
     "socket.io-client": "~2.2.0"
   },

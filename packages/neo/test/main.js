@@ -38,12 +38,14 @@ function clearText() {
 
 function handleSuccess(data) {
   stopLoading();
+  clearText();
   const formatted = syntaxHighlight(data);
   resultEle.innerHTML = formatted;
 }
 
 function handleError(error) {
   stopLoading();
+  clearText();
   errorEle.innerHTML = syntaxHighlight(error);
 }
 

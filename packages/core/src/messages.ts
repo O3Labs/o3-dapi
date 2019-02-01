@@ -36,6 +36,9 @@ export function receiveMessage(message: IncomingMessage) {
     }
 
     if (command === 'event') {
+      if (eventName === 'READY') {
+        window._o3dapi.isReady = data;
+      }
       Object.keys(eventsListeners)
       .map(key => eventsListeners[key]) // Object.values
       .forEach(handler => handler(eventName, data));
