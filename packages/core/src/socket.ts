@@ -17,7 +17,7 @@ export function initSocket(isHTTPS = true): Promise<void> {
       isConnected = true;
     });
 
-    socket.on('event', res => {
+    socket.on('event', (res, mac?: string) => {
       if (res && res.eventName === 'READY' && !messageEncryption && res.key) {
         resolve();
         messageEncryption = new MessageEncryption();
@@ -25,7 +25,7 @@ export function initSocket(isHTTPS = true): Promise<void> {
         socket.emit('register', messageEncryption.getPublicKey());
         receiveMessage(res);
       } else {
-        const data = messageEncryption.decrypt(res);
+        const data = messageEncryption.decrypt(res, mac);
         if (!data.error) {
           receiveMessage(data.message);
         } else {
@@ -62,6 +62,6 @@ export function isSocketConnected() {
 }
 
 export function sendSocketMessage(message) {
-  const encryptedMessage = messageEncryption.encrypt(message);
-  socket.emit('event', encryptedMessage);
+  const [encryptedMessage, mac] = messageEncryption.encrypt(message);
+  socket.emit('event', encryptedMessage, mac);
 }
