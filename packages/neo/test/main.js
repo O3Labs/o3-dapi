@@ -148,7 +148,7 @@ function invokeRead() {
 function invoke() {
   try {
     startLoading();
-    o3dapi.NEO.invoke({
+    var obj =  {
       scriptHash: invokeScriptHashEle.value,
       operation: invokeOperationEle.value,
       args: invokeArgsEle.value && JSON.parse(invokeArgsEle.value),
@@ -157,7 +157,16 @@ function invoke() {
       network: networksEle.value,
       assetIntentOverrides: assetIntentOverridesEle.value && JSON.parse(assetIntentOverridesEle.value),
       triggerContractVerification: triggerContractVerificationEle.checked,
-    })
+    }
+    if (obj.assetIntentOverrides == "") {
+      delete obj.assetIntentOverrides
+    }
+
+    if (obj.attachedAssets == "" ) {
+      delete obj.attachedAssets
+    }
+
+    o3dapi.NEO.invoke(obj)
     .then(handleSuccess)
     .catch(handleError);
   } catch (err) {
