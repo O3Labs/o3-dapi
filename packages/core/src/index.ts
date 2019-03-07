@@ -8,6 +8,7 @@ import {
 import { initSocket } from './socket';
 
 const o3dapiCore: any = {};
+const isBrowser = typeof window !== 'undefined';
 
 o3dapiCore.initPlugins = (plugins: Plugin[]) => {
   plugins.forEach(plugin => {
@@ -15,7 +16,9 @@ o3dapiCore.initPlugins = (plugins: Plugin[]) => {
   });
 };
 
-o3dapiCore.isAvailable = Boolean((window as any)._o3dapi.isAvailable);
+if (isBrowser) {
+  o3dapiCore.isAvailable = Boolean((window as any)._o3dapi.isAvailable);
+}
 
 if (!o3dapiCore.isAvailable) {
   initSocket()

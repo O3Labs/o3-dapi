@@ -15,12 +15,13 @@ import { disconnect } from './modules/disconnect';
 import { addEventListener, removeEventListener } from './modules/eventListener';
 import { ArgumentDataType, EventName, BLOCKCHAIN } from './constants';
 import { initMessaging } from './messaging';
+const isBrowser = typeof window !== 'undefined';
 
 class O3dapiNeo {
 
   static blockchain = BLOCKCHAIN;
 
-  isAvailable = Boolean((window as any)._o3dapi.isAvailable);
+  isAvailable = isBrowser && Boolean((window as any)._o3dapi.isAvailable);
 
   getProvider = getProvider;
   getNetworks = getNetworks;
