@@ -1,6 +1,6 @@
 import openSocket from 'socket.io-client';
 import { receiveMessage } from './messages';
-import MessageEncryption from './messageEncryption';
+import MessageEncryption, { AES128GCM } from './messageEncryption';
 
 let socket;
 let isConnected;
@@ -22,7 +22,15 @@ export function initSocket(isHTTPS = true): Promise<void> {
         resolve();
         messageEncryption = new MessageEncryption();
         messageEncryption.setSharedKey(res.key);
-        socket.emit('register', messageEncryption.getPublicKey());
+        let registerMessage = messageEncryption.getPublicKey();
+        if (res.algorithm === AES128GCM) {
+          messageEncryption.setCipherAlgorithOverride(AES128GCM);
+          registerMessage = {
+            key: messageEncryption.getPublicKey(),
+            algorithm: AES128GCM,
+          };
+        }
+        socket.emit('register', registerMessage);
         receiveMessage(res);
       } else {
         const data = messageEncryption.decrypt(res);
