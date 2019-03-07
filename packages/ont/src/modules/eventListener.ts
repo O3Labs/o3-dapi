@@ -1,4 +1,7 @@
 declare const window: any;
+declare const global: any;
+const isBrowser = typeof window !== 'undefined';
+const safeWindow = isBrowser ? window : global;
 import { EventName } from '../constants';
 
 interface Listeners {
@@ -12,7 +15,7 @@ export function addEventListener(event: EventName, callback: Function) {
   currentListeners.push(callback);
   listeners[event] = currentListeners;
 
-  const isReady = window._o3dapi.isReady;
+  const isReady = safeWindow._o3dapi.isReady;
 
   if (event === EventName.READY && isReady) {
     const readyListeners = listeners[EventName.READY];

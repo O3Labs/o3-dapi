@@ -1,4 +1,7 @@
+declare const require: any;
+const isBrowser = typeof window !== 'undefined';
 import { Buffer } from 'buffer';
+const crypto = require('node-crypto');
 import { randomFillSync } from 'randomfill';
 import { createCipheriv, createDecipheriv } from 'browserify-cipher';
 import createECDH from 'create-ecdh';
@@ -7,9 +10,14 @@ const UTF8 = 'utf8';
 const HEX = 'hex';
 export const AES128GCM = 'aes-128-gcm';
 
+const safeRandomFillSync = isBrowser ? randomFillSync : crypto.randomFillSync;
+const safeCreateCipheriv = isBrowser ? createCipheriv : crypto.createCipheriv;
+const safeCreateDecipheriv = isBrowser ? createDecipheriv : crypto.createDecipheriv;
+const safeCreateECDH = isBrowser ? createECDH : crypto.createECDH;
+
 export default class MessageEncryption {
 
-  private ec = createECDH('secp256k1');
+  private ec = safeCreateECDH('secp256k1');
   private key = this.ec.generateKeys();
   private shared;
   private nonceMap = {};
@@ -33,8 +41,8 @@ export default class MessageEncryption {
       nonce: Date.now() + Math.floor(Math.random() * 100000000000000000),
     };
     const iv = Buffer.alloc(16);
-    randomFillSync(iv);
-    const cipher = createCipheriv(this.cipherAlgorithm, this._getSharedKey(), iv);
+    safeRandomFillSync(iv);
+    const cipher = safeCreateCipheriv(this.cipherAlgorithm, this._getSharedKey(), iv);
     const encrypted = cipher.update(JSON.stringify(data), UTF8, HEX) + cipher.final(HEX);
 
     if (this.cipherAlgorithm === AES256) {
@@ -62,7 +70,7 @@ export default class MessageEncryption {
         encryptedText = Buffer.from(input.encrypted, HEX);
         authTag = Buffer.from(input.authTag, HEX);
       }
-      const decipher = createDecipheriv(this.cipherAlgorithm, this._getSharedKey(), iv);
+      const decipher = safeCreateDecipheriv(this.cipherAlgorithm, this._getSharedKey(), iv);
       authTag && decipher.setAuthTag(authTag);
       const data = JSON.parse(decipher.update(encryptedText, HEX, UTF8) + decipher.final(UTF8));
 

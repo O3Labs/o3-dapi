@@ -36,5 +36,9 @@ module.exports = (env) => {
       libraryExport: 'default',
       globalObject: 'typeof self !== \'undefined\' ? self : this',
     },
+    externals: [
+      {'socket.io-client-node': 'socket.io-client'},
+      {'node-crypto': 'crypto'},
+    ],
   };
 };

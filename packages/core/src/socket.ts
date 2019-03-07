@@ -1,6 +1,11 @@
+declare const require: any;
+const isBrowser = typeof window !== 'undefined';
 import openSocket from 'socket.io-client';
+const io = require('socket.io-client-node');
 import { receiveMessage } from './messages';
 import MessageEncryption, { AES128GCM } from './messageEncryption';
+
+const socketIo = isBrowser ? openSocket : io;
 
 let socket;
 let isConnected;
@@ -11,7 +16,12 @@ export function initSocket(isHTTPS = true): Promise<void> {
     const url = isHTTPS ?
       'https://dapi.o3.app:60003' :
       'http://127.0.0.1:60003';
-    socket = openSocket(url);
+
+    const socketConfig = {};
+    if (!isBrowser) {
+      socketConfig['rejectUnauthorized'] = false;
+    }
+    socket = socketIo(url, socketConfig);
 
     socket.on('connect', res => {
       isConnected = true;

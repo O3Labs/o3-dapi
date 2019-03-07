@@ -1,3 +1,6 @@
+declare const global: any;
+const isBrowser = typeof window !== 'undefined';
+const safeWindow = isBrowser ? window : global;
 import * as assets from './modules/assets';
 import * as identity from './modules/identity';
 import * as message from './modules/message';
@@ -27,7 +30,7 @@ class O3dapiOnt {
 
   static blockchain = BLOCKCHAIN;
 
-  isAvailable = Boolean((window as any)._o3dapi.isAvailable);
+  isAvailable = Boolean(safeWindow._o3dapi.isAvailable);
   getProvider = getProvider;
   getNetworks = getNetworks;
   getAccount = getAccount;

@@ -1,4 +1,5 @@
 declare const window: any;
+declare const global: any;
 declare const _o3dapi: any;
 import { get } from 'lodash-es';
 import {
@@ -17,11 +18,10 @@ const NO_PROVIDER = { type: 'NO_PROVIDER', description: 'O3 dapi provider not fo
 const REQUEST_TIMEOUT = { type: 'REQUEST_TIMEOUT', description: 'Provider is taking longer that timeout specified to complete request.'};
 
 const isBrowser = typeof window !== 'undefined';
+const safeWindow = isBrowser ? window : global;
 
-if (isBrowser) {
-  window._o3dapi = window._o3dapi ? window._o3dapi : {};
-  _o3dapi.receiveMessage = receiveMessage;
-}
+safeWindow._o3dapi = safeWindow._o3dapi ? safeWindow._o3dapi : {};
+_o3dapi.receiveMessage = receiveMessage;
 
 export function receiveMessage(message: IncomingMessage) {
   try {
@@ -30,7 +30,6 @@ export function receiveMessage(message: IncomingMessage) {
     }
     const {
       platform,
-      blockchain,
       command,
       messageId,
       data,
@@ -44,7 +43,7 @@ export function receiveMessage(message: IncomingMessage) {
 
     if (command === 'event') {
       if (eventName === 'READY') {
-        window._o3dapi.isReady = data;
+        safeWindow._o3dapi.isReady = data;
       }
       Object.keys(eventsListeners)
       .map(key => eventsListeners[key]) // Object.values
