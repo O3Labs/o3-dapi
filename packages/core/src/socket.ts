@@ -12,6 +12,7 @@ let isConnected;
 let messageEncryption;
 
 export function initSocket(isHTTPS = true): Promise<void> {
+  console.log('initSocket');
   return new Promise((resolve, reject) => {
     const url = isHTTPS ?
       'https://dapi.o3.app:60003' :

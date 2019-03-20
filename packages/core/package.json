@@ -2,7 +2,7 @@
   "name": "o3-dapi-core",
   "version": "0.3.0",
   "description": "O3 dapi core messaging protocol",
-  "main": "./lib/o3-dapi-core.min.js",
+  "main": "./build/bundle.js",
   "types": "./lib/index.d.ts",
   "scripts": {
     "start": "webpack --mode development --watch",
