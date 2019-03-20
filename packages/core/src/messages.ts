@@ -94,7 +94,6 @@ export function sendMessage({
     const isIOS = Boolean(webkitPostMessage) && typeof webkitPostMessage === 'function';
 
     if (isSocketConnected()) {
-      console.log('isSocketConnected');
       sendSocketMessage(message);
     } else if (messageHandler) {
       try {
@@ -111,7 +110,6 @@ export function sendMessage({
         reject(NO_PROVIDER);
       }
     } else {
-      console.log('no socket', !!socketInitPromise);
       socketInitPromise = socketInitPromise || initSocket();
 
       socketInitPromise
@@ -129,7 +127,6 @@ export function sendMessage({
       })
       .catch(err => {
         socketInitPromise = null;
-        console.log('socket error', err);
         reject(NO_PROVIDER);
       });
     }
