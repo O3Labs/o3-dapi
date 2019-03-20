@@ -65,7 +65,6 @@ export function addEventsListener({blockchain, callback}: AddEventsListenerArgs)
 }
 
 let socketInitPromise;
-
 export function sendMessage({
   blockchain,
   version,
