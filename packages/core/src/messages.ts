@@ -10,7 +10,7 @@ import {
   AddEventsListenerArgs,
   SendMessageArgs,
 } from './types';
-import { isSocketConnected, sendSocketMessage, initSocket } from './socket';
+import { isSocketConnected, sendSocketMessage, getSocket } from './socket';
 
 const PLATFORM = 'o3-dapi';
 const messageQueue = {};
@@ -81,7 +81,6 @@ export function addEventsListener({blockchain, callback}: AddEventsListenerArgs)
   eventsListeners[blockchain] = callback;
 }
 
-let socketInitPromise;
 export function sendMessage({
   blockchain,
   version,
@@ -133,11 +132,7 @@ export function sendMessage({
         reject(NO_PROVIDER);
       }
     } else {
-      socketInitPromise = socketInitPromise || initSocket();
-
-      socketInitPromise
-      .then(() => {
-        socketInitPromise = null;
+      getSocket().then(() => {
         sendSocketMessage(message);
         messageQueue[messageId] = {
           resolve,
@@ -149,7 +144,6 @@ export function sendMessage({
         };
       })
       .catch(err => {
-        socketInitPromise = null;
         reject(NO_PROVIDER);
       });
     }

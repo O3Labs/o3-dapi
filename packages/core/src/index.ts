@@ -11,7 +11,7 @@ import {
   setEncryptionOverride,
 } from './messageEncryption';
 
-import { initSocket } from './socket';
+import { getSocket } from './socket';
 
 import * as utils from './utils';
 
@@ -29,8 +29,7 @@ if (isBrowser) {
 }
 
 if (!o3dapiCore.isAvailable) {
-  initSocket()
-  .catch(err => {});
+  getSocket().catch(err => {});
 }
 
 o3dapiCore.openO3 = () => window.location.replace('o3network://deep');
