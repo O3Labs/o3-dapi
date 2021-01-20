@@ -10,9 +10,10 @@ const socketIo = isBrowser ? openSocket : io;
 let socket;
 let isConnected;
 let messageEncryption;
+let socketPromise;
 
-export function initSocket(isHTTPS = true): Promise<void> {
-  return new Promise((resolve, reject) => {
+export function getSocket(isHTTPS = true): Promise<void> {
+  return socketPromise || (socketPromise = new Promise((resolve, reject) => {
     const url = isHTTPS ?
       'https://dapi.o3.app:60003' :
       'http://127.0.0.1:60004';
@@ -25,6 +26,7 @@ export function initSocket(isHTTPS = true): Promise<void> {
 
     socket.on('connect', res => {
       isConnected = true;
+      socketPromise = null;
     });
 
     socket.on('event', res => {
@@ -61,18 +63,19 @@ export function initSocket(isHTTPS = true): Promise<void> {
     socket.on('disconnect', res => {
       isConnected = false;
       messageEncryption = null;
+      socketPromise = null;
     });
 
     socket.on('connect_error', err => {
       socket.close();
+      socketPromise = null;
       if (isHTTPS) {
-        initSocket(false)
-        .catch(() => { reject(); });
+        getSocket(false).catch(() => { reject(); });
       } else {
         reject();
       }
     });
-  });
+  }));
 }
 
 export function isSocketConnected() {
