@@ -20,7 +20,7 @@ phases:
       nodejs: 10
     commands:
       - gem install bundler
-      - curl -sL https://deb.nodesource.com/setup_10.x | bash -
+      - curl -sL https://deb.nodesource.com/setup_12.x | bash -
       - apt-get install -y nodejs
   pre_build:
     commands:
