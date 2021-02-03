@@ -1,0 +1,11 @@
+{
+  "name": "o3-dapi-neo-docs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "install": "bundle install",
+    "start": "bundle exec middleman server",
+    "dist": "bundle exec middleman build --clean"
+  }
+}

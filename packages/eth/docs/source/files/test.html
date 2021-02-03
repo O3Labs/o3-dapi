@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/neo-dapi@2.0.4/lib/neo-dapi.min.js"></script>
+  </head>
+  <body>
+    <h1>Token testbed</h1>
+
+    <div class="method-container">
+      <h3>script hash</h3>
+      <input type="text" id="scriptHash" name="" value="">
+    </div>
+
+    <div class="method-container">
+      <h3>name</h3>
+      <button type="button" name="button" onclick="handleName()">Run</button>
+      <div class="result" id="nameResult">
+
+      </div>
+      <div class="error" id="nameError">
+
+      </div>
+    </div>
+
+    <div class="method-container">
+      <h3>symbol</h3>
+      <button type="button" name="button" onclick="handleSymbol()">Run</button>
+      <div class="result" id="symbolResult">
+
+      </div>
+      <div class="error" id="symbolError">
+
+      </div>
+    </div>
+
+    <div class="method-container">
+      <h3>decimals</h3>
+      <button type="button" name="button" onclick="handleDecimals()">Run</button>
+      <div class="result" id="decimalsResult">
+
+      </div>
+      <div class="error" id="decimalsError">
+
+      </div>
+    </div>
+
+    <div class="method-container">
+      <h3>totalSupply</h3>
+      <button type="button" name="button" onclick="handleTotalSupply()">Run</button>
+      <div class="result" id="totalSupplyResult">
+
+      </div>
+      <div class="error" id="totalSupplyError">
+
+      </div>
+    </div>
+
+    <div class="method-container">
+      <h3>balanceOf</h3>
+      <input type="text" id="balanceOf-address" name="address" placeholder="address" value="">
+      <button type="button" name="button" onclick="handleBalanceOf()">Run</button>
+      <div class="result" id="balanceOfResult">
+
+      </div>
+      <div class="error" id="balanceOfError">
+
+      </div>
+    </div>
+
+    <div class="method-container">
+      <h3>transfer</h3>
+      <input type="text" id="transfer-addr-from" name="from address" placeholder="from address" value="">
+      <input type="text" id="transfer-addr-to" name="to address" placeholder="to address" value="">
+      <input type="number" id="transfer-amount" name="amount" placeholder="amount" value="">
+      <button type="button" name="button" onclick="handleTransfer()">Run</button>
+      <div class="result" id="transferResult">
+
+      </div>
+      <div class="error" id="transferError">
+
+      </div>
+    </div>
+
+    <div class="method-container">
+      <h3>init</h3>
+      <button type="button" name="button" onclick="handleInit()">Run</button>
+      <div class="result" id="initResult">
+
+      </div>
+      <div class="error" id="initError">
+
+      </div>
+    </div>
+
+  </body>
+  <script type="text/javascript">
+    const scriptHashEle = document.getElementById("scriptHash");
+    const balanceOfAddressEle = document.getElementById("balanceOf-address");
+    const transferAddrFromEle = document.getElementById("transfer-addr-from");
+    const transferAddrToEle = document.getElementById("transfer-addr-to");
+    const transferAmountEle = document.getElementById("transfer-amount");
+
+    const nameResultEle = document.getElementById("nameResult");
+    const symbolResultEle = document.getElementById("symbolResult");
+    const decimalsResultEle = document.getElementById("decimalsResult");
+    const totalSupplyResultEle = document.getElementById("totalSupplyResult");
+    const balanceOfResultEle = document.getElementById("balanceOfResult");
+    const transferResultEle = document.getElementById("transferResult");
+    const initResultEle = document.getElementById("initResult");
+
+    const nameErrorEle = document.getElementById("nameError");
+    const symbolErrorEle = document.getElementById("symbolError");
+    const decimalsErrorEle = document.getElementById("decimalsError");
+    const totalSupplyErrorEle = document.getElementById("totalSupplyError");
+    const balanceOfErrorEle = document.getElementById("balanceOfError");
+    const transferErrorEle = document.getElementById("transferError");
+    const initErrorEle = document.getElementById("initError");
+
+    function handleName() {
+      neoDapi.invokeRead({
+        scriptHash: scriptHashEle.value,
+        operation: 'name',
+      })
+      .then(res => res.stack[0].value)
+      .then(res => neoDapi.utils.hex2str(res))
+      .then(res => nameResultEle.innerHTML = res)
+      .catch(err => nameErrorEle.innerHTML = err);
+    }
+
+    function handleSymbol() {
+      neoDapi.invokeRead({
+        scriptHash: scriptHashEle.value,
+        operation: 'symbol',
+      })
+      .then(res => res.stack[0].value)
+      .then(res => neoDapi.utils.hex2str(res))
+      .then(res => symbolResultEle.innerHTML = res)
+      .catch(err => symbolErrorEle.innerHTML = err);
+    }
+
+    function handleDecimals() {
+      neoDapi.invokeRead({
+        scriptHash: scriptHashEle.value,
+        operation: 'decimals',
+      })
+      .then(res => res.stack[0].value)
+      .then(res => decimalsResultEle.innerHTML = res)
+      .catch(err => decimalsErrorEle.innerHTML = err);
+    }
+
+    function handleTotalSupply() {
+      Promise.all([
+        neoDapi.invokeRead({
+          scriptHash: scriptHashEle.value,
+          operation: 'totalSupply',
+        }).then(res => neoDapi.utils.hex2int(res.stack[0].value || 0)),
+        neoDapi.invokeRead({
+          scriptHash: scriptHashEle.value,
+          operation: 'decimals',
+        }).then(res => res.stack[0].value)
+      ])
+      .then(([total, decimals]) => total / Math.pow(10, decimals))
+      .then(res => totalSupplyResultEle.innerHTML = res)
+      .catch(err => totalSupplyErrorEle.innerHTML = err);
+    }
+
+    function handleBalanceOf() {
+      Promise.all([
+        neoDapi.invokeRead({
+          scriptHash: scriptHashEle.value,
+          operation: 'balanceOf',
+          args: [
+            {
+              type: neoDapi.Constants.ArgumentDataType.ADDRESS,
+              value: balanceOfAddressEle.value,
+            }
+          ]
+        }).then(res => neoDapi.utils.hex2int(res.stack[0].value || 0)),
+        neoDapi.invokeRead({
+          scriptHash: scriptHashEle.value,
+          operation: 'decimals',
+        }).then(res => res.stack[0].value)
+      ])
+      .then(([total, decimals]) => total / Math.pow(10, decimals))
+      .then(res => balanceOfResultEle.innerHTML = res)
+      .catch(err => balanceOfErrorEle.innerHTML = err);
+    }
+
+    function handleTransfer() {
+      neoDapi.invoke({
+        scriptHash: scriptHashEle.value,
+        operation: 'transfer',
+        args: [
+          {
+            type: neoDapi.Constants.ArgumentDataType.ADDRESS,
+            value: transferAddrFromEle.value,
+          },
+          {
+            type: neoDapi.Constants.ArgumentDataType.ADDRESS,
+            value: transferAddrToEle.value,
+          },
+          {
+            type: neoDapi.Constants.ArgumentDataType.INTEGER,
+            value: transferAmountEle.value,
+          }
+        ]
+      })
+      .then(res => JSON.stringify(res))
+      .then(res => transferResultEle.innerHTML = res)
+      .catch(err => transferErrorEle.innerHTML = err);
+    }
+
+    function handleInit() {
+      neoDapi.invoke({
+        scriptHash: scriptHashEle.value,
+        operation: 'init'
+      })
+      .then(res => JSON.stringify(res))
+      .then(res => initResultEle.innerHTML = res)
+      .catch(err => initErrorEle.innerHTML = err);
+    }
+
+  </script>
+</html>

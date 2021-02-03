@@ -1,0 +1,375 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <meta property="og:title" content="NEO dAPI Testbed">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://cdn.o3.network/img/neo/NEO.png">
+  <meta property="og:description" content="Testbed for the O3 dapi NEO interface. You can query all the available methods provided by the dapi protocol.">
+
+  <title>O3 Dapp Platform - NEO</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="./styles.css">
+  <!-- <script type="text/javascript" src="../../core/lib/o3-dapi-core.min.js"></script> -->
+  <!-- <script type="text/javascript" src="../lib/o3-dapi-neo.min.js"></script> -->
+  <!-- <script type="text/javascript" src="../../core/build/bundle.js"></script> -->
+  <!-- <script type="text/javascript" src="../build/bundle.js"></script> -->
+  <!-- <script type="text/javascript" src="../../../neo-client/build/bundle.js"></script> -->
+
+  <script src="https://cdn.jsdelivr.net/npm/o3-dapi-core@0.3.6/lib/o3-dapi-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/o3-dapi-neo@0.4.1/lib/o3-dapi-neo.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/o3-dapi-neoclient@0.0.4/lib/o3-dapi-neoclient.min.js"></script>
+</head>
+
+<body>
+
+  <div class="nav">
+    <h4 class="title">O3 Dapp Platform - NEO Client (no provider, getBalance, getStorage, invokeRead, verifyMessage)</h4>
+    <div class='account-container'>
+      <div id="account" class="account"></div>
+      <div id="disconnect" class="disconnect" onclick="disconnect()"></div>
+    </div>
+    <select id="networks" name="networks"></select>
+  </div>
+
+  <div class="content">
+
+    <div class="functions">
+      <h3>Available functions</h3>
+      <div class="scroll-container">
+
+        <div class="function-container">
+          <h5 class="title">getProvider</h5>
+          <p class="text">
+            <p>Returns information about the dAPI provider, including who this provider is, the version of their dAPI, and the NEP that the interface is compatible with.</p>
+          </p>
+          <button type="button" class="btn btn-primary" onclick="getProvider()">Get provider</button>
+        </div>
+
+        <div class="function-container">
+          <h5 class="title">getNetworks</h5>
+          <p class="text">
+            <p>Returns a list of available provider networks</p>
+          </p>
+          <button type="button" class="btn btn-primary" onclick="getNetworks()">Get networks</button>
+        </div>
+
+        <div class="function-container">
+          <h5 class="title">getAccount</h5>
+          <p class="text">
+            <p>Return the Account that is currently connected to the dApp.</p>
+          </p>
+          <button type="button" class="btn btn-primary" onclick="getAccount()">Get account</button>
+        </div>
+
+        <div class="function-container">
+          <h5 class="title">getPublicKey</h5>
+          <p class="text">
+            <p>Return the Public Key of the Account that is currently connected to the dApp.</p>
+          </p>
+          <button type="button" class="btn btn-primary" onclick="getPublicKey()">Get public key</button>
+        </div>
+
+        <div class="function-container">
+          <h5 class="title">getBalance</h5>
+          <p class="text">
+            <p>Return balance of a specific asset for the given account, or all balances for an account. Also takes multiple entries.</p>
+          </p>
+          <textarea id='balanceInput' name="name">[{"address":"AScKxyXmNtEnTLTvbVhNQyTJmgytxhwSnM","assets":["GAS"]}]</textarea>
+          <button type="button" class="btn btn-primary" onclick="getBalance()">Get Balance</button>
+        </div>
+
+        <div class="function-container">
+          <h5 class="title">getStorage</h5>
+          <p class="text">
+            <p>Reads the raw value in smart contract storage.</p>
+          </p>
+          <p>Script hash:</p>
+          <input id='getStorageScriptHash' type="text" value="c36aee199dbba6c3f439983657558cfb67629599"/>
+          <br/>
+          <p>Key:</p>
+          <input id='getStorageKey' type="text" value="bd097b2fcf70e1fd30a5c3ef51e662feeafeba01"/>
+          <button type="button" class="btn btn-primary" onclick="getStorage()">Get storage</button>
+        </div>
+
+        <div class="function-container">
+          <h5 class="title">invokeRead</h5>
+          <p class="text">
+            <p>Execute a contract invocation in read-only mode.</p>
+          </p>
+          <p>Script hash:</p>
+          <input id='invokeReadScriptHash' type="text" value="c36aee199dbba6c3f439983657558cfb67629599"/>
+          <br/>
+          <p>Operation:</p>
+          <input id='invokeReadOperation' type="text" value="balanceOf"/>
+          <br/>
+          <p>Arguments:</p>
+          <textarea id='invokeReadArgs'>[{"type":"ByteArray","value":"bd097b2fcf70e1fd30a5c3ef51e662feeafeba01"}]</textarea>
+          <button type="button" class="btn btn-primary" onclick="invokeRead()">Invoke read</button>
+        </div>
+
+        <div class="function-container">
+          <h5 class="title">invoke</h5>
+          <p class="text">
+            <p>Execute a contract invocation.</p>
+          </p>
+          <br/>
+          <p>Script hash:</p>
+          <input id='invokeScriptHash' type="text" value="c36aee199dbba6c3f439983657558cfb67629599"/>
+          <br/>
+          <p>Operation:</p>
+          <input id='invokeOperation' type="text" value="transfer"/>
+          <br/>
+          <p>Arguments:</p>
+          <textarea id='invokeArgs'>[{"type":"ByteArray","value":""},{"type":"ByteArray","value":""},{"type":"ByteArray","value":"0100000000000000"}]</textarea>
+          <br/>
+          <p>Attached assets: (Optional)</p>
+          <input id='invokeAttachedAssets' type="text"/>
+          <br/>
+          <p>Fee: (Optional)</p>
+          <input id='invokeFee' type="text" placeholder="eg. 0.00000001"/>
+          <p>Asset Intent Overrides:</p>
+          <textarea id='assetIntentOverrides'></textarea>
+          <br/>
+          <p>Trigger contract verification:</p>
+          <input id='triggerContractVerification' type="checkbox" />
+          <br/>
+          <button type="button" class="btn btn-primary" onclick="invoke()">Invoke</button>
+        </div>
+
+        <div class="function-container">
+          <h5 class="title">send</h5>
+          <p class="text">
+            <p>Invoke a transfer of a specified amount of a given asset from the connected account to another account.</p>
+          </p>
+          <p>From address:</p>
+          <input id='sendFromAddress' type="text" placeholder="eg. AKJQMHma9MA8KK5M8iQg8ASeg3KZLsjwvB"/>
+          <br/>
+          <p>To address:</p>
+          <input id='sendToAddress' type="text" placeholder="eg. AKJQMHma9MA8KK5M8iQg8ASeg3KZLsjwvB"/>
+          <br/>
+          <p>Asset:</p>
+          <input id='sendAsset' type="text" placeholder="eg. SWTH or ab38352559b8b203bde5fddfa0b07d8b2525e132"/>
+          <br/>
+          <p>Amount:</p>
+          <input id='sendAmount' type="text" placeholder="eg. 0.01"/>
+          <br/>
+          <p>Remark: (Optional)</p>
+          <input id='sendRemark' type="text" placeholder="eg. Lunch last Thursday"/>
+          <br/>
+          <p>Fee: (Optional)</p>
+          <input id='sendFee' type="text" placeholder="eg. 0.00000001"/>
+          <br/>
+          <button type="button" class="btn btn-primary" onclick="send()">Send</button>
+        </div>
+
+        <div class="function-container">
+          <h5 class="title">signMessage</h5>
+          <p class="text">
+            <p>Sign an arbitrary message.</p>
+          </p>
+          <p>Message:</p>
+          <textarea id='signMessageInput'>Hello World!</textarea>
+          <button type="button" class="btn btn-primary" onclick="signMessage()">Sign</button>
+        </div>
+
+        <div class="function-container">
+          <h5 class="title">verifyMessage</h5>
+          <p class="text">
+            <p>Verify a message signature.</p>
+          </p>
+          <p>Message:</p>
+          <textarea id='verifyMessageInput'>Hello World!</textarea>
+          <br/>
+          <p>Signature:</p>
+          <textarea id='verifyMessageSignatureInput'></textarea>
+          <br/>
+          <p>Public Key:</p>
+          <input id='verifyMessagePiblicKeyInput' type="text"/>
+          <br/>
+          <button type="button" class="btn btn-primary" onclick="verifyMessage()">Verify</button>
+        </div>
+
+        <div class="function-container">
+          <h5 class="title">deploy</h5>
+          <p class="text">
+            <p>Deploy a smart contract.</p>
+          </p>
+
+          <br/>
+          <p>Name:</p>
+          <input id='deployName' type="text" value="Add"/>
+
+          <br/>
+          <p>Version:</p>
+          <input id='deployVersion' type="text" value="v8"/>
+
+          <br/>
+          <p>Author:</p>
+          <input id='deployAuthor' type="text" value="James"/>
+
+          <br/>
+          <p>Email:</p>
+          <input id='deployEmail' type="text" value="support@o3.network"/>
+
+          <br/>
+          <p>Description:</p>
+          <input id='deployDescription' type="text" value="Add"/>
+
+          <br/>
+          <p>NeedStorage:</p>
+          <input id='deployNeedsStorage' type="checkbox" />
+
+          <br/>
+          <p>dynamicInvoke:</p>
+          <input id='deployDynamicInvoke' type="checkbox" />
+
+          <br/>
+          <p>isPayable:</p>
+          <input id='deployIsPayable' type="checkbox" />
+
+          <br/>
+          <p>returnType:</p>
+          <input id='deployReturnType' type="text" value="05"/>
+
+          <br/>
+          <p>parameterList:</p>
+          <input id='deployParameterList' type="text" value="05"/>
+
+          <br/>
+          <p>
+            Code:
+            <input type="file" id="deployAvmFile" accept=".avm">
+          </p>
+          <textarea id='deployCode'>54c56b6c766b00527ac46c766b51527ac46c766b00c36c766b51c3936c766b52527ac46203006c766b52c3616c7566</textarea>
+
+          <br/>
+          <button type="button" class="btn btn-primary" onclick="deploy()">Deploy</button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="output">
+      <h3>Output</h3>
+      <div class="scroll-container">
+        <div id="loading"><div style="width:100%;height:100%" class="lds-pacman"><div><div></div><div></div><div></div></div><div><div></div><div></div></div></div></div>
+        <div id="result"></div>
+        <div id="error"></div>
+      </div>
+    </div>
+
+    <div id="utils-button" onclick="toggleUtils()">Utils</div>
+
+    <div id="utils">
+      <h3>Utils</h3>
+      <div class="scroll-container">
+
+        <div class="function-container">
+          <h5 class="title">Hex String <===> String</h5>
+          <div class="text">
+            68656c6c6f <===> hello
+          </div>
+          <div class="">
+            <div class="row">
+              <div>Hex string:</div>
+              <div>
+                <input id='utilsHex2strInput' type="text"/>
+              </div>
+              <div>=></div>
+              <div id='utilsHex2strOutput'></div>
+            </div>
+            <div class="row">
+              <div>String:</div>
+              <div>
+                <input id='utilsStr2hexInput' type="text"/>
+              </div>
+              <div>=></div>
+              <div id='utilsStr2hexOutput'></div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary" onclick="utilsString()">Transform</button>
+        </div>
+
+        <div class="function-container">
+          <h5 class="title">Hex String  <===> Integer</h5>
+          <div class="text">
+            00e1f505 <===> 100000000
+          </div>
+          <div class="">
+            <div class="row">
+              <div>Hex string:</div>
+              <div>
+                <input id='utilsHex2intInput' type="text"/>
+              </div>
+              <div>=></div>
+              <div id='utilsHex2intOutput'></div>
+            </div>
+            <div class="row">
+              <div>Integer:</div>
+              <div>
+                <input id='utilsInt2hexInput' type="number"/>
+              </div>
+              <div>=></div>
+              <div id='utilsInt2hexOutput'></div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary" onclick="utilsInteger()">Transform</button>
+        </div>
+
+        <div class="function-container">
+          <h5 class="title">Big endian <===> Little endian</h5>
+          <div class="text">
+            bc99b2a477e28581b2fd04249ba27599ebd736d3 <===> d336d7eb9975a29b2404fdb28185e277a4b299bc
+          </div>
+          <div class="">
+            <div class="row">
+              <div>Hex string:</div>
+              <div>
+                <input id='utilsReverseHexInput' type="text"/>
+              </div>
+              <div>=></div>
+              <div id='utilsReverseHexOutput'></div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary" onclick="utilsReverseHex()">Transform</button>
+        </div>
+
+        <div class="function-container">
+          <h5 class="title">Address <===> ScriptHash</h5>
+          <div class="text">
+            Ab2fvZdmnM4HwDgVbdBrbTLz1wK5TcEyhU <===> d336d7eb9975a29b2404fdb28185e277a4b299bc
+          </div>
+          <div class="">
+            <div class="row">
+              <div>Address:</div>
+              <div>
+                <input id='utilsAddress2scriptHashInput' type="text"/>
+              </div>
+              <div>=></div>
+              <div id='utilsAddress2scriptHashOutput'></div>
+            </div>
+            <div class="row">
+              <div>ScriptHash:</div>
+              <div>
+                <input id='utilsScriptHash2addressInput' type="text"/>
+              </div>
+              <div>=></div>
+              <div id='utilsScriptHash2addressOutput'></div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary" onclick="utilsAddress()">Transform</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<script type="text/javascript" src="./main.js"></script>
+</body>
+</html>
