@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="O3 dApp Platform — NEO">
+  <meta name="description" content="O3 dApp Platform — ETH">
   <meta name="author" content="O3">
-  <title>O3 dApp Platform — NEO</title>
+  <title>O3 dApp Platform — ETH</title>
 
   <link rel="stylesheet" href="https://cdn.o3.app/css/purpose2.0/assets/libs/@fortawesome/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.o3.app/css/purpose2.0/assets/css/purpose.css" id="stylesheet">
@@ -14,9 +14,7 @@
   <link rel="stylesheet" href="./docs.css" id="stylesheet">
   <!-- <script src="https://cdn.jsdelivr.net/npm/o3-dapi-core@0.3.13/lib/o3-dapi-core.min.js"></script> -->
   <script type="text/javascript" src="../../core/build/bundle.js"></script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/o3-dapi-neo@0.6.1/lib/o3-dapi-neo.min.js"></script> -->
   <script type="text/javascript" src="../build/bundle.js"></script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/neo-dapi@2.0.4/lib/neo-dapi.min.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <style type="text/css">
   .string {
@@ -77,7 +75,7 @@ a {
     <nav id="navbar-main" class="navbar navbar-expand-lg navbar-light bg-white">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html">
-          <img alt="Image placeholder" src="https://cdn.o3.network/logo/logo-light.png" id="navbar-logo" style="height: 40px;"><span class="ml-3">O3 dApp Platform — NEO</span>
+          <img alt="Image placeholder" src="https://cdn.o3.network/logo/logo-light.png" id="navbar-logo" style="height: 40px;"><span class="ml-3">O3 dApp Platform — ETH</span>
         </a>
         <button class="sidenav-toggler ml-auto mr-3 active" type="button" data-action="sidenav-pin" data-target="#sidenav-main">
           <div class="sidenav-toggler-inner">
@@ -92,14 +90,8 @@ a {
             <li class="nav-item">
               <a class="nav-link" href="./index.html">Testbed</a>
             </li>
-             <li class="nav-item">
-              <a class="nav-link" href="./deploy.html">Deploy Smart Contract</a>
-            </li>
             <li class="nav-item">
               <a class="nav-link" target="_blank" href="https://docs.o3.network">Documents</a>
-            </li>
-            <li class="nav-item">
-              <select id="networks" name="networks" class="custom-select" v-model="network"></select>
             </li>
           </ul>
         </div>
@@ -119,38 +111,17 @@ a {
                 </a>
                 <div class="collapse show" id="navbar-functions">
                   <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link" href="#collapse-getProvider">getProvider</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-getNetworks">getNetworks</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-getAccount">getAccount</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-getPublicKey">getPublicKey</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-getBalance" >getBalance</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-getStorage">getStorage</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-invokeRead">invokeRead</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-invoke">invoke</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-invokeMulti">invokeMulti</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-send">send</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-signMessage">signMessage</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-verifyMessage">verifyMessage</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-getBlock">getBlock</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-getBlockHeight">getBlockHeight</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-getTransaction">getTransaction</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-getApplicationLog">getApplicationLog</a></li>
-                  </ul>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#navbar-utils" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-utils">
-                  Utilities
-                </a>
-                <div class="collapse show" id="navbar-utils">
-                  <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link" href="#collapse-hex2str">Hex to String</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-str2hex">String to Hex</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-hex2int">Hex to Integer</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-int2hex">Integer to Hex</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-reverseHex">Reverse Hex</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-address2scripthash">Address to Script hash</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#collapse-scripthash2address">Script hash to Address</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#collapse-ethChainId">eth_chainId</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#collapse-ethNetVersion">net_version</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#collapse-ethRequestAccounts">eth_requestAccounts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#collapse-ethAccounts">eth_accounts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#collapse-ethBlockNumber" >eth_blockNumber</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#collapse-ethCall">eth_call</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#collapse-ethEstimateGas">eth_estimateGas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#collapse-ethGasPrice">eth_gasPrice</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#collapse-ethTransactionReceipt">eth_getTransactionReceipt</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#collapse-ethSendTransaction">eth_sendTransaction</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#collapse-ethSendRawTransaction">eth_sendRawTransaction</a></li>
                   </ul>
                 </div>
               </li>
@@ -167,480 +138,227 @@ a {
             <div class="docs-content">
 
               <div class="docs-page-title">
-                <h2>O3 dApp Platform — NEO</h2>
+                <h2>O3 dApp Platform — ETH</h2>
               </div>
 
-              <p class="text-muted docs-lead">A testbed for dAPI for NEO blockchain.</p>
+              <p class="text-muted docs-lead">A testbed for dAPI for ETH blockchain.</p>
               <hr class="divider divider-fade"></hr>
 
-              <div id="collapse-getProvider" class="method">
-                <div class="card" id="getProvider">
+              <div id="collapse-ethChainId" class="method">
+                <div class="card" id="eth_chainId">
                   <div class="card-header py-4">
-                    <h3 class="mt-0">getProvider</h3>
-                    <p class="small mb-0">Returns information about the dAPI provider, including who this provider is, the version of their dAPI, and the NEP that the interface is compatible with.</p>
+                    <h3 class="mt-0">eth_chainId</h3>
+                    <p class="small mb-0">Returns the available chainId.</p>
                   </div>
                   <div>
                     <div class="card-body">
-                      <button class="btn btn-primary btn-sm" onclick="getProvider('getProvider-result')">Run</button>
+                      <button class="btn btn-primary btn-sm" onclick="ethChainId('eth_chainId_res')">Run</button>
                     </div>
                     <div class="card-footer">
                       <h6>Result</h6>
-                      <pre><div class="p-3 border rounded" id="getProvider-result"></div></pre>
+                      <pre><div class="p-3 border rounded" id="eth_chainId_res"></div></pre>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div id="collapse-getNetworks" class="method">
+              <div id="collapse-ethNetVersion" class="method">
                 <div class="card" id="getNetworks">
                   <div class="card-header py-4">
-                    <h3 class="mt-0">getNetworks</h3>
-                    <p class="small mb-0">Returns a list of available provider networks.</p>
+                    <h3 class="mt-0">net_version</h3>
+                    <p class="small mb-0">Returns the current network id.</p>
                   </div>
                   <div>
                     <div class="card-body">
-                      <button class="btn btn-primary btn-sm" onclick="getNetworks('getNetworks-result')">Run</button>
+                      <button class="btn btn-primary btn-sm" onclick="ethNetVersion('net_version_res')">Run</button>
                     </div>
                     <div class="card-footer">
 
                       <h6>Result</h6>
-                      <pre><div class="p-3 border rounded" id="getNetworks-result"></div></pre>
+                      <pre><div class="p-3 border rounded" id="net_version_res"></div></pre>
                     </div>
 
                   </div>
                 </div>
               </div>
 
-              <div id="collapse-getAccount" class="method">
+              <div id="collapse-ethRequestAccounts" class="method">
                 <div class="card" id="getAccount">
                   <div class="card-header py-4">
-                    <h3 class="mt-0">getAccount</h3>
-                    <p class="small mb-0">Return the Account that is currently connected to the dApp.</p>
+                    <h3 class="mt-0">eth_requestAccounts</h3>
+                    <p class="small mb-0">Returns the address owned by the client.</p>
                   </div>
                   <div>
                     <div class="card-body">
 
-                      <button class="btn btn-primary btn-sm" onclick="getAccount('getAccount-result')">Run</button>
+                      <button class="btn btn-primary btn-sm" onclick="ethRequestAccounts('eth_requestAccounts_res')">Run</button>
                     </div>
                     <div class="card-footer">
 
                       <h6>Result</h6>
-                      <pre><div class="p-3 border rounded" id="getAccount-result"></div></pre>
+                      <pre><div class="p-3 border rounded" id="eth_requestAccounts_res"></div></pre>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div id="collapse-getPublicKey" class="method">
+              <div id="collapse-ethAccounts" class="method">
                 <div class="card" id="getPublicKey">
                   <div class="card-header py-4">
-                    <h3 class="mt-0">getPublicKey</h3>
-                    <p class="small mb-0">Return the Public Key of the Account that is currently connected to the dApp.</p>
+                    <h3 class="mt-0">eth_accounts</h3>
+                    <p class="small mb-0">Returns the address owned by the client.</p>
                   </div>
                   <div>
                     <div class="card-body">
 
-                      <button class="btn btn-primary btn-sm" onclick="getPublicKey('getPublicKey-result')">Run</button>
+                      <button class="btn btn-primary btn-sm" onclick="ethAccounts('eth_accounts_res')">Run</button>
                     </div>
                     <div class="card-footer">
 
                       <h6>Result</h6>
-                      <pre><div class="p-3 border rounded" id="getPublicKey-result"></div></pre>
+                      <pre><div class="p-3 border rounded" id="eth_accounts_res"></div></pre>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div id="collapse-getBalance" class="method">
+              <div id="collapse-ethBlockNumber" class="method">
                 <div class="card" id="getBalance">
                   <div class="card-header py-4">
-                    <h3 class="mt-0">getBalance</h3>
-                    <p class="small mb-0">Return balance of a specific asset for the given account, or all balances for an account. Also takes multiple entries.</p>
+                    <h3 class="mt-0">eth_blockNumber</h3>
+                    <p class="small mb-0">Returns the number of most recent block.</p>
                   </div>
                   <div>
                     <div class="card-body">
                       <h6>Input</h6>
-                      <textarea class="form-control mb-2" id="getBalance-input" placeholder="getBalance input" rows="12">{{formatInput(getBalanceInput)}}</textarea>
-                      <button class="btn btn-primary btn-sm" onclick="getBalance('getBalance-input','getBalance-result')">Run</button>
+                      <button class="btn btn-primary btn-sm" onclick="ethBlockNumber('eth_blockNumber_res')">Run</button>
                     </div>
                     <div class="card-footer">
                       <h6>Result</h6>
-                      <pre><div class="p-3 border rounded" id="getBalance-result"></div></pre>
+                      <pre><div class="p-3 border rounded" id="eth_blockNumber_res"></div></pre>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div id="collapse-getStorage" class="method">
+              <div id="collapse-ethCall" class="method">
                 <div class="card" id="getStorage">
                   <div class="card-header py-4">
-                    <h3 class="mt-0">getStorage</h3>
-                    <p class="small mb-0">Reads the raw value in smart contract storage.</p>
+                    <h3 class="mt-0">eth_call</h3>
+                    <p class="small mb-0">DATA - the return value of executed contract.</p>
                   </div>
                   <div>
                     <div class="card-body">
                       <h6>Input</h6>
-                      <textarea class="form-control mb-2" id="getStorage-input" placeholder="getStorage input" rows="6">{{formatInput(getStorageInput)}}</textarea>
-                      <button class="btn btn-primary btn-sm" onclick="getStorage('getStorage-input','getStorage-result')">Run</button>
+                      <textarea class="form-control mb-2" id="eth_call_input" placeholder="getStorage input" rows="6">{{formatInput(ethCallInput)}}</textarea>
+                      <button class="btn btn-primary btn-sm" onclick="ethCall('eth_call_input', 'eth_call_res')">Run</button>
                     </div>
                     <div class="card-footer">
                       <h6>Result</h6>
-                      <pre><div class="p-3 border rounded" id="getStorage-result"></div></pre>
+                      <pre><div class="p-3 border rounded" id="eth_call_res"></div></pre>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div id="collapse-invokeRead" class="method">
+              <div id="collapse-ethEstimateGas" class="method">
                 <div class="card" id="invokeRead">
                   <div class="card-header py-4">
-                    <h3 class="mt-0">invokeRead</h3>
-                    <p class="small mb-0">Execute a contract invocation in read-only mode.</p>
+                    <h3 class="mt-0">eth_estimateGas</h3>
+                    <p class="small mb-0">QUANTITY - get the amount of gas used.</p>
                   </div>
                   <div>
                     <div class="card-body">
                       <h6>Input</h6>
-                      <textarea class="form-control mb-2" id="invokeRead-input" placeholder="invokeRead input" rows="12">{{formatInput(invokeReadInput)}}</textarea>
-                      <button class="btn btn-primary btn-sm" onclick="invokeRead('invokeRead-input','invokeRead-result')">Run</button>
+                      <textarea class="form-control mb-2" id="eth_estimateGas_input" placeholder="invokeRead input" rows="12">{{formatInput(ethEstimateGasInput)}}</textarea>
+                      <button class="btn btn-primary btn-sm" onclick="ethEstimateGas('eth_estimateGas_input', 'eth_estimateGas_res')">Run</button>
                     </div>
                     <div class="card-footer">
                       <h6>Result</h6>
-                      <pre><div class="p-3 border rounded" id="invokeRead-result"></div></pre>
+                      <pre><div class="p-3 border rounded" id="eth_estimateGas_res"></div></pre>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div id="collapse-invoke" class="method">
+              <div id="collapse-ethGasPrice" class="method">
                 <div class="card" id="invoke">
                   <div class="card-header py-4">
-                    <h3 class="mt-0">invoke</h3>
-                    <p class="small mb-0">Execute a contract invocation.</p>
+                    <h3 class="mt-0">eth_gasPrice</h3>
+                    <p class="small mb-0">QUANTITY - get the integer of the current gas price in wei.</p>
                   </div>
                   <div>
                     <div class="card-body">
                       <h6>Input</h6>
-                      <textarea class="form-control mb-2" id="invoke-input" placeholder="invoke input" rows="22">{{formatInput(invokeInput)}}</textarea>
-                      <button class="btn btn-primary btn-sm" onclick="invoke('invoke-input','invoke-result')">Run</button>
+                      <button class="btn btn-primary btn-sm" onclick="ethGasPrice('eth_gasPrice_res')">Run</button>
                     </div>
                     <div class="card-footer">
                       <h6>Result</h6>
-                      <pre><div class="p-3 border rounded" id="invoke-result"></div></pre>
+                      <pre><div class="p-3 border rounded" id="eth_gasPrice_res"></div></pre>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div id="collapse-invokeMulti" class="method">
-                <div class="card" id="invokeMulti">
+              <div id="collapse-ethTransactionReceipt" class="method">
+                <div class="card">
                   <div class="card-header py-4">
-                    <h3 class="mt-0">invokeMulti</h3>
-                    <p class="small mb-0">Execute multiple contract invocations.</p>
+                    <h3 class="mt-0">eth_getTransactionReceipt</h3>
+                    <p class="small mb-0">DATA, 32 Bytes - the transaction hash, or the zero hash if the transaction is not yet available. Use eth_getTransactionReceipt to get the contract address, after the transaction was mined, when you created a contract.</p>
                   </div>
                   <div>
                     <div class="card-body">
                       <h6>Input</h6>
-                      <textarea class="form-control mb-2" id="invoke-multi-input" placeholder="invokeMulti input" rows="22">{{formatInput(invokeMultiInput)}}</textarea>
-                      <button class="btn btn-primary btn-sm" onclick="invokeMulti('invoke-multi-input','invoke-multi-result')">Run</button>
+                      <textarea class="form-control mb-2" id="eth_TransactionReceipt_input" placeholder="invokeMulti input" rows="22">{{formatInput(ethTransactionReceiptInput)}}</textarea>
+                      <button class="btn btn-primary btn-sm" onclick="ethTransactionReceipt('eth_TransactionReceipt_input', 'eth_TransactionReceipt_res')">Run</button>
                     </div>
                     <div class="card-footer">
                       <h6>Result</h6>
-                      <pre><div class="p-3 border rounded" id="invoke-multi-result"></div></pre>
+                      <pre><div class="p-3 border rounded" id="eth_TransactionReceipt_res"></div></pre>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div id="collapse-send" class="method">
+              <div id="collapse-ethSendTransaction" class="method">
                 <div class="card" id="send">
                   <div class="card-header py-4">
-                    <h3 class="mt-0">send</h3>
-                    <p class="small mb-0">Invoke a transfer of a specified amount of a given asset from the connected account to another account.</p>
+                    <h3 class="mt-0">eth_sendTransaction</h3>
+                    <p class="small mb-0">Send a transaction and return txid.</p>
                   </div>
                   <div>
                     <div class="card-body">
                       <h6>Input</h6>
-                      <textarea class="form-control mb-2" id="send-input" placeholder="send input" rows="12">{{formatInput(sendInput)}}</textarea>
-                      <button class="btn btn-primary btn-sm" onclick="send('send-input','send-result')">Run</button>
+                      <textarea class="form-control mb-2" id="eth_sendTransaction_input" placeholder="send input" rows="12">{{formatInput(ethSendTransactionInput)}}</textarea>
+                      <button class="btn btn-primary btn-sm" onclick="ethSendTransaction('eth_sendTransaction_input', 'eth_sendTransaction')">Run</button>
                     </div>
                     <div class="card-footer">
                       <h6>Result</h6>
-                      <pre><div class="p-3 border rounded" id="send-result"></div></pre>
+                      <pre><div class="p-3 border rounded" id="eth_sendTransaction"></div></pre>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div id="collapse-signMessage" class="method">
+              <div id="collapse-ethSendRawTransaction" class="method">
                 <div class="card" id="signMessage">
                   <div class="card-header py-4">
-                    <h3 class="mt-0">signMessage</h3>
-                    <p class="small mb-0">Invoke a transfer of a specified amount of a given asset from the connected account to another account.</p>
+                    <h3 class="mt-0">eth_sendRawTransaction</h3>
+                    <p class="small mb-0">Send a transaction and return txid.</p>
                   </div>
                   <div>
                     <div class="card-body">
                       <h6>Input</h6>
-                      <textarea class="form-control mb-2" id="signMessage-input" placeholder="signMessage input" rows="4">{{formatInput(signMessageInput)}}</textarea>
-                      <button class="btn btn-primary btn-sm" onclick="signMessage('signMessage-input','signMessage-result')">Run</button>
+                      <textarea class="form-control mb-2" id="eth_sendRawTransaction_input" placeholder="signMessage input" rows="4">{{formatInput(ethSendRawTransactionInput)}}</textarea>
+                      <button class="btn btn-primary btn-sm" onclick="ethSendRawTransaction('eth_sendRawTransaction_input', 'eth_sendRawTransaction_res')">Run</button>
                     </div>
                     <div class="card-footer">
                       <h6>Result</h6>
-                      <pre><div class="p-3 border rounded" id="signMessage-result"></div></pre>
+                      <pre><div class="p-3 border rounded" id="eth_sendRawTransaction_res"></div></pre>
                     </div>
                   </div>
                 </div>
               </div>
-
-              <div id="collapse-verifyMessage" class="method">
-                <div class="card" id="verifyMessage">
-                  <div class="card-header py-4">
-                    <h3 class="mt-0">verifyMessage</h3>
-                    <p class="small mb-0">Verify a message signature.</p>
-                  </div>
-                  <div>
-                    <div class="card-body">
-                      <h6>Input</h6>
-                      <textarea class="form-control mb-2" id="verifyMessage-input" placeholder="verifyMessage input" rows="4">{{formatInput(verifyMessageInput)}}</textarea>
-                      <button class="btn btn-primary btn-sm" onclick="verifyMessage('verifyMessage-input','verifyMessage-result')">Run</button>
-                    </div>
-                    <div class="card-footer">
-                      <h6>Result</h6>
-                      <pre><div class="p-3 border rounded" id="verifyMessage-result"></div></pre>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div id="collapse-getBlock" class="method">
-                <div class="card" id="getBlock">
-                  <div class="card-header py-4">
-                    <h3 class="mt-0">getBlock</h3>
-                    <p class="small mb-0">Get info about a given block.</p>
-                  </div>
-                  <div>
-                    <div class="card-body">
-                      <h6>Input</h6>
-                      <textarea class="form-control mb-2" id="getBlock-input" placeholder="getBlock input" rows="4">{{getBlockInput}}</textarea>
-                      <button class="btn btn-primary btn-sm" onclick="getBlock('getBlock-input','getBlock-result')">Run</button>
-                    </div>
-                    <div class="card-footer">
-                      <h6>Result</h6>
-                      <pre><div class="p-3 border rounded" id="getBlock-result"></div></pre>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div id="collapse-getBlockHeight" class="method">
-                <div class="card" id="getBlockHeight">
-                  <div class="card-header py-4">
-                    <h3 class="mt-0">getBlockHeight</h3>
-                    <p class="small mb-0">Height of the current block.</p>
-                  </div>
-                  <div>
-                    <div class="card-body">
-                      <h6>Input</h6>
-                      <textarea class="form-control mb-2" id="getBlockHeight-input" placeholder="getBlockHeight input" rows="4">{{getBlockHeightInput}}</textarea>
-                      <button class="btn btn-primary btn-sm" onclick="getBlockHeight('getBlockHeight-input','getBlockHeight-result')">Run</button>
-                    </div>
-                    <div class="card-footer">
-                      <h6>Result</h6>
-                      <pre><div class="p-3 border rounded" id="getBlockHeight-result"></div></pre>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div id="collapse-getTransaction" class="method">
-                <div class="card" id="getTransaction">
-                  <div class="card-header py-4">
-                    <h3 class="mt-0">getTransaction</h3>
-                    <p class="small mb-0">Get info about a given transaction.</p>
-                  </div>
-                  <div>
-                    <div class="card-body">
-                      <h6>Input</h6>
-                      <textarea class="form-control mb-2" id="getTransaction-input" placeholder="getTransaction input" rows="4">{{getTransactionInput}}</textarea>
-                      <button class="btn btn-primary btn-sm" onclick="getTransaction('getTransaction-input','getTransaction-result')">Run</button>
-                    </div>
-                    <div class="card-footer">
-                      <h6>Result</h6>
-                      <pre><div class="p-3 border rounded" id="getTransaction-result"></div></pre>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div id="collapse-getApplicationLog" class="method">
-                <div class="card" id="getApplicationLog">
-                  <div class="card-header py-4">
-                    <h3 class="mt-0">getApplicationLog</h3>
-                    <p class="small mb-0">Get info about a given transaction.</p>
-                  </div>
-                  <div>
-                    <div class="card-body">
-                      <h6>Input</h6>
-                      <textarea class="form-control mb-2" id="getApplicationLog-input" placeholder="getApplicationLog input" rows="4">{{getApplicationLogInput}}</textarea>
-                      <button class="btn btn-primary btn-sm" onclick="getApplicationLog('getApplicationLog-input','getApplicationLog-result')">Run</button>
-                    </div>
-                    <div class="card-footer">
-                      <h6>Result</h6>
-                      <pre><div class="p-3 border rounded" id="getApplicationLog-result"></div></pre>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <h2 class="mb-3">Utilities</h2>
-
-              <div id="collapse-hex2str" class="method">
-                <div class="card">
-                  <div class="card-header py-4">
-                    <h6 class="mb-0">Hex → String</h6>
-                  </div>
-                  <div>
-                    <div class="card-body pb-0">
-                      <div class="form-group">
-                        <label class="form-control-label" for="basic-url">Enter the hexadecimal text to decode</label>
-                        <textarea class="form-control mb-2" id="hex2str-input" placeholder="Hex input" rows="4">4f33</textarea>
-                        <button class="btn btn-primary btn-sm" onclick="hex2str('hex2str-input','hex2str-result')">Convert</button>
-                      </div>
-                    </div>
-                    <div class="card-footer">
-                      <h6>Result</h6>
-                      <div class="p-3 border rounded" id="hex2str-result"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div id="collapse-str2hex" class="method">
-                <div class="card">
-                  <div class="card-header py-4">
-                    <h6 class="mb-0">String → Hex</h6>
-                  </div>
-                  <div>
-                    <div class="card-body pb-0">
-                      <div class="form-group">
-                        <label class="form-control-label" for="basic-url">Enter the text to encode to hex</label>
-                        <textarea class="form-control mb-2" id="str2hex-input" placeholder="Hex input" rows="4">O3</textarea>
-                        <button class="btn btn-primary btn-sm" onclick="str2hex('str2hex-input','str2hex-result')">Convert</button>
-                      </div>
-                    </div>
-                    <div class="card-footer">
-                      <h6>Result</h6>
-                      <div class="p-3 border rounded" id="str2hex-result"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div id="collapse-hex2int" class="method">
-                <div class="card">
-                  <div class="card-header py-4">
-                    <h6 class="mb-0">Hex → Integer</h6>
-                  </div>
-                  <div>
-                    <div class="card-body pb-0">
-                      <div class="form-group">
-                        <label class="form-control-label" for="basic-url">Enter the hexadecimal text to decode</label>
-                        <textarea class="form-control mb-2" id="hex2int-input" placeholder="Hex input" rows="4">00e1f505</textarea>
-                        <button class="btn btn-primary btn-sm" onclick="hex2int('hex2int-input','hex2int-result')">Convert</button>
-                      </div>
-                    </div>
-                    <div class="card-footer">
-                      <h6>Result</h6>
-                      <div class="p-3 border rounded" id="hex2int-result"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div id="collapse-int2hex" class="method">
-                <div class="card">
-                  <div class="card-header py-4">
-                    <h6 class="mb-0">Integer → Hex</h6>
-                  </div>
-                  <div>
-                    <div class="card-body pb-0">
-                      <div class="form-group">
-                        <label class="form-control-label" for="basic-url">Enter the hexadecimal text to decode</label>
-                        <textarea class="form-control mb-2" id="int2hex-input" placeholder="Hex input" rows="4">100000000</textarea>
-                        <button class="btn btn-primary btn-sm" onclick="int2hex('int2hex-input','int2hex-result')">Convert</button>
-                      </div>
-                    </div>
-                    <div class="card-footer">
-                      <h6>Result</h6>
-                      <div class="p-3 border rounded" id="int2hex-result"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div id="collapse-reverseHex" class="method">
-                <div class="card">
-                  <div class="card-header py-4">
-                    <h6 class="mb-0">Reverse Hex</h6>
-                  </div>
-                  <div>
-                    <div class="card-body pb-0">
-                      <div class="form-group">
-                        <label class="form-control-label" for="basic-url">Enter the hexadecimal text to reverse</label>
-                        <textarea class="form-control mb-2" id="reverseHex-input" placeholder="Hex input" rows="4">bc99b2a477e28581b2fd04249ba27599ebd736d3</textarea>
-                        <button class="btn btn-primary btn-sm" onclick="reverseHex('reverseHex-input','reverseHex-result')">Convert</button>
-                      </div>
-                    </div>
-                    <div class="card-footer">
-                      <h6>Result</h6>
-                      <div class="p-3 border rounded" id="reverseHex-result"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div id="collapse-address2scripthash" class="method">
-                <div class="card">
-                  <div class="card-header py-4">
-                    <h6 class="mb-0">Address → Script hash</h6>
-                  </div>
-                  <div>
-                    <div class="card-body pb-0">
-                      <div class="form-group">
-                        <label class="form-control-label" for="basic-url">Enter the address to convert</label>
-                        <textarea class="form-control mb-2" id="address2scripthash-input" placeholder="Hex input" rows="4">Ab2fvZdmnM4HwDgVbdBrbTLz1wK5TcEyhU</textarea>
-                        <button class="btn btn-primary btn-sm" onclick="address2scripthash('address2scripthash-input','address2scripthash-result')">Convert</button>
-                      </div>
-                    </div>
-                    <div class="card-footer">
-                      <h6>Result</h6>
-                      <div class="p-3 border rounded" id="address2scripthash-result"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div id="collapse-scripthash2address" class="method">
-                <div class="card">
-                  <div class="card-header py-4">
-                    <h6 class="mb-0">Script hash → Address</h6>
-                  </div>
-                  <div>
-                    <div class="card-body pb-0">
-                      <div class="form-group">
-                        <label class="form-control-label" for="basic-url">Enter the script hash to convert</label>
-                        <textarea class="form-control mb-2" id="scripthash2address-input" placeholder="Hex input" rows="4">d336d7eb9975a29b2404fdb28185e277a4b299bc</textarea>
-                        <button class="btn btn-primary btn-sm" onclick="scripthash2address('scripthash2address-input','scripthash2address-result')">Convert</button>
-                      </div>
-                    </div>
-                    <div class="card-footer">
-                      <h6>Result</h6>
-                      <div class="p-3 border rounded" id="scripthash2address-result"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
 
             </div>
             <!-- docs-content -->

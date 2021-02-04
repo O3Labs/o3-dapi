@@ -1,104 +1,33 @@
 var app = new Vue({
 	el: '#app',
 	data: {
-		network:"",
-		getStorageInput: {
-			scriptHash: "c36aee199dbba6c3f439983657558cfb67629599",
-			key: "bd097b2fcf70e1fd30a5c3ef51e662feeafeba01",
-			network: "TestNet",
+		ethCallInput: [
+			{
+				"to":"0xdaaf96c344f63131acadd0ea35170e7892d3dfba", // account address
+				"data":"0xbc1c58d11d9964670435ad8ded3a5abba251ed340cb01fce690794b9dc35627fdac55fb0",
+			}, "latest"
+		],
+		ethEstimateGasInput: [{
+			"from": "0x54715A7ab13692b268Eb12334E98e0DA891a86d0",
+			"to": "0xdF704A67Fc56F0D7CFA147548Ee4C115921D2ba3",
+			"value": "0x3211"
+		}],
+		ethTransactionReceiptInput: ['0x4383f1bc48657782998bd8d44e24bdbe8f2431346cd69dde73aec2188288ae06'],
+		ethSendTransactionInput: {
+			"from": "0x54715A7ab13692b268Eb12334E98e0DA891a86d0",
+			"to": "0xdF704A67Fc56F0D7CFA147548Ee4C115921D2ba3", // account address
+			"gas": "0x15f90", // 90000
+			"gasPrice": "0x32", // 50
+			"value": "0x3211", 
+			// "data": "0xa9059cbb00000000000000000000000054715A7ab13692b268Eb12334E98e0DA891a86d000000000000000000000000000000000000000000000000000000000000186a0"
 		},
-		getBalanceInput: {
-			params: [{
-				"address": "AScKxyXmNtEnTLTvbVhNQyTJmgytxhwSnM",
-				"assets": ["GAS"]
-			}],
-			network: "TestNet",
-		},
-		invokeReadInput: {
-			scriptHash: "c36aee199dbba6c3f439983657558cfb67629599",
-			operation: "balanceOf",
-			args:[{"type":"ByteArray","value":"bd097b2fcf70e1fd30a5c3ef51e662feeafeba01"}],
-			network: "TestNet",
-		},
-		invokeInput: {
-			scriptHash: "c36aee199dbba6c3f439983657558cfb67629599",
-			operation: "transfer",
-			args: [{"type":"ByteArray","value":""},{"type":"ByteArray","value":""},{"type":"ByteArray","value":"0100000000000000"}],
-			fee: "0.11",
-			network: "TestNet",
-			triggerContractVerification: false,
-			broadcastOverride: false,
-		},
-		invokeMultiInput: {
-			invokeArgs: [
-				{
-					scriptHash: "c36aee199dbba6c3f439983657558cfb67629599",
-					operation: "transfer",
-					args: [{"type":"ByteArray","value":""},{"type":"ByteArray","value":""},{"type":"ByteArray","value":"0100000000000000"}],
-					triggerContractVerification: false,
-					attachedAssets: {
-						'NEO': 1,
-					}
-				},
-				{
-					scriptHash: "c36aee199dbba6c3f439983657558cfb67629599",
-					operation: "transfer",
-					args: [{"type":"ByteArray","value":""},{"type":"ByteArray","value":""},{"type":"ByteArray","value":"0100000000000000"}],
-					triggerContractVerification: true,
-					attachedAssets: {
-						'NEO': 2,
-					}
-				}
-			],
-			fee: "0.11",
-			network: "TestNet",
-			broadcastOverride: false,
-		},
-		sendInput: {
-			fromAddress: "ANtdacYPFN6zkarDwVt5vH55FKsJU8SapW",
-			toAddress: "ANtdacYPFN6zkarDwVt5vH55FKsJU8SapW",
-			asset: "GAS",
-			amount: "1",
-			remark: "TestRemark",
-			fee: "0.011",
-			network: "TestNet",
-			broadcastOverride: false,
-		},
-		signMessageInput:{
-			message: "Here is a message",
-		},
-		verifyMessageInput:{
-			message: "Here is a message",
-			data: "",
-			publicKey: "",
-		},
-		getBlockInput:{
-			blockHeight: 2619690,
-			network: "TestNet",
-		},
-		getBlockHeightInput:{
-			network: "TestNet",
-		},
-		getTransactionInput:{
-			txid: "",
-			network: "TestNet",
-		},
-		getApplicationLogInput:{
-			txid: "",
-			network: "TestNet",
-		}
-	},
-	watch: {
-		network:function(value){
-			this.getStorageInput.network = value;
-			this.getBalanceInput.network = value;
-			this.invokeReadInput.network = value;
-			this.invokeInput.network = value;
-			this.invokeMultiInput.network = value;
-			this.sendInput.network = value;
-			this.getBlockInput.network = value;
-			this.getBlockHeightInput.network = value;
-			this.getApplicationLogInput.network = value;
+		ethSendRawTransactionInput: {
+			"from": "0x54715A7ab13692b268Eb12334E98e0DA891a86d0",
+			"to": "0xdAC17F958D2ee523a2206206994597C13D831ec7", // Contract address
+			"gas": "0x15f90", // 90000
+			"gasPrice": "0x32", // 50
+			"value": "0x0", // 0
+			"data": "0xa9059cbb000000000000000000000000dF704A67Fc56F0D7CFA147548Ee4C115921D2ba300000000000000000000000000000000000000000000000000000000000186a0"
 		}
 	},
 	methods: {
@@ -108,50 +37,100 @@ var app = new Vue({
 	}
 })
 
+function formatInput(json) {
+	return JSON.stringify(json, null, "\t");
+}
 
-function getProvider(elem) {
-	o3dapi.ETH.request({method: 'net_version'}).then(res => {
-		console.log(res)
+function ethChainId(elem) {
+	o3dapi.ETH.request({method: 'eth_chainId', params: []}).then((res) => {
+		document.getElementById(elem).innerHTML = formatInput(res);
 	}).catch(err => {
-		console.log(err)
+		document.getElementById(elem).innerHTML = formatInput(err);
+	});
+}
+
+function ethNetVersion(elem) {
+	o3dapi.ETH.request({method: 'net_version', params: []}).then((res) => {
+		document.getElementById(elem).innerHTML = formatInput(res);
+	}).catch((err) => {
+		document.getElementById(elem).innerHTML = formatInput(err);
+	});
+}
+
+function ethRequestAccounts(elem) {
+	o3dapi.ETH.request({method: 'eth_requestAccounts', params: []}).then(res => {
+		document.getElementById(elem).innerHTML = formatInput(res);
+	}).catch(err => {
+		document.getElementById(elem).innerHTML = formatInput(err);
 	})
 }
 
-function getAccount(elem) {
+function ethAccounts(elem) {
 	o3dapi.ETH.request({method: 'eth_accounts', params: []}).then(res => {
-		console.log(res)
+		document.getElementById(elem).innerHTML = formatInput(res);
 	}).catch(err => {
-		console.log(err)
+		document.getElementById(elem).innerHTML = formatInput(err);
 	})
 }
 
-function getBlockHeight(inputElement, resultElem) {
-	try {
-		o3dapi.ETH.request({method: 'eth_blockNumber', params: []}).then(res => {
-			console.log(res)
-		}).catch(err => {
-			console.log(err)
-		})
-	} catch (err) {
-		document.getElementById(resultElem).innerHTML = 'invalid JSON input';
-	}
+function ethBlockNumber(elem) {
+	o3dapi.ETH.request({method: 'eth_blockNumber', params: []}).then(res => {
+		document.getElementById(elem).innerHTML = formatInput(res);
+	}).catch(err => {
+		document.getElementById(elem).innerHTML = formatInput(err);
+	})
 }
 
-function getTransaction(inputElement, resultElem) {
-	try {
-		let params = {
-			"from": "0xd34E3B073a484823058Ab76fc2304D5394beafE4",
-			"to": "0xdF704A67Fc56F0D7CFA147548Ee4C115921D2ba3",
-			// "gas": "0x15f90", // 90000
-			// "gasPrice": "0x32", // 50
-			"value": "0x9184e72a", // 2441406250
-			// "data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
-		}
-		
-		o3dapi.ETH.request({method: 'eth_sendTransaction', params: params}).then(res => {
-			console.log(res)
-		})
-	} catch (error) {
-		console.log(error)
-	}
+function ethCall(reqElem, resElem) {
+	let params = JSON.parse(document.getElementById(reqElem).innerHTML);
+	o3dapi.ETH.request({method: 'eth_call', params: params}).then(res => {
+		document.getElementById(resElem).innerHTML = formatInput(res);
+	}).catch(err => {
+		document.getElementById(resElem).innerHTML = formatInput(err);
+	})
+}
+
+function ethEstimateGas(reqElem, resElem) {
+	let params = JSON.parse(document.getElementById(reqElem).innerHTML);
+	o3dapi.ETH.request({method: 'eth_estimateGas', params: params}).then(res => {
+		document.getElementById(resElem).innerHTML = formatInput(res);
+	}).catch(err => {
+		document.getElementById(resElem).innerHTML = formatInput(err);
+	})
+}
+
+function ethGasPrice(resElem) {
+	o3dapi.ETH.request({method: 'eth_gasPrice', params: []}).then(res => {
+		document.getElementById(resElem).innerHTML = formatInput(res);
+	}).catch(err => {
+		document.getElementById(resElem).innerHTML = formatInput(err);
+	})
+}
+
+function ethTransactionReceipt(reqElem, resElem) {
+	let params = JSON.parse(document.getElementById(reqElem).innerHTML);
+	console.log(params)
+	o3dapi.ETH.request({method: 'eth_getTransactionReceipt', params: params}).then(res => {
+		document.getElementById(resElem).innerHTML = formatInput(res);
+	}).catch(err => {
+		document.getElementById(resElem).innerHTML = formatInput(err);
+	})
+}
+
+function ethSendTransaction(reqElem, resElem) {
+	let params = JSON.parse(document.getElementById(reqElem).innerHTML);
+	o3dapi.ETH.request({method: 'eth_sendTransaction', params: params}).then(res => {
+		document.getElementById(resElem).innerHTML = formatInput(res);
+	}).catch(err => {
+		document.getElementById(resElem).innerHTML = formatInput(err);
+	})
+}
+
+function ethSendRawTransaction(reqElem, resElem) {
+	let params = JSON.parse(document.getElementById(reqElem).innerHTML);
+	o3dapi.ETH.request({method: 'eth_sendRawTransaction', params: params}).then(res => {
+		document.getElementById(resElem).innerHTML = formatInput(res);
+	}).catch(err => {
+		document.getElementById(resElem).innerHTML = formatInput(err);
+	})
 }
