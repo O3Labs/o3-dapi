@@ -20,6 +20,7 @@ phases:
       nodejs: 12
     commands:
       - gem install bundler
+      - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
       - curl -sL https://deb.nodesource.com/setup_12.x | bash -
       - apt-get install -y nodejs
   pre_build:
