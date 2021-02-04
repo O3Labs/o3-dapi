@@ -16,6 +16,8 @@ const PLATFORM = 'o3-dapi';
 const messageQueue = {};
 const eventsListeners: {[blockchain: string]: EventHandler} = {};
 const NO_PROVIDER = { type: 'NO_PROVIDER', description: 'O3 dapi provider not found.'};
+const ETH_NO_PROVIDER = { message: 'O3 dapi provider not found.'};
+
 const REQUEST_TIMEOUT = { type: 'REQUEST_TIMEOUT', description: 'Provider is taking longer that timeout specified to complete request.'};
 
 const isBrowser = typeof window !== 'undefined';
@@ -150,7 +152,11 @@ export function sendMessage({
       })
       .catch(err => {
         socketInitPromise = null;
-        reject(NO_PROVIDER);
+        if (blockchain === 'ETH') {
+          reject(ETH_NO_PROVIDER);
+        } else {
+          reject(NO_PROVIDER);
+        }
       });
     }
 
