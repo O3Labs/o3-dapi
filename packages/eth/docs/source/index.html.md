@@ -10,17 +10,17 @@ toc_footers:
   # - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
 
 includes:
-  # - gettingStarted
+  - gettingStarted
   # - devEnv
   # - tutorials
-  - getAccountTutorial
-  - getBalanceTutorial
-  - sendAssetsTutorial
-  - privateNetSetupTutorial
-  - helloWorldTutorial
+  # - getAccountTutorial
+  # - getBalanceTutorial
+  # - sendAssetsTutorial
+  # - privateNetSetupTutorial
+  # - helloWorldTutorial
   - dapiTestbed
-  - nep5Contract
-  - sampleDapp
+  # - nep5Contract
+  # - sampleDapp
   - apiMethods
   # - write
   # - events

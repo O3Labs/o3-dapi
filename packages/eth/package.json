@@ -1,8 +1,8 @@
 {
-  "name": "o3-dapi-neo",
-  "version": "0.6.1",
-  "description": "NEO Plugin for o3-dapi",
-  "main": "./lib/o3-dapi-neo.min.js",
+  "name": "o3-dapi-eth",
+  "version": "1.0.2",
+  "description": "ETH Plugin for o3-dapi",
+  "main": "./lib/o3-dapi-eth.min.js",
   "types": "./lib/index.d.ts",
   "scripts": {
     "start": "webpack --mode development --watch",
@@ -13,12 +13,12 @@
     "type": "git",
     "url": "git+https://github.com/O3Labs/o3-dapi.git"
   },
-  "author": "Nick Fujita",
+  "author": "O3Labs",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/O3Labs/o3-dapi/issues"
   },
-  "homepage": "https://github.com/O3Labs/o3-dapi/tree/master/packages/neo",
+  "homepage": "https://github.com/O3Labs/o3-dapi/tree/master/packages/eth",
   "devDependencies": {
     "ts-loader": "5.2.2",
     "tslint": "5.11.0",
@@ -28,7 +28,7 @@
     "webpack-cli": "3.1.2"
   },
   "keywords": [
-    "neo",
+    "eth",
     "web3"
   ]
 }

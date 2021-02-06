@@ -5,7 +5,7 @@ const safeWindow = isBrowser ? window : global;
 import { request, RequestArguments, Account } from './modules/read/request';
 import { BLOCKCHAIN } from './constants';
 import { initMessaging } from './messaging';
-class O3dapiEth {
+class O3DapiEth {
 
   static blockchain = BLOCKCHAIN;
 
@@ -21,7 +21,7 @@ class O3dapiEth {
     this.clientPlugin = plugin;
   }
 }
-export default O3dapiEth;
+export default O3DapiEth;
 
 export type request = (data: RequestArguments) => Promise<Account>;
 

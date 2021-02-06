@@ -7,7 +7,7 @@ Read methods do not alter the state of the blockchain. It can help you query inf
 ### eth_chainId
 
 ```typescript
-const chainId = await o3dapi.ETH.request({method: 'eth_chainId', params: []});
+o3dapi.ETH.request({method: 'eth_chainId', params: []}).then(res => {}).catch(err => {});
 ```
 
 > Example Response
@@ -22,14 +22,10 @@ const chainId = await o3dapi.ETH.request({method: 'eth_chainId', params: []});
 
 ### net_version
 
-#### Parameters
-
-none
-
-#### Returns
+Returns the current network id.
 
 ```typescript
-const netWork = await o3dapi.ETH.request({method: 'net_version', params: []});
+o3dapi.ETH.request({method: 'net_version', params: []}).then(res => {}).catch(err => {});
 ```
 
 > Example Response
@@ -42,11 +38,19 @@ const netWork = await o3dapi.ETH.request({method: 'net_version', params: []});
 }
 ```
 
+#### Parameters
+
+none
+
+#### Returns
+
 `String` - The current network id.
 
 * `"1"`: Ethereum Mainnet
 
 ### eth_accounts
+
+Returns of addresses owned by client.
 
 ```typescript
 o3dapi.ETH.request({method: 'eth_accounts', params: []}).then(res => {}).catch(err => {});
@@ -56,14 +60,25 @@ o3dapi.ETH.request({method: 'eth_accounts', params: []}).then(res => {}).catch(e
 
 ```typescript
 {
-  "id": 1,
-  "jsonrpc": "2.0",
-  "result": ["0x407d73d8a49eeb85d32cf465507dd71d507100c1"]
+	"id": 1,
+	"jsonrpc": "2.0",
+	"result": [
+		"0x54715A7ab13692b268Eb12334E98e0DA891a86d0"
+	]
 }
 ```
 
+#### Parameters
+
+none
+
+#### Returns
+
+`Array of DATA`,20 Bytes - addresses owned by the client.
+
 ### eth_requestAccounts
 
+Returns of addresses owned by client.
 
 ```typescript
 o3dapi.ETH.request({method: 'eth_requestAccounts', params: []}).then(res => {}).catch(err => {});
@@ -72,27 +87,61 @@ o3dapi.ETH.request({method: 'eth_requestAccounts', params: []}).then(res => {}).
 > Example Response
 
 ```typescript
-["0x407d73d8a49eeb85d32cf465507dd71d507100c1"]
+{
+	"id": 1,
+	"jsonrpc": "2.0",
+	"result": [
+		"0x54715A7ab13692b268Eb12334E98e0DA891a86d0"
+	]
+}
 ```
+
+#### Parameters
+
+none
+
+#### Returns
+
+`Array of DATA`,20 Bytes - addresses owned by the client.
 
 ### eth_blockNumber
 
+Returns the number of most recent block.
 
+```typescript
+o3dapi.ETH.request({method: 'eth_blockNumber', params: []}).then((res) => {}).catch((err) => {});
+```
+> Example Response
+
+```typescript
+{
+	"jsonrpc": "2.0",
+	"id": 1,
+	"result": "0xb3f5db"
+}
+```
+
+#### Parameters
+
+none
+
+#### Returns
+
+`QUANTITY` - integer of the current block number the client is on.
 
 ### eth_call
 
 Executes a new message call immediately without creating a transaction on the block chain.
 
 ```typescript
-let params = {
-  "from": "0xd34E3B073a484823058Ab76fc2304D5394beafE4",
-  "to": "0x54715A7ab13692b268Eb12334E98e0DA891a86d0",
-  "gas": "0x15f90", // 90000
-  "gasPrice": "0x32", // 50
-  "value": "0x9184e72a", // 2441406250
-  //"data":"0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
-}
-o3dapi.ETH.request({method: 'eth_sendTransaction', params:  [params]}).then(txid => {
+let params = [
+  {
+    "to":"0xdaaf96c344f63131acadd0ea35170e7892d3dfba", // account address
+    "data":"0xbc1c58d11d9964670435ad8ded3a5abba251ed340cb01fce690794b9dc35627fdac55fb0",
+  }, "latest"
+]
+
+o3dapi.ETH.request({method: 'eth_sendTransaction', params:  params}).then(txid => {
   console.log(txid)
 }).catch((err) => {});
 ```
@@ -101,13 +150,15 @@ o3dapi.ETH.request({method: 'eth_sendTransaction', params:  [params]}).then(txid
 
 ```typescript
 {
-  "id":1,
-  "jsonrpc": "2.0",
-  "result": "0x"
+	"jsonrpc": "2.0",
+	"id": 1,
+	"result": "0x00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000026e3010170122094c398198b191d52219591e891c88fff49b6c613b20d89164e66045dcca5d0ad0000000000000000000000000000000000000000000000000000"
 }
 ```
 
 #### Parameters
+
+1.`Object` - The transaction call object
 
 | Parameter         | Type     | Description                                                                                                                                        |
 |:----------------- |:-------- |:-------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -119,22 +170,142 @@ o3dapi.ETH.request({method: 'eth_sendTransaction', params:  [params]}).then(txid
 | data            | String  | DATA - The compiled code of a contract OR the hash of the invoked method signature and encoded parameters. |
 | nonce           | String   | QUANTITY-(optional) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.           |
 
+2.`QUANTITY|TAG` - integer block number, or the string `"latest"`, `"earliest"` or `"pending"`.
 
 ### eth_estimateGas
 
+Generates and returns an estimate of how much gas is necessary to allow the transaction to complete. The transaction will not be added to the blockchain. Note that the estimate may be significantly more than the amount of gas actually used by the transaction, for a variety of reasons including EVM mechanics and node performance.
 
+```typescript
+const params = [
+  {
+    "from": "0x54715A7ab13692b268Eb12334E98e0DA891a86d0",
+    "to": "0xdF704A67Fc56F0D7CFA147548Ee4C115921D2ba3",
+    "value": "0x3211"
+  }, "latest"
+];
+o3dapi.ETH.request({method: 'eth_estimateGas', params: params}).then(res => {}).catch(err => {});
+```
+
+> Example Response
+
+```typescript
+{
+	"jsonrpc": "2.0",
+	"id": 1,
+	"result": "0x5208"
+}
+```
+#### Parameters
+
+1.`Object` - The transaction call object.
+
+| Parameter         | Type     | Description                                                                                                                                        |
+|:----------------- |:-------- |:-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| from            | String   | TDATA, 20 Bytes - The address the transaction is send from.                      |
+| to              | String   | DATA, 20 Bytes - (optional when creating new contract) The address the transaction is directed to.             |
+| gas             | String   | QUANTITY - (optional, default: 90000) Integer of the gas provided for the transaction execution. It will return unused gas.          |
+| gasPrice        | String   | QUANTITY - (optional, default: To-Be-Determined) Integer of the gasPrice used for each paid gas            |
+| value           | String  | QUANTITY - (optional) Integer of the value sent with this transaction     |
+| data            | String  | DATA - The compiled code of a contract OR the hash of the invoked method signature and encoded parameters. |
+| nonce           | String   | QUANTITY-(optional) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.           |
+
+2.`QUANTITY|TAG` - integer block number, or the string `"latest"`, `"earliest"` or `"pending"`.
+
+#### Returns
+
+`DATA` - the return value of executed contract.
 
 ### eth_gasPrice
 
+```typescript
+o3dapi.ETH.request({method: 'eth_gasPrice', params: []}).then(res => {}).catch(err => {});
+```
 
+> Example Response
+
+```typescript
+{
+	"jsonrpc": "2.0",
+	"id": 1,
+	"result": "0x5208"
+}
+```
+
+Returns the current price per gas in wei.
+
+#### Parameters
+
+none
+
+#### Returns
+
+`QUANTITY` - integer of the current gas price in wei.
 
 ### eth_getTransactionReceipt
 
+Returns the receipt of a transaction by transaction hash.
+Note That the receipt is not available for pending transactions.
 
+#### Parameters
+
+1.`DATA`, 32 Bytes - hash of a transaction
+
+#### Returns
+
+```typescript
+const params = ["0x4383f1bc48657782998bd8d44e24bdbe8f2431346cd69dde73aec2188288ae06"]
+o3dapi.ETH.request({method: 'eth_getTransactionReceipt', params: params}).then(res => {}).catch(err => {});
+```
+
+> Example Response
+
+```typescript
+{
+	"jsonrpc": "2.0",
+	"id": 1,
+	"result": {
+		"blockHash": "0xe0eb08b52feaecd7c33c36a033f3111a28b3ab1114ceaeadffb034a9745f5d96",
+		"blockNumber": "0xb247e6",
+		"contractAddress": null,
+		"cumulativeGasUsed": "0xa1a968",
+		"from": "0xd34e3b073a484823058ab76fc2304d5394beafe4",
+		"gasUsed": "0x5208",
+		"logs": [],
+		"logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+		"status": "0x1",
+		"to": "0x54715a7ab13692b268eb12334e98e0da891a86d0",
+		"transactionHash": "0x4383f1bc48657782998bd8d44e24bdbe8f2431346cd69dde73aec2188288ae06",
+		"transactionIndex": "0x8a"
+	}
+}
+```
+
+`Object` - A transaction receipt object, or `null` when no receipt was found:
+
+| Parameter         | Type     | Description                                                                                                                                        |
+|:----------------- |:-------- |:-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| transactionHash        | `DATA`       | 2 Bytes - hash of the transaction.                      |
+| transactionIndex       | `QUANTITY`   | integer of the transactions index position in the block.             |
+| blockHash              | `DATA`       | 32 Bytes - hash of the block where this transaction was in.          |
+| blockNumber            | `QUANTITY`   | block number where this transaction was in.           |
+| from                   | `DATA`       | 20 Bytes - address of the sender.       |
+| to                     | `DATA`       | 20 Bytes - address of the receiver. null when its a contract creation transaction. |
+| cumulativeGasUsed      | `QUANTITY`   | The total amount of gas used when this transaction was executed in the block.         |
+| gasUsed                | `QUANTITY`   | The amount of gas used by this specific transaction alone.         |
+| contractAddress        | `DATA`       | 20 Bytes - The contract address created, if the transaction was a contract creation, otherwise `null`.         |
+| logs                   | `Array`      | Array of log objects, which this transaction generated.         |
+| logsBloom              | `DATA`       | 256 Bytes - Bloom filter for light clients to quickly retrieve related logs.         |
+| cumulativeGasUsed      | `QUANTITY`   | The total amount of gas used when this transaction was executed in the block.         |
+
+It also returns either :
+
+| Parameter         | Type     | Description                                                                                                                                        |
+|:----------------- |:-------- |:-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| root         | `DATA`       | 32 bytes of post-transaction stateroot (pre Byzantium)                      |
+| status       | `QUANTITY`   | either 1 (success) or 0 (failure)             |
 
 ## Write Methods
-
-Creates new message call transaction or a contract creation, if the data field contains code.
 
 ### eth_sendTransaction
 
@@ -146,25 +317,19 @@ let params = {
   "to": "0xdF704A67Fc56F0D7CFA147548Ee4C115921D2ba3",
   "gas": "0x15f90", // 90000
   "gasPrice": "0x32", // 50
-  "value": "0x9184e72a", // 2441406250
-  "data":"0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675",
+  // "value": "0x9184e72a", // 2441406250
+  "data": "0xa9059cbb00000000000000000000000054715A7ab13692b268Eb12334E98e0DA891a86d000000000000000000000000000000000000000000000000000000000000186a0"
   "nonce": "0x1"
 }
-o3dapi.ETH.request({method: 'eth_sendTransaction', params: params}).then(txid => {
-  console.log(txid)
-}).catch(({code: number, message: string}) => {
-  switch(code) {
-    case 40001:
-      console.log(message);
-      break;
-    case -32602:
-      console.log(message);
-      break;
-    case -32603:
-      console.log(message);
-      break;
-  }
-});
+o3dapi.ETH.request({method: 'eth_sendTransaction', params: params}).then(txid => {}).catch((err) => {});
+```
+
+> Example Response
+
+```typescript
+{
+	"txid": "0xa0b84f3dce91b151fa9160721ce1c7d2d8e900a36f78f7d80f0974896577ceeb"
+}
 ```
 
 ##### Input Arguments
@@ -191,21 +356,15 @@ let params = {
   "value": "0x9184e72a", // 2441406250
   // "data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
 }
-o3dapi.ETH.request({method: 'eth_sendTransaction', params: params}).then(txid => {
-  console.log(txid)
-}).catch(({code: number, message: string}) => {
-  switch(code) {
-    case 40001:
-      console.log(message);
-      break;
-    case -32602:
-      console.log(message);
-      break;
-    case -32603:
-      console.log(message);
-      break;
-  }
-});
+o3dapi.ETH.request({method: 'eth_sendTransaction', params: params}).then(txid => {}).catch((err) => {});
+```
+
+> Example Response
+
+```typescript
+{
+	"txid": "0xa0b84f3dce91b151fa9160721ce1c7d2d8e900a36f78f7d80f0974896577ceeb"
+}
 ```
 
 ##### Input Arguments

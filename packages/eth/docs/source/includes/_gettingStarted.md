@@ -1,6 +1,6 @@
 # Guide
 ## Getting Started
-To develop for MetaMask, install MetaMask on your development machine
+To develop for O3-desktop, install O3-desktop on your development machine
 ## What is the dAPI?
 
 The dAPI is a package interface for communicating with the ETH blockchain. The methods are handled by an existing wallet provider, such as the O3 wallet, and help to reduce the development overhead associated with creating dApps on ETH.
@@ -16,25 +16,28 @@ dAPI client integrations are currently facilited via a versioned JS package, and
 ### Install via CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/ETH-dapi@2.0.4/lib/ETH-dapi.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/o3-dapi-core@0.3.13/lib/o3-dapi-core.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/o3-dapi-eth@1.0.1/lib/o3-dapi-eth.min.js"></script>
 ```
 ```typescript
-window.ETHDapi
+window.initPlugins([o3DapiETH]);
 ```
-
-[![](https://data.jsdelivr.com/v1/package/npm/ETH-dapi/badge)](https://www.jsdelivr.com/package/npm/ETH-dapi)
-
-When installing via CDN, it's always recommended to reference a specific version of the ETH-dapi package, to protect your app from possible method interface updates. In this example the version referenced in the url is 2.0.4.
-
 
 ### Install via NPM
 
 ```typescript
-npm i --save ETH-dapi
+npm i --save o3-dapi-core
 
-or
+and
 
-yarn add ETH-dapi
+npm i --save o3-dapi-eth
+
+import o3dapi from 'o3-dapi-core';
+
+import o3DapiETH from 'o3-dapi-eth';
+
+o3dapi.initPlugins([o3DapiETH]);
+
 ```
 
 ```typescript
@@ -45,12 +48,7 @@ or
 import ETHDapi from 'ETH-dapi';
 ```
 
-[![npm version](https://badge.fury.io/js/ETH-dapi.svg)](https://badge.fury.io/js/ETH-dapi)
-
-When installing via NPM, it's always advised to lockdown your package version to either the specific version only, or to patch updates.
-
-
-## Dev Environment
+<!-- ## Dev Environment
 
 The client JS package will help to facilitate all communications with the provider wallet, and the only requirement is that you have the O3 wallet running in the background. For development purposes, we recommend using the O3 desktop application, which can be downloaded from [https://o3.network](https://o3.network).
 
@@ -61,8 +59,4 @@ As long as you have the O3 desktop application open in the background. You can o
 If you are looking to develop your own smart contracts, or would like to test sending assets without having to worry about requesting assets on testnet, O3 has made a private net available for you to run on your local computer. This locally hosted private net will provide you will full controll over all the ETH and GAS in your network, and it can be reset at anytime.
 
 For more information please see the private net repo:
-[https://github.com/O3Labs/ETH-privatenet-docker](https://github.com/O3Labs/ETH-privatenet-docker)
-
-## Mobile Compatability
-
-We suggest doing the majority of your development using O3 desktop and using the mobile device simulator in the Chrome debugger. Once your app has been tested and fully functional, the JS package should automatically connect when running in the O3 mobile wallet with no additional changes.
+[https://github.com/O3Labs/ETH-privatenet-docker](https://github.com/O3Labs/ETH-privatenet-docker) -->
