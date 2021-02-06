@@ -37,14 +37,15 @@ phases:
       - bundle install
   build:
     commands:
-      - bundle exec middleman build --clean
       - cd ../../neo/docs
+      - bundle exec middleman build --clean
+      - cd ../../ont/docs
       - bundle exec middleman build --clean
       - cd ../../eth/docs
       - bundle exec middleman build --clean
   post_build:
     commands:
-      - cd build
+      - cd ../../neo/docs/build
       - aws s3 sync . "s3://${NEO_DOCS_BUCKET_NAME}" --delete
       - aws cloudfront create-invalidation --distribution-id "${NEO_DOCS_DISTRIBUTION_ID}" --paths "/*"
       - cd ../../../ont/docs/build
@@ -54,12 +55,12 @@ phases:
       - aws s3 sync . "s3://${ETH_DOCS_BUCKET_NAME}" --delete
       - aws cloudfront create-invalidation --distribution-id "${ETH_DOCS_DISTRIBUTION_ID}" --paths "/*"
       - aws cloudfront create-invalidation --distribution-id "${DOCS_DISTRIBUTION_ID}" --paths "/*"
-      - cd ../../test
-      - aws s3 sync . "s3://${ONT_TESTBED_BUCKET_NAME}" --delete
-      - aws cloudfront create-invalidation --distribution-id "${ONT_TESTBED_DISTRIBUTION_ID}" --paths "/*"
-      - cd ../../neo/test
+      - cd ../../../neo/test
       - aws s3 sync . "s3://${NEO_TESTBED_BUCKET_NAME}" --delete
       - aws cloudfront create-invalidation --distribution-id "${NEO_TESTBED_DISTRIBUTION_ID}" --paths "/*"
+      - cd ../../ont/test
+      - aws s3 sync . "s3://${ONT_TESTBED_BUCKET_NAME}" --delete
+      - aws cloudfront create-invalidation --distribution-id "${ONT_TESTBED_DISTRIBUTION_ID}" --paths "/*"
       - cd ../../eth/test
       - aws s3 sync . "s3://${ETH_TESTBED_BUCKET_NAME}" --delete
       - aws cloudfront create-invalidation --distribution-id "${ETH_TESTBED_DISTRIBUTION_ID}" --paths "/*"
