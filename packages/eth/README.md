@@ -37,5 +37,12 @@ import o3DapiETH from 'o3-dapi-eth';
 
 o3dapi.initPlugins([o3DapiETH]);
 
-o3dapi.ETH..request({method: 'eth_chainId', params: []}).then((res) => {}).catch((err) => {});
+o3dapi.ETH.request({method: 'eth_chainId', params: []}).then((res) => {}).catch((err) => {});
+```
+
+## start eth
+```
+yarn
+
+npm start or npm run start
 ```
