@@ -8,11 +8,15 @@ env:
     NEO_DOCS_DISTRIBUTION_ID: "E3FNU7MRCVVDLZ"
     ONT_DOCS_BUCKET_NAME: "ontdapidocs.o3.network"
     ONT_DOCS_DISTRIBUTION_ID: "EOLLDLPJJG41F"
+    ETH_DOCS_BUCKET_NAME: "ethdapidocs.o3.network"
+    ETH_DOCS_DISTRIBUTION_ID: "E2ALW1DL5HUXHZ"
     DOCS_DISTRIBUTION_ID: "ECTYGKE66GGGC"
     ONT_TESTBED_BUCKET_NAME: "ontdapitestbed.o3.app"
     ONT_TESTBED_DISTRIBUTION_ID: "E3PXLO44HLRNK5"
     NEO_TESTBED_BUCKET_NAME: "neodapitestbed.o3.app"
     NEO_TESTBED_DISTRIBUTION_ID: "EUCWR0DB12L5Z"
+    ETH_TESTBED_BUCKET_NAME: "ethdapitestbed.o3.app"
+    ETH_TESTBED_DISTRIBUTION_ID: "E2I7P8ARZ8CFUU"
 
 phases:
   install:
@@ -29,10 +33,14 @@ phases:
       - bundle install
       - cd ../../ont/docs
       - bundle install
+      - cd ../../eth/docs
+      - bundle install
   build:
     commands:
       - bundle exec middleman build --clean
       - cd ../../neo/docs
+      - bundle exec middleman build --clean
+      - cd ../../eth/docs
       - bundle exec middleman build --clean
   post_build:
     commands:
@@ -42,6 +50,9 @@ phases:
       - cd ../../../ont/docs/build
       - aws s3 sync . "s3://${ONT_DOCS_BUCKET_NAME}" --delete
       - aws cloudfront create-invalidation --distribution-id "${ONT_DOCS_DISTRIBUTION_ID}" --paths "/*"
+      - cd ../../../eth/docs/build
+      - aws s3 sync . "s3://${ETH_DOCS_BUCKET_NAME}" --delete
+      - aws cloudfront create-invalidation --distribution-id "${ETH_DOCS_DISTRIBUTION_ID}" --paths "/*"
       - aws cloudfront create-invalidation --distribution-id "${DOCS_DISTRIBUTION_ID}" --paths "/*"
       - cd ../../test
       - aws s3 sync . "s3://${ONT_TESTBED_BUCKET_NAME}" --delete
@@ -49,3 +60,6 @@ phases:
       - cd ../../neo/test
       - aws s3 sync . "s3://${NEO_TESTBED_BUCKET_NAME}" --delete
       - aws cloudfront create-invalidation --distribution-id "${NEO_TESTBED_DISTRIBUTION_ID}" --paths "/*"
+      - cd ../../eth/test
+      - aws s3 sync . "s3://${ETH_TESTBED_BUCKET_NAME}" --delete
+      - aws cloudfront create-invalidation --distribution-id "${ETH_TESTBED_DISTRIBUTION_ID}" --paths "/*"
