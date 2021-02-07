@@ -12,28 +12,34 @@ In a browser - cdn [![](https://data.jsdelivr.com/v1/package/npm/o3-dapi-eth/bad
 
 Install via npm [![npm version](https://badge.fury.io/js/o3-dapi-eth.svg)](https://badge.fury.io/js/o3-dapi-eth)
 ```
-npm i --save o3-dapi-core
 npm i --save o3-dapi-eth
 
-import o3dapi from 'o3-dapi-core';
+or
 
-import o3DapiETH from 'o3-dapi-eth';
-
-o3dapi.initPlugins([o3DapiETH]);
-
-yarn add o3-dapi-core
 yarn add o3-dapi-eth
 ```
 
 ```
+import o3dapi from 'o3-dapi-core';
+import o3DapiETH from 'o3-dapi-eth';
+
+or
+
 var o3dapi = require('o3-dapi-core');
 var o3DapiETH = require('o3-dapi-eth');
+
+o3dapi.initPlugins([o3DapiETH]);
 ```
 
 ## Example
 ```
 import o3dapi from 'o3-dapi-core';
 import o3DapiETH from 'o3-dapi-eth';
+
+or
+
+var o3dapi = require('o3-dapi-core');
+var o3DapiETH = require('o3-dapi-eth');
 
 o3dapi.initPlugins([o3DapiETH]);
 
@@ -42,7 +48,7 @@ o3dapi.ETH.request({method: 'eth_chainId', params: []}).then((res) => {}).catch(
 
 ## start eth
 ```
-yarn
+yarn start
 
 npm start or npm run start
 ```

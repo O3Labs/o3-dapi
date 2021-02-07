@@ -15,19 +15,21 @@ var app = new Vue({
 			}, "latest"
 		],
 		ethTransactionReceiptInput: ['0x4383f1bc48657782998bd8d44e24bdbe8f2431346cd69dde73aec2188288ae06'],
+		// eth
 		ethSendTransactionInput: {
 			"from": "0x54715A7ab13692b268Eb12334E98e0DA891a86d0",
 			"to": "0xdF704A67Fc56F0D7CFA147548Ee4C115921D2ba3", // account address
 			"gas": "0x15f90", // 90000
-			"gasPrice": "0x32", // 50
-			"value": "0x3211", 
+			"gasPrice": "0x9184e72a000", // 10000000000000
+			"value": "0x9184e72a", 
 			// "data": "0xa9059cbb00000000000000000000000054715A7ab13692b268Eb12334E98e0DA891a86d000000000000000000000000000000000000000000000000000000000000186a0"
 		},
+		// Contract
 		ethSendRawTransactionInput: {
 			"from": "0x54715A7ab13692b268Eb12334E98e0DA891a86d0",
 			"to": "0xdAC17F958D2ee523a2206206994597C13D831ec7", // Contract address
 			"gas": "0x15f90", // 90000
-			"gasPrice": "0x32", // 50
+			"gasPrice": "0x9184e72a000", // 10000000000000
 			"value": "0x0", // 0
 			"data": "0xa9059cbb000000000000000000000000dF704A67Fc56F0D7CFA147548Ee4C115921D2ba300000000000000000000000000000000000000000000000000000000000186a0"
 		}
