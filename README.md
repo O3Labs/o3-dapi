@@ -3,6 +3,20 @@ Decentralized API messaging protocol with blockchain plugins
 
 ## Standalone Packages
 
+### eth-dapi
+
+A single bundle for interfacing with the ETH blockchain.
+
+When to use:
+- Your app only interfaces with the ETH blockchain, not Ontology.
+- You would like to have the clientside logic to make calls to the NEO blockchain without a O3 wallet open.
+  - Results in larger package size, but more functionality
+
+In a browser - cdn [![](https://data.jsdelivr.com/v1/package/npm/o3-dapi-eth/badge)](https://www.jsdelivr.com/package/npm/o3-dapi-eth)
+
+Install via npm [![npm version](https://badge.fury.io/js/o3-dapi-eth.svg)](https://badge.fury.io/js/o3-dapi-eth)
+
+
 ### neo-dapi
 
 A single bundle for interfacing with the NEO blockchain.
