@@ -17,7 +17,7 @@ dAPI client integrations are currently facilited via a versioned JS package, and
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/o3-dapi-core@0.3.13/lib/o3-dapi-core.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/o3-dapi-eth@1.0.1/lib/o3-dapi-eth.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/o3-dapi-eth@1.0.4/lib/o3-dapi-eth.min.js"></script>
 ```
 ```typescript
 window.initPlugins([o3DapiETH]);
@@ -26,26 +26,40 @@ window.initPlugins([o3DapiETH]);
 ### Install via NPM
 
 ```typescript
-npm i --save o3-dapi-core
-
-and
-
 npm i --save o3-dapi-eth
 
-import o3dapi from 'o3-dapi-core';
+or
 
-import o3DapiETH from 'o3-dapi-eth';
-
-o3dapi.initPlugins([o3DapiETH]);
+yarn add o3-dapi-eth
 
 ```
 
 ```typescript
-var ETHDapi = require('ETH-dapi');
+import o3dapi from 'o3-dapi-core';
+import o3DapiETH from 'o3-dapi-eth';
 
 or
 
-import ETHDapi from 'ETH-dapi';
+var o3dapi = require('o3-dapi-core');
+var o3DapiETH = require('o3-dapi-eth');
+
+o3dapi.initPlugins([o3DapiETH]);
+```
+
+> Example Response
+
+```typescript
+import o3dapi from 'o3-dapi-core';
+import o3DapiETH from 'o3-dapi-eth';
+
+or
+
+var o3dapi = require('o3-dapi-core');
+var o3DapiETH = require('o3-dapi-eth');
+
+o3dapi.initPlugins([o3DapiETH]);
+
+o3dapi.ETH.request({method: 'eth_chainId', params: []}).then((res) => {}).catch((err) => {});
 ```
 
 <!-- ## Dev Environment
