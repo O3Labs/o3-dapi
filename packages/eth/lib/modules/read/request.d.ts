@@ -1,5 +1,6 @@
+import { Command } from '../../constants';
 export interface RequestArguments {
-    method: string;
+    method: Command;
     params?: {} | string;
 }
 export interface Account {

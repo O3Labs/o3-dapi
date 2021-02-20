@@ -15,7 +15,19 @@ export enum ArgumentDataType {
 }
 
 export enum Command {
+  ethChainId = 'eth_chainId',
+  netVersion = 'net_version',
+  ethRequestAccounts = 'eth_requestAccounts',
   ethAccounts = 'eth_accounts',
+  ethBlockNumber = 'eth_blockNumber',
+  ethCall = 'eth_call',
+  ethEstimateGas = 'eth_estimateGas',
+  ethGasPrice = 'eth_gasPrice',
+  ethSendTransaction = 'eth_sendTransaction',
+  ethSendRawTransaction = 'eth_sendRawTransaction',
+  ethGetTransactionReceipt = 'eth_getTransactionReceipt',
+  disconnect = 'disconnect',
+  RegisterBlockHeightListener = 'RegisterBlockHeightListener',
 }
 
 export enum EventName {

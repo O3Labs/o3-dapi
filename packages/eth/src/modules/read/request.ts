@@ -2,7 +2,7 @@ import { sendMessage } from '../../messaging';
 import { Command } from '../../constants';
 
 export interface RequestArguments {
-  method: string;
+  method: Command;
   params?: {} | string;
 }
 
