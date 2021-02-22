@@ -5,9 +5,8 @@ o3dapi.initPlugins([o3DapiETH]);
 function disconnect() {
     o3dapi.ETH.disconnect()
     .then(data => {
-      accountEle.innerHTML = '';
-      disconnectEle.innerHTML = '';
-      return data;
+        console.log(data)
+        return data;
     })
     .then(res => {
         console.log(res)
@@ -18,8 +17,7 @@ function disconnect() {
 o3dapi.ETH.addEventListener(o3dapi.ETH.Constants.EventName.READY, onReady);
 
 o3dapi.ETH.addEventListener(o3dapi.ETH.Constants.EventName.CONNECTED, data => {
-    accountEle.innerHTML = `Connected Account: ${data.address}`;
-    disconnectEle.innerHTML = 'disconnect';
+    console.log(data);
 });
 
 o3dapi.ETH.addEventListener(o3dapi.ETH.Constants.EventName.NETWORK_CHANGED, handleNewNetworks);
