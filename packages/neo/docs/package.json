@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/O3Labs/o3-dapi/issues"
   },
-  "homepage": "https://github.com/O3Labs/o3-dapi/tree/master/packages/eth",
+  "homepage": "https://github.com/O3Labs/o3-dapi/tree/master/packages/neo",
   "devDependencies": {
     "ts-loader": "5.2.2",
     "tslint": "5.11.0",
