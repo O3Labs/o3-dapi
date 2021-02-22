@@ -1,7 +1,6 @@
 const disconnectEle = document.getElementById("disconnect");
 
 o3dapi.initPlugins([o3DapiETH]);
-console.log(o3dapi.ETH)
 
 function disconnect() {
     o3dapi.ETH.disconnect()
@@ -18,29 +17,23 @@ function disconnect() {
 
 o3dapi.ETH.addEventListener(o3dapi.ETH.Constants.EventName.READY, onReady);
 
+o3dapi.ETH.addEventListener(o3dapi.ETH.Constants.EventName.CONNECTED, data => {
+    accountEle.innerHTML = `Connected Account: ${data.address}`;
+    disconnectEle.innerHTML = 'disconnect';
+});
+
+o3dapi.ETH.addEventListener(o3dapi.ETH.Constants.EventName.NETWORK_CHANGED, handleNewNetworks);
+
 o3dapi.ETH.addEventListener(o3dapi.ETH.Constants.EventName.DISCONNECTED, data => {
     accountEle.innerHTML = '';
     disconnectEle.innerHTML = '';
 });
 
-function handleNewNetworks({ networks, defaultNetwork }) {
-    const networksEle = document.getElementById("networks");
-    [].slice.call(networksEle.children).forEach(child => networksEle.remove(child));
-    networks.forEach(network => {
-        const option = document.createElement('option');
-        if (network === defaultNetwork) {
-            option.selected = 'selected';
-        }
-        option.value = network;
-        option.label = network;
-        option.innerHTML = network;
-        networksEle.append(option);
-    });
+function handleNewNetworks() {
+    console.log('network')
 }
 
 function onReady() {
-    o3dapi.ETH.getNetworks()
-        .then(handleNewNetworks);
     o3dapi.ETH.addEventListener(o3dapi.ETH.Constants.EventName.BLOCK_HEIGHT_CHANGED, data => {
         console.log('eth block height changed: ', JSON.stringify(data));
     });
