@@ -1,5 +1,5 @@
 import { request, RequestArguments, Account } from './modules/read/request';
-import { EventName } from './constants';
+import { EventName, Command } from './constants';
 import { addEventListener, removeEventListener } from './modules/eventListener';
 import { disconnect } from './modules/disconnect';
 declare class O3DapiEth {
@@ -11,6 +11,7 @@ declare class O3DapiEth {
     removeEventListener: typeof removeEventListener;
     Constants: {
         EventName: typeof EventName;
+        Command: typeof Command;
     };
     constructor(sendMessageMethod: any, addEventListenerMethod: any);
     setClientPlugin(plugin: any): void;

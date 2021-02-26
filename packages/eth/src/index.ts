@@ -3,7 +3,7 @@ declare const window: any
 const isBrowser = typeof window !== 'undefined';
 const safeWindow = isBrowser ? window : global;
 import { request, RequestArguments, Account } from './modules/read/request';
-import { BLOCKCHAIN, EventName } from './constants';
+import { BLOCKCHAIN, EventName, Command } from './constants';
 import { initMessaging } from './messaging';
 import { addEventListener, removeEventListener } from './modules/eventListener';
 import { disconnect } from './modules/disconnect';
@@ -21,6 +21,7 @@ class O3DapiEth {
 
   Constants = {
     EventName,
+    Command
   };
 
   constructor(sendMessageMethod, addEventListenerMethod) {

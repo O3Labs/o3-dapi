@@ -23,7 +23,7 @@ export function addEventListener(event: EventName, callback: Function): void {
     readyListeners && readyListeners.forEach(callback => callback(isReady));
   }
 
-  if (event === EventName.BLOCK_HEIGHT_CHANGED) {
+  if (event === EventName.ETH_BLOCK_HEIGHT_CHANGED) {
     sendMessage({
       command: Command.RegisterBlockHeightListener,
     });

@@ -86,7 +86,7 @@ function ethBlockNumber(elem) {
 }
 
 function ethCall(reqElem, resElem) {
-	let params = JSON.parse(document.getElementById(reqElem).innerHTML);
+	let params = JSON.parse(document.getElementById(reqElem).value);
 	o3dapi.ETH.request({method: 'eth_call', params: params}).then(res => {
 		document.getElementById(resElem).innerHTML = formatInput(res);
 	}).catch(err => {
@@ -95,7 +95,7 @@ function ethCall(reqElem, resElem) {
 }
 
 function ethEstimateGas(reqElem, resElem) {
-	let params = JSON.parse(document.getElementById(reqElem).innerHTML);
+	let params = JSON.parse(document.getElementById(reqElem).value);
 	o3dapi.ETH.request({method: 'eth_estimateGas', params: params}).then(res => {
 		document.getElementById(resElem).innerHTML = formatInput(res);
 	}).catch(err => {
@@ -112,7 +112,7 @@ function ethGasPrice(resElem) {
 }
 
 function ethTransactionReceipt(reqElem, resElem) {
-	let params = JSON.parse(document.getElementById(reqElem).innerHTML);
+	let params = JSON.parse(document.getElementById(reqElem).value);
 	o3dapi.ETH.request({method: 'eth_getTransactionReceipt', params: params}).then(res => {
 		document.getElementById(resElem).innerHTML = formatInput(res);
 	}).catch(err => {
@@ -121,7 +121,7 @@ function ethTransactionReceipt(reqElem, resElem) {
 }
 
 function ethSendTransaction(reqElem, resElem) {
-	let params = JSON.parse(document.getElementById(reqElem).innerHTML);
+	let params = JSON.parse(document.getElementById(reqElem).value);
 	o3dapi.ETH.request({method: 'eth_sendTransaction', params: params}).then(res => {
 		document.getElementById(resElem).innerHTML = formatInput(res);
 	}).catch(err => {
@@ -130,8 +130,9 @@ function ethSendTransaction(reqElem, resElem) {
 }
 
 function ethSendRawTransaction(reqElem, resElem) {
-	let params = JSON.parse(document.getElementById(reqElem).innerHTML);
+	let params = JSON.parse(document.getElementById(reqElem).value);
 	o3dapi.ETH.request({method: 'eth_sendRawTransaction', params: params}).then(res => {
+		console.log(res)
 		document.getElementById(resElem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(resElem).innerHTML = formatInput(err);

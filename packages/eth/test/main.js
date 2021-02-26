@@ -32,7 +32,7 @@ function handleNewNetworks() {
 }
 
 function onReady() {
-    o3dapi.ETH.addEventListener(o3dapi.ETH.Constants.EventName.BLOCK_HEIGHT_CHANGED, data => {
+    o3dapi.ETH.addEventListener(o3dapi.ETH.Constants.EventName.ETH_BLOCK_HEIGHT_CHANGED, data => {
         console.log('eth block height changed: ', JSON.stringify(data));
     });
 };
