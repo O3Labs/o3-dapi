@@ -19,9 +19,9 @@ var app = new Vue({
 		ethSendTransactionInput: {
 			"from": "0x54715A7ab13692b268Eb12334E98e0DA891a86d0",
 			"to": "0xdF704A67Fc56F0D7CFA147548Ee4C115921D2ba3", // account address
-			"gas": "0x15f90", // 90000
-			"gasPrice": "0x9184e72a000", // 10000000000000
-			"value": "0x9184e72a", 
+			"gas": "0x5208", // 90000
+			"gasPrice": "0x199c82cc00", // 10000000000000
+			"value": "0x9184e72a",
 			// "data": "0xa9059cbb00000000000000000000000054715A7ab13692b268Eb12334E98e0DA891a86d000000000000000000000000000000000000000000000000000000000000186a0"
 		},
 		// Contract
@@ -113,7 +113,6 @@ function ethGasPrice(resElem) {
 
 function ethTransactionReceipt(reqElem, resElem) {
 	let params = JSON.parse(document.getElementById(reqElem).value);
-	console.log(params);
 	o3dapi.ETH.request({method: 'eth_getTransactionReceipt', params: params}).then(res => {
 		document.getElementById(resElem).innerHTML = formatInput(res);
 	}).catch(err => {
@@ -133,6 +132,7 @@ function ethSendTransaction(reqElem, resElem) {
 function ethSendRawTransaction(reqElem, resElem) {
 	let params = JSON.parse(document.getElementById(reqElem).value);
 	o3dapi.ETH.request({method: 'eth_sendRawTransaction', params: params}).then(res => {
+		console.log(res)
 		document.getElementById(resElem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(resElem).innerHTML = formatInput(err);

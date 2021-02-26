@@ -1,6 +1,6 @@
 {
   "name": "o3-dapi-eth",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "ETH Plugin for o3-dapi",
   "main": "./lib/o3-dapi-eth.min.js",
   "types": "./lib/index.d.ts",

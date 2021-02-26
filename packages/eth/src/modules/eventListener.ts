@@ -11,6 +11,25 @@ interface Listeners {
 
 const listeners: Listeners = {};
 
+export function addEventListener(event: EventName, callback: Function): void {
+  const currentListeners = listeners[event] || [];
+  currentListeners.push(callback);
+  listeners[event] = currentListeners;
+
+  const isReady = safeWindow._o3dapi.isReady;
+
+  if (event === EventName.READY && isReady) {
+    const readyListeners = listeners[EventName.READY];
+    readyListeners && readyListeners.forEach(callback => callback(isReady));
+  }
+
+  if (event === EventName.ETH_BLOCK_HEIGHT_CHANGED) {
+    sendMessage({
+      command: Command.RegisterBlockHeightListener,
+    });
+  }
+}
+
 export function removeEventListener(event: EventName): void {
   listeners[event] = [];
 }
