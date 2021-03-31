@@ -3,35 +3,37 @@ var app = new Vue({
 	data: {
 		ethCallInput: [
 			{
-				"to":"0xdaaf96c344f63131acadd0ea35170e7892d3dfba", // account address
-				"data":"0xbc1c58d11d9964670435ad8ded3a5abba251ed340cb01fce690794b9dc35627fdac55fb0",
+				"to": "0xdaaf96c344f63131acadd0ea35170e7892d3dfba", // account address
+				"data": "0xbc1c58d11d9964670435ad8ded3a5abba251ed340cb01fce690794b9dc35627fdac55fb0",
 			}, "latest"
 		],
 		ethEstimateGasInput: [
 			{
-				"from": "0x54715A7ab13692b268Eb12334E98e0DA891a86d0",
+				"from": "0x348C795De6e7B158e38c4fEa8035b923a611e4AF",
 				"to": "0xdF704A67Fc56F0D7CFA147548Ee4C115921D2ba3",
 				"value": "0x3211"
 			}, "latest"
 		],
-		ethTransactionReceiptInput: ['0x4383f1bc48657782998bd8d44e24bdbe8f2431346cd69dde73aec2188288ae06'],
-		// eth
+		ethTransactionReceiptInput: ['0x3228af56ca9e6540d1953b3fdfbd94c6db6a3afc469c2becb9021c90b9804917'],
+		// bsc
 		ethSendTransactionInput: {
-			"from": "0x54715A7ab13692b268Eb12334E98e0DA891a86d0",
-			"to": "0xdF704A67Fc56F0D7CFA147548Ee4C115921D2ba3", // account address
+			"from": "0x297a030b3A99dB1c089b563BCBdFF291CE283141",
+			"to": "0x297a030b3A99dB1c089b563BCBdFF291CE283141", // account address
 			"gas": "0x5208", // 90000
-			"gasPrice": "0x199c82cc00", // 10000000000000
-			"value": "0x9184e72a",
+			"gasPrice": "0x02540be400", // 10000000000000
+			"value": "0x5af3107a4000",
 			// "data": "0xa9059cbb00000000000000000000000054715A7ab13692b268Eb12334E98e0DA891a86d000000000000000000000000000000000000000000000000000000000000186a0"
 		},
 		// Contract
-		ethSendRawTransactionInput: {
-			"from": "0x54715A7ab13692b268Eb12334E98e0DA891a86d0",
-			"to": "0xdAC17F958D2ee523a2206206994597C13D831ec7", // Contract address
-			"gas": "0x15f90", // 90000
-			"gasPrice": "0x9184e72a000", // 10000000000000
-			"value": "0x0", // 0
-			"data": "0xa9059cbb000000000000000000000000dF704A67Fc56F0D7CFA147548Ee4C115921D2ba300000000000000000000000000000000000000000000000000000000000186a0"
+		ethSendRawTransactionInput: { 
+			"nonce": "23", 
+			"gas": "60000", 
+			"gasPrice": "0x02540be400",
+			"from": "0x297a030b3A99dB1c089b563BCBdFF291CE283141",
+			"to": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+			"value": "0",
+			"data": "0xa9059cbb000000000000000000000000297a030b3A99dB1c089b563BCBdFF291CE28314100000000000000000000000000000000000000000000000000005af3107a4000",
+			"chainId": "56"
 		}
 	},
 	methods: {
@@ -46,7 +48,7 @@ function formatInput(json) {
 }
 
 function ethChainId(elem) {
-	O3Dapi.ETH.request({method: 'eth_chainId', params: []}).then((res) => {
+	O3Dapi.BSC.request({ method: 'eth_chainId', params: [] }).then((res) => {
 		document.getElementById(elem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(elem).innerHTML = formatInput(err);
@@ -54,7 +56,7 @@ function ethChainId(elem) {
 }
 
 function ethNetVersion(elem) {
-	O3Dapi.ETH.request({method: 'net_version', params: []}).then((res) => {
+	O3Dapi.BSC.request({ method: 'net_version', params: [] }).then((res) => {
 		document.getElementById(elem).innerHTML = formatInput(res);
 	}).catch((err) => {
 		document.getElementById(elem).innerHTML = formatInput(err);
@@ -62,7 +64,7 @@ function ethNetVersion(elem) {
 }
 
 function ethRequestAccounts(elem) {
-	O3Dapi.ETH.request({method: 'eth_requestAccounts', params: []}).then(res => {
+	O3Dapi.BSC.request({ method: 'eth_requestAccounts', params: [] }).then(res => {
 		document.getElementById(elem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(elem).innerHTML = formatInput(err);
@@ -70,7 +72,7 @@ function ethRequestAccounts(elem) {
 }
 
 function ethAccounts(elem) {
-	O3Dapi.ETH.request({method: 'eth_accounts', params: []}).then(res => {
+	O3Dapi.BSC.request({ method: 'eth_accounts', params: [] }).then(res => {
 		document.getElementById(elem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(elem).innerHTML = formatInput(err);
@@ -78,7 +80,7 @@ function ethAccounts(elem) {
 }
 
 function ethBlockNumber(elem) {
-	O3Dapi.ETH.request({method: 'eth_blockNumber', params: []}).then(res => {
+	O3Dapi.BSC.request({ method: 'eth_blockNumber', params: [] }).then(res => {
 		document.getElementById(elem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(elem).innerHTML = formatInput(err);
@@ -87,7 +89,7 @@ function ethBlockNumber(elem) {
 
 function ethCall(reqElem, resElem) {
 	let params = JSON.parse(document.getElementById(reqElem).value);
-	O3Dapi.ETH.request({method: 'eth_call', params: params}).then(res => {
+	O3Dapi.BSC.request({ method: 'eth_call', params: params }).then(res => {
 		document.getElementById(resElem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(resElem).innerHTML = formatInput(err);
@@ -96,7 +98,7 @@ function ethCall(reqElem, resElem) {
 
 function ethEstimateGas(reqElem, resElem) {
 	let params = JSON.parse(document.getElementById(reqElem).value);
-	O3Dapi.ETH.request({method: 'eth_estimateGas', params: params}).then(res => {
+	O3Dapi.BSC.request({ method: 'eth_estimateGas', params: params }).then(res => {
 		document.getElementById(resElem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(resElem).innerHTML = formatInput(err);
@@ -104,7 +106,7 @@ function ethEstimateGas(reqElem, resElem) {
 }
 
 function ethGasPrice(resElem) {
-	O3Dapi.ETH.request({method: 'eth_gasPrice', params: []}).then(res => {
+	O3Dapi.BSC.request({ method: 'eth_gasPrice', params: [] }).then(res => {
 		document.getElementById(resElem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(resElem).innerHTML = formatInput(err);
@@ -113,7 +115,7 @@ function ethGasPrice(resElem) {
 
 function ethTransactionReceipt(reqElem, resElem) {
 	let params = JSON.parse(document.getElementById(reqElem).value);
-	O3Dapi.ETH.request({method: 'eth_getTransactionReceipt', params: params}).then(res => {
+	O3Dapi.BSC.request({ method: 'eth_getTransactionReceipt', params: params }).then(res => {
 		document.getElementById(resElem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(resElem).innerHTML = formatInput(err);
@@ -122,7 +124,7 @@ function ethTransactionReceipt(reqElem, resElem) {
 
 function ethSendTransaction(reqElem, resElem) {
 	let params = JSON.parse(document.getElementById(reqElem).value);
-	O3Dapi.ETH.request({method: 'eth_sendTransaction', params: params}).then(res => {
+	O3Dapi.BSC.request({ method: 'eth_sendTransaction', params: params }).then(res => {
 		document.getElementById(resElem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(resElem).innerHTML = formatInput(err);
@@ -131,7 +133,7 @@ function ethSendTransaction(reqElem, resElem) {
 
 function ethSendRawTransaction(reqElem, resElem) {
 	let params = JSON.parse(document.getElementById(reqElem).value);
-	O3Dapi.ETH.request({method: 'eth_sendRawTransaction', params: params}).then(res => {
+	O3Dapi.BSC.request({ method: 'eth_sendRawTransaction', params: params }).then(res => {
 		console.log(res)
 		document.getElementById(resElem).innerHTML = formatInput(res);
 	}).catch(err => {

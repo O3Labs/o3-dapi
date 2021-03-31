@@ -1,5 +1,5 @@
 import { onEvent } from './modules/eventListener';
-import { BLOCKCHAIN, VERSION } from './constants';
+import { ChainType, VERSION } from './constants';
 
 interface SendMessageArgs {
   command: string;
@@ -15,15 +15,15 @@ interface InternalSendMessageArgs extends SendMessageArgs {
 
 export let _sendMessage = (args: InternalSendMessageArgs): Promise<any> => Promise.reject(new Error('o3-dapi-eth plugin not instanciated.'));
 
-export function sendMessage(args: SendMessageArgs): Promise<any> {
+export function sendMessage(args: SendMessageArgs, chainType: ChainType): Promise<any> {
   return _sendMessage({
     ...args,
-    blockchain: BLOCKCHAIN,
+    blockchain: chainType,
     version: VERSION,
   });
 }
 
-export function initMessaging(sendMessageMethod, addEventListener) {
+export function initMessaging(sendMessageMethod, addEventListener, chainType: ChainType) {
   _sendMessage = sendMessageMethod;
-  addEventListener({blockchain: BLOCKCHAIN, callback: onEvent});
+  addEventListener({blockchain: chainType, callback: onEvent});
 }

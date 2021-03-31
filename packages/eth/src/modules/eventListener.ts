@@ -2,7 +2,7 @@ declare const window: any;
 declare const global: any;
 const isBrowser = typeof window !== 'undefined';
 const safeWindow = isBrowser ? window : global;
-import { EventName, Command } from '../constants';
+import { EventName, Command, ChainType } from '../constants';
 import { sendMessage } from '../messaging';
 
 interface Listeners {
@@ -24,9 +24,12 @@ export function addEventListener(event: EventName, callback: Function): void {
   }
 
   if (event === EventName.ETH_BLOCK_HEIGHT_CHANGED) {
-    sendMessage({
-      command: Command.RegisterBlockHeightListener,
-    });
+    sendMessage(
+      {
+        command: Command.RegisterBlockHeightListener,
+      },
+      ChainType.BSC
+    );
   }
 }
 

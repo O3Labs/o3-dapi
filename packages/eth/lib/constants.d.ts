@@ -1,7 +1,11 @@
-export declare const BLOCKCHAIN = "ETH";
 export declare const VERSION = "v1";
 export declare const CHAINID = "0x1";
 export declare const NETWORK = "1";
+export declare enum ChainType {
+    ETH = "ETH",
+    BSC = "BSC",
+    HECO = "HECO"
+}
 export declare enum ArgumentDataType {
     STRING = "String",
     BOOLEAN = "Boolean",

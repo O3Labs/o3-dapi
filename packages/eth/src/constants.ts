@@ -1,7 +1,12 @@
-export const BLOCKCHAIN = 'ETH';
 export const VERSION = 'v1';
 export const CHAINID = "0x1";
 export const NETWORK = "1";
+
+export enum ChainType {
+  ETH = 'ETH',
+  BSC = 'BSC',
+  HECO = 'HECO',
+}
 
 export enum ArgumentDataType {
   STRING = 'String',
