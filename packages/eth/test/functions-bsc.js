@@ -17,7 +17,7 @@ var app = new Vue({
 		ethTransactionReceiptInput: ['0x3228af56ca9e6540d1953b3fdfbd94c6db6a3afc469c2becb9021c90b9804917'],
 		// bsc
 		ethSendTransactionInput: {
-			"from": "0x297a030b3A99dB1c089b563BCBdFF291CE283141",
+			"from": "0x348C795De6e7B158e38c4fEa8035b923a611e4AF",
 			"to": "0x297a030b3A99dB1c089b563BCBdFF291CE283141", // account address
 			"gas": "0x5208", // 90000
 			"gasPrice": "0x02540be400", // 10000000000000
@@ -26,14 +26,12 @@ var app = new Vue({
 		},
 		// Contract
 		ethSendRawTransactionInput: { 
-			"nonce": "23", 
 			"gas": "60000", 
 			"gasPrice": "0x02540be400",
-			"from": "0x297a030b3A99dB1c089b563BCBdFF291CE283141",
+			"from": "0x348C795De6e7B158e38c4fEa8035b923a611e4AF",
 			"to": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
 			"value": "0",
-			"data": "0xa9059cbb000000000000000000000000297a030b3A99dB1c089b563BCBdFF291CE28314100000000000000000000000000000000000000000000000000005af3107a4000",
-			"chainId": "56"
+			"data": "0xa9059cbb000000000000000000000000297a030b3A99dB1c089b563BCBdFF291CE28314100000000000000000000000000000000000000000000000000000005af3107a4",
 		}
 	},
 	methods: {
