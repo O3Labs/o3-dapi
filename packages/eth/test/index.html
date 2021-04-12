@@ -116,6 +116,7 @@ a {
                     <li class="nav-item"><a class="nav-link" href="#collapse-ethNetVersion">net_version</a></li>
                     <li class="nav-item"><a class="nav-link" href="#collapse-ethRequestAccounts">eth_requestAccounts</a></li>
                     <li class="nav-item"><a class="nav-link" href="#collapse-ethAccounts">eth_accounts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#collapse-ethGetBalance">eth_getBalance</a></li>
                     <li class="nav-item"><a class="nav-link" href="#collapse-ethBlockNumber" >eth_blockNumber</a></li>
                     <li class="nav-item"><a class="nav-link" href="#collapse-ethCall">eth_call</a></li>
                     <li class="nav-item"><a class="nav-link" href="#collapse-ethEstimateGas">eth_estimateGas</a></li>
@@ -218,6 +219,25 @@ a {
 
                       <h6>Result</h6>
                       <pre><div class="p-3 border rounded" id="eth_accounts_res"></div></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="collapse-ethGetBalance" class="method">
+                <div class="card" id="getPublicKey">
+                  <div class="card-header py-4">
+                    <h3 class="mt-0">eth_getBalance</h3>
+                    <p class="small mb-0">Returns the balance owned by the client.</p>
+                  </div>
+                  <div>
+                    <div class="card-body">
+                      <textarea class="form-control mb-2" id="eth_getBalance_input" placeholder="getStorage input" rows="6">{{formatInput(ethGetBalanceInput)}}</textarea>
+                      <button class="btn btn-primary btn-sm" onclick="ethGetBalance('eth_getBalance_input', 'eth_getBalance_res')">Run</button>
+                    </div>
+                    <div class="card-footer">
+                      <h6>Result</h6>
+                      <pre><div class="p-3 border rounded" id="eth_getBalance_res"></div></pre>
                     </div>
                   </div>
                 </div>

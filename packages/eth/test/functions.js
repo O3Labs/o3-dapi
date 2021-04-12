@@ -1,6 +1,10 @@
 var app = new Vue({
 	el: '#app',
 	data: {
+		ethGetBalanceInput: [
+			"0x54715A7ab13692b268Eb12334E98e0DA891a86d0",
+			"latest"
+		],
 		ethCallInput: [
 			{
 				"to":"0xdaaf96c344f63131acadd0ea35170e7892d3dfba", // account address
@@ -88,6 +92,15 @@ function ethBlockNumber(elem) {
 function ethCall(reqElem, resElem) {
 	let params = JSON.parse(document.getElementById(reqElem).value);
 	O3Dapi.ETH.request({method: 'eth_call', params: params}).then(res => {
+		document.getElementById(resElem).innerHTML = formatInput(res);
+	}).catch(err => {
+		document.getElementById(resElem).innerHTML = formatInput(err);
+	})
+}
+
+function ethGetBalance(reqElem, resElem) {
+	let params = JSON.parse(document.getElementById(reqElem).value);
+	O3Dapi.ETH.request({method: 'eth_getBalance', params: params}).then(res => {
 		document.getElementById(resElem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(resElem).innerHTML = formatInput(err);

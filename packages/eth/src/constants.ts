@@ -21,6 +21,7 @@ export enum ArgumentDataType {
 
 export enum Command {
   ethChainId = 'eth_chainId',
+  ethGetBalance= 'eth_getBalance',
   netVersion = 'net_version',
   ethRequestAccounts = 'eth_requestAccounts',
   ethAccounts = 'eth_accounts',
