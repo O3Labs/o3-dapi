@@ -46,7 +46,7 @@ function formatInput(json) {
 }
 
 function ethChainId(elem) {
-	O3Dapi.HECO.request({method: 'eth_chainId', params: []}).then((res) => {
+	o3dapi.HECO.request({method: 'eth_chainId', params: []}).then((res) => {
 		document.getElementById(elem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(elem).innerHTML = formatInput(err);
@@ -54,7 +54,7 @@ function ethChainId(elem) {
 }
 
 function ethNetVersion(elem) {
-	O3Dapi.HECO.request({method: 'net_version', params: []}).then((res) => {
+	o3dapi.HECO.request({method: 'net_version', params: []}).then((res) => {
 		document.getElementById(elem).innerHTML = formatInput(res);
 	}).catch((err) => {
 		document.getElementById(elem).innerHTML = formatInput(err);
@@ -62,7 +62,7 @@ function ethNetVersion(elem) {
 }
 
 function ethRequestAccounts(elem) {
-	O3Dapi.HECO.request({method: 'eth_requestAccounts', params: []}).then(res => {
+	o3dapi.HECO.request({method: 'eth_requestAccounts', params: []}).then(res => {
 		document.getElementById(elem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(elem).innerHTML = formatInput(err);
@@ -70,7 +70,7 @@ function ethRequestAccounts(elem) {
 }
 
 function ethAccounts(elem) {
-	O3Dapi.HECO.request({method: 'eth_accounts', params: []}).then(res => {
+	o3dapi.HECO.request({method: 'eth_accounts', params: []}).then(res => {
 		document.getElementById(elem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(elem).innerHTML = formatInput(err);
@@ -78,7 +78,7 @@ function ethAccounts(elem) {
 }
 
 function ethBlockNumber(elem) {
-	O3Dapi.HECO.request({method: 'eth_blockNumber', params: []}).then(res => {
+	o3dapi.HECO.request({method: 'eth_blockNumber', params: []}).then(res => {
 		document.getElementById(elem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(elem).innerHTML = formatInput(err);
@@ -87,7 +87,7 @@ function ethBlockNumber(elem) {
 
 function ethCall(reqElem, resElem) {
 	let params = JSON.parse(document.getElementById(reqElem).value);
-	O3Dapi.HECO.request({method: 'eth_call', params: params}).then(res => {
+	o3dapi.HECO.request({method: 'eth_call', params: params}).then(res => {
 		document.getElementById(resElem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(resElem).innerHTML = formatInput(err);
@@ -96,7 +96,7 @@ function ethCall(reqElem, resElem) {
 
 function ethEstimateGas(reqElem, resElem) {
 	let params = JSON.parse(document.getElementById(reqElem).value);
-	O3Dapi.HECO.request({method: 'eth_estimateGas', params: params}).then(res => {
+	o3dapi.HECO.request({method: 'eth_estimateGas', params: params}).then(res => {
 		document.getElementById(resElem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(resElem).innerHTML = formatInput(err);
@@ -104,7 +104,7 @@ function ethEstimateGas(reqElem, resElem) {
 }
 
 function ethGasPrice(resElem) {
-	O3Dapi.HECO.request({method: 'eth_gasPrice', params: []}).then(res => {
+	o3dapi.HECO.request({method: 'eth_gasPrice', params: []}).then(res => {
 		document.getElementById(resElem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(resElem).innerHTML = formatInput(err);
@@ -113,7 +113,7 @@ function ethGasPrice(resElem) {
 
 function ethTransactionReceipt(reqElem, resElem) {
 	let params = JSON.parse(document.getElementById(reqElem).value);
-	O3Dapi.HECO.request({method: 'eth_getTransactionReceipt', params: params}).then(res => {
+	o3dapi.HECO.request({method: 'eth_getTransactionReceipt', params: params}).then(res => {
 		document.getElementById(resElem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(resElem).innerHTML = formatInput(err);
@@ -122,7 +122,7 @@ function ethTransactionReceipt(reqElem, resElem) {
 
 function ethSendTransaction(reqElem, resElem) {
 	let params = JSON.parse(document.getElementById(reqElem).value);
-	O3Dapi.HECO.request({method: 'eth_sendTransaction', params: params}).then(res => {
+	o3dapi.HECO.request({method: 'eth_sendTransaction', params: params}).then(res => {
 		document.getElementById(resElem).innerHTML = formatInput(res);
 	}).catch(err => {
 		document.getElementById(resElem).innerHTML = formatInput(err);
@@ -131,7 +131,7 @@ function ethSendTransaction(reqElem, resElem) {
 
 function ethSendRawTransaction(reqElem, resElem) {
 	let params = JSON.parse(document.getElementById(reqElem).value);
-	O3Dapi.HECO.request({method: 'eth_sendRawTransaction', params: params}).then(res => {
+	o3dapi.HECO.request({method: 'eth_sendRawTransaction', params: params}).then(res => {
 		console.log(res)
 		document.getElementById(resElem).innerHTML = formatInput(res);
 	}).catch(err => {
