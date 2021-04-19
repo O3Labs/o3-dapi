@@ -7,9 +7,8 @@ import { EventName, Command, ChainType } from './constants';
 import { initMessaging } from './messaging';
 import { addEventListener, removeEventListener } from './modules/eventListener';
 import { disconnect } from './modules/disconnect';
-import o3dapi from 'o3-dapi-core';
 
-class ETH {
+export class ETH {
 
   static blockchain = ChainType.ETH;
   private clientPlugin;
@@ -33,7 +32,7 @@ class ETH {
     this.clientPlugin = plugin;
   }
 }
-class BSC {
+export class BSC {
 
   static blockchain = ChainType.BSC;
   private clientPlugin;
@@ -57,7 +56,7 @@ class BSC {
     this.clientPlugin = plugin;
   }
 }
-class HECO {
+export class HECO {
 
   static blockchain = ChainType.HECO;
   private clientPlugin;
@@ -81,10 +80,11 @@ class HECO {
     this.clientPlugin = plugin;
   }
 }
-o3dapi.initPlugins([ETH]);
-o3dapi.initPlugins([BSC]);
-o3dapi.initPlugins([HECO]);
-export default o3dapi;
+const o3dapiEth = {};
+o3dapiEth['ETH'] = ETH;
+o3dapiEth['BSC'] = BSC;
+o3dapiEth['HECO'] = HECO;
+export default o3dapiEth;
 
 export type request = (data: RequestArguments, blockchain: ChainType) => Promise<Account>;
 export type disconnect = () => Promise<boolean>;
