@@ -32,7 +32,7 @@ module.exports = (env) => {
       path: path.join(__dirname, DISTRIBUTION ? 'lib' : 'build'),
       filename: DISTRIBUTION ? 'o3-dapi-eth.min.js' : 'bundle.js',
       libraryTarget: "umd",
-      library: 'o3dapiEth',
+      library: 'o3DapiETH',
       libraryExport: 'default',
       globalObject: 'typeof self !== \'undefined\' ? self : this',
     },

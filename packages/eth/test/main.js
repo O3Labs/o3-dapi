@@ -1,8 +1,8 @@
 const disconnectEle = document.getElementById("disconnect");
 
-o3dapi.initPlugins([o3dapiEth.ETH])
-o3dapi.initPlugins([o3dapiEth.BSC])
-o3dapi.initPlugins([o3dapiEth.HECO])
+o3dapi.initPlugins([o3dapiETH.ETH])
+o3dapi.initPlugins([o3dapiETH.BSC])
+o3dapi.initPlugins([o3dapiETH.HECO])
 
 function disconnect() {
     o3dapi.ETH.disconnect()

@@ -80,11 +80,11 @@ export class HECO {
     this.clientPlugin = plugin;
   }
 }
-const o3dapiEth = {};
-o3dapiEth['ETH'] = ETH;
-o3dapiEth['BSC'] = BSC;
-o3dapiEth['HECO'] = HECO;
-export default o3dapiEth;
+const o3DapiETH = {};
+o3DapiETH['ETH'] = ETH;
+o3DapiETH['BSC'] = BSC;
+o3DapiETH['HECO'] = HECO;
+export default o3DapiETH;
 
 export type request = (data: RequestArguments, blockchain: ChainType) => Promise<Account>;
 export type disconnect = () => Promise<boolean>;

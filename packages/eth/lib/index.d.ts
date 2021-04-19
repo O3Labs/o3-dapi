@@ -44,8 +44,8 @@ export declare class HECO {
     constructor(sendMessageMethod: any, addEventListenerMethod: any, blockchain?: ChainType);
     setClientPlugin(plugin: any): void;
 }
-declare const o3dapiEth: {};
-export default o3dapiEth;
+declare const o3DapiETH: {};
+export default o3DapiETH;
 export declare type request = (data: RequestArguments, blockchain: ChainType) => Promise<Account>;
 export declare type disconnect = () => Promise<boolean>;
 export declare type addEventListener = (event: EventName, callback: Function) => void;
