@@ -17,10 +17,18 @@ dAPI client integrations are currently facilited via a versioned JS package, and
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/o3-dapi-core@0.3.13/lib/o3-dapi-core.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/o3-dapi-eth@1.0.4/lib/o3-dapi-eth.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/o3-dapi-eth@1.0.8/lib/o3-dapi-eth.min.js"></script>
 ```
 ```typescript
-window.initPlugins([o3DapiETH]);
+window.initPlugins([o3DapiETH['ETH']]);
+
+or
+
+window.initPlugins([o3DapiETH['BSC']]);
+
+or
+
+window.initPlugins([o3DapiETH['HECO']]);
 ```
 
 ### Install via NPM

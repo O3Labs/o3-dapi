@@ -221,7 +221,7 @@ o3dapi.ETH.request({ method: "eth_estimateGas", params: params })
 
 | Parameter | Type   | Description                                                                                                                 |
 | :-------- | :----- | :-------------------------------------------------------------------------------------------------------------------------- |
-| from      | String | TDATA, 20 Bytes - The address the transaction is send from.                                                                 |
+| from      | String | DATA, 20 Bytes - The address the transaction is send from.                                                                 |
 | to        | String | DATA, 20 Bytes - (optional when creating new contract) The address the transaction is directed to.                          |
 | gas       | String | QUANTITY - (optional, default: 90000) Integer of the gas provided for the transaction execution. It will return unused gas. |
 | gasPrice  | String | QUANTITY - (optional, default: To-Be-Determined) Integer of the gasPrice used for each paid gas                             |
@@ -234,6 +234,35 @@ o3dapi.ETH.request({ method: "eth_estimateGas", params: params })
 #### Returns
 
 `DATA` - the return value of executed contract.
+
+### eth_getBalance
+
+| Parameter     | Type   | Description                                                                                                                 |
+| :------------ | :----- | :-------------------------------------------------------------------------------------------------------------------------- |
+| DATA          | String | DATA, 20 Bytes - address to check for balance.                                                                              |
+| QUANTITY|TAG  | String | QUANTITY|TAG - integer block number, or the string "latest", "earliest" or "pending",                                       |
+
+
+```typescript
+o3dapi.ETH.request({ method: "eth_getBalance", params: [
+	"0x54715A7ab13692b268Eb12334E98e0DA891a86d0",
+	"latest"]
+  })
+  .then((res) => {})
+  .catch((err) => {});
+```
+
+> Example Response
+
+```typescript
+{
+	"jsonrpc": "2.0",
+	"id": 1,
+	"result": "0x5c7277d40a532"
+}
+```
+
+Returns the current price per gas in wei.
 
 ### eth_gasPrice
 
@@ -253,7 +282,7 @@ o3dapi.ETH.request({ method: "eth_gasPrice", params: [] })
 }
 ```
 
-Returns the current price per gas in wei.
+Returns integer of the current balance in wei.
 
 #### Parameters
 
