@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="O3 dApp Platform — NEO">
+  <meta name="author" content="O3">
+  <title>O3 dApp Platform — NEO</title>
+
+  <link rel="stylesheet" href="https://cdn.o3.app/css/purpose2.0/assets/libs/@fortawesome/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.o3.app/css/purpose2.0/assets/css/purpose.css" id="stylesheet">
+  <link rel="stylesheet" href="https://cdn.o3.app/css/purpose2.0/assets/css/purpose-blue-light.css" id="stylesheet">
+  <link rel="stylesheet" href="./docs.css" id="stylesheet">
+  <!-- <script src="https://cdn.jsdelivr.net/npm/o3-dapi-core@0.3.6/lib/o3-dapi-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/o3-dapi-neo@0.4.2/lib/o3-dapi-neo.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/neo-dapi@2.0.4/lib/neo-dapi.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <style type="text/css">
+  .string {
+    color: #000;
+  }
+
+  .number {
+    color: #0000ff;
+  }
+
+  .boolean {
+    color: #b22222;
+  }
+
+  .null {
+    color: #808080;
+  }
+
+  .key {
+    color: #008000;
+  }
+</style>
+<style type="text/css">
+[v-cloak] {
+  display: none
+}
+
+*,
+body {
+  color: #000;
+}
+
+a {
+  color: #000 !important;
+}
+
+.form-control, .form-control:focus{
+  color:#000;
+}
+.docs-content>div.method[id]:before {
+  display: block;
+  height: 6rem;
+  margin-top: -6rem;
+  visibility: hidden;
+  content: "";
+}
+
+</style>
+</head>
+
+<body class="docs">
+  <div id="app">
+
+    <header class="header fixed-top border-bottom" style="">
+      <div class="container-fluid bg-primary" style="height: 9px;z-index: 19999">
+      </div>
+      <nav id="navbar-main" class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html">
+            <img alt="Image placeholder" src="https://cdn.o3.network/logo/logo-light.png" id="navbar-logo" style="height: 40px;"><span class="ml-3">O3 dApp Platform — NEO</span>
+          </a>
+          <button class="sidenav-toggler ml-auto mr-3 active" type="button" data-action="sidenav-pin" data-target="#sidenav-main">
+            <div class="sidenav-toggler-inner">
+              <i class="sidenav-toggler-line"></i>
+              <i class="sidenav-toggler-line"></i>
+              <i class="sidenav-toggler-line"></i>
+            </div>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+             <li class="nav-item">
+              <a class="nav-link" href="./index.html">Testbed</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./deploy.html">Deploy Smart Contract</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" href="https://docs.o3.network">Documents</a>
+            </li>
+            <li class="nav-item">
+              <select id="networks" name="networks" class="custom-select" v-model="network"></select>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+  <div class="main-content" >
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-lg-12 col-xl-12">
+          <div class="docs-content">
+
+            <div class="docs-page-title">
+              <h2>O3 dApp Platform — NEO</h2>
+            </div>
+            <p class="text-muted docs-lead">A testbed for dAPI for NEO blockchain.</p>
+            <hr class="divider divider-fade"></hr>
+
+            <div class="method">
+              <div class="card" id="deploy">
+                <div class="card-header py-4">
+                  <h3 class="mt-0">deploy</h3>
+                  <p class="small mb-0">Deploy a smart contract.</p>
+                </div>
+                <div>
+                  <div class="card-body">
+                   <div class="form-row mb-3">
+                    <div class="col-md-12">
+                      <textarea class="form-control" rows="3" id="avm-hex" v-model="deployInput.code"></textarea>
+                    </div>
+                    <div class="col-md-12">
+                      <div>
+                        <input type="file" name="file-avm" id="file-avm" class="custom-input-file" accept=".avm" v-on:change="readAVM" />
+                        <label for="file-avm">
+                          <i class="fa fa-upload"></i>
+                          <span>Choose an AVM file</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-control-label">Parameter List</label>
+                        <input type="text" id="deploy-parameters" class="form-control" v-model="deployInput.parameterList">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-control-label">Return type</label>
+                        <input type="text" id="deploy-return-type" class="form-control" v-model="deployInput.returnType">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="form-control-label">Smart Contract Name</label>
+                        <input type="text" id="deploy-name" class="form-control" placeholder="My Smart contract" v-model="deployInput.name">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="form-control-label">Author</label>
+                        <input type="text" id="deploy-author" class="form-control" placeholder="Keanu" v-model="deployInput.author">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="form-control-label">Email</label>
+                        <input type="email" id="deploy-email" class="form-control" placeholder="your@email.network" v-model="deployInput.email">
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="form-group">
+                        <label class="form-control-label">Description</label>
+                        <input type="text" id="deploy-description" class="form-control" placeholder="A description of a smart contract" v-model="deployInput.description">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="form-control-label">Version</label>
+                        <input type="text" id="deploy-version" class="form-control" placeholder="v.1.0" v-model="deployInput.version">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row mb-3">
+                   <div class="col-md-12">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="useStorage" v-model="deployInput.needsStorage">
+                      <label class="custom-control-label" for="useStorage">Use storage</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="dynamicInvoke"v-model="deployInput.dynamicInvoke">
+                      <label class="custom-control-label" for="dynamicInvoke">Allow dynamic invoke</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="isPayable" v-model="deployInput.isPayable">
+                      <label class="custom-control-label" for="isPayable">Payable Smart Contract</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                 <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-control-label">Network fee</label>
+                    <input type="text" class="form-control" placeholder="0.11" v-model="deployInput.networkFee">
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-sm mt-5" v-on:click="deploy('deploy-result')">Deploy to {{network}}</button>
+            </div>
+            <div class="card-footer">
+              <h6>Result</h6>
+              <pre><div class="p-3 border rounded" id="deploy-result"></div></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript" src="./syntaxHighlight.js"></script>
+<script type="text/javascript" src="./main.js"></script>
+<script type="text/javascript" src="./deploy.js"></script>
+<script src="https://cdn.o3.app/css/purpose2.0/assets/js/purpose.core.js"></script>
+<script src="https://cdn.o3.app/css/purpose2.0/assets/js/purpose.js"></script>
+</body>
+
+</html>
