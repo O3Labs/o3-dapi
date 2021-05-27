@@ -1,7 +1,6 @@
 interface BalanceRequest {
     address: string;
-    assets?: string[];
-    fetchUTXO?: boolean;
+    contracts?: string[];
 }
 export interface GetBalanceArgs {
     params: BalanceRequest | BalanceRequest[];
@@ -11,7 +10,7 @@ export interface BalanceResults {
     [address: string]: Balance[];
 }
 interface Balance {
-    assetID: string;
+    contract: string;
     symbol: string;
     amount: string;
 }

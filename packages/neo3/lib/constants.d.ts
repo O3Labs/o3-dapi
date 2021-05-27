@@ -19,6 +19,7 @@ export declare enum Command {
     getBalance = "getBalance",
     getStorage = "getStorage",
     invokeRead = "invokeRead",
+    invokeReadMulti = "invokeReadMulti",
     getBlock = "getBlock",
     getBlockHeight = "getBlockHeight",
     getTransaction = "getTransaction",

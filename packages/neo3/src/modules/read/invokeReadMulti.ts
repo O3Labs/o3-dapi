@@ -16,14 +16,15 @@ interface Signer {
   allowedgroups?: string[];
 }
 
+
 interface Argument {
   type: ArgumentDataType;
   value: any;
 }
 
-export function invokeRead(data: InvokeReadArgs): Promise<any> {
+export function invokeRead(data: InvokeReadArgs[]): Promise<any> {
   return sendMessage({
-    command: Command.invokeRead,
+    command: Command.invokeReadMulti,
     data,
   });
 }

@@ -3,7 +3,7 @@ var app = new Vue({
   data: {
     network: "",
     getStorageInput: {
-      scriptHash: "c36aee199dbba6c3f439983657558cfb67629599",
+      scriptHash: "0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5",
       key: "bd097b2fcf70e1fd30a5c3ef51e662feeafeba01",
       network: "TestNet",
     },
@@ -15,11 +15,11 @@ var app = new Vue({
       network: "TestNet",
     },
     invokeReadInput: {
-      scriptHash: "c36aee199dbba6c3f439983657558cfb67629599",
+      scriptHash: "0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5",
       operation: "balanceOf",
       args: [{
-        "type": "ByteArray",
-        "value": "bd097b2fcf70e1fd30a5c3ef51e662feeafeba01"
+        "type": "Address",
+        "value": "NYxb4fSZVKAz8YsgaPK2WkT3KcAE9b3Vag"
       }],
       network: "TestNet",
     },
@@ -102,18 +102,18 @@ var app = new Vue({
       publicKey: "",
     },
     getBlockInput: {
-      blockHeight: 2619690,
+      blockHeight: 100,
       network: "TestNet",
     },
     getBlockHeightInput: {
       network: "TestNet",
     },
     getTransactionInput: {
-      txid: "",
+      txid: "0x3174b6a05a110986d09dfb418652fd454a1109db5b56feee382d9fa3c80231bd",
       network: "TestNet",
     },
     getApplicationLogInput: {
-      txid: "",
+      txid: "0x3174b6a05a110986d09dfb418652fd454a1109db5b56feee382d9fa3c80231bd",
       network: "TestNet",
     }
   },

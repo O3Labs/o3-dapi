@@ -3,12 +3,11 @@ import { Command } from '../../constants';
 
 interface BalanceRequest {
   address: string; // Address to check balance(s)
-  assets?: string[]; // Asset symbol or script hash to check balance
-  fetchUTXO?: boolean;
+  contracts?: string[]; // Asset symbol or script hash to check balance
 }
 
 export interface GetBalanceArgs {
-  params: BalanceRequest|BalanceRequest[];
+  params: BalanceRequest | BalanceRequest[];
   network?: string;
 }
 
@@ -17,7 +16,7 @@ export interface BalanceResults {
 }
 
 interface Balance {
-  assetID: string;
+  contract: string;
   symbol: string;
   amount: string;
 }
@@ -27,12 +26,11 @@ export function getBalance(data: GetBalanceArgs): Promise<BalanceResults> {
     data.params = [data.params];
   }
 
-  data.params.forEach(({address, assets, fetchUTXO}, index) => {
-    if (assets && !Array.isArray(assets)) {
+  data.params.forEach(({ address, contracts }, index) => {
+    if (contracts && !Array.isArray(contracts)) {
       data.params[index] = {
         address,
-        assets: [assets],
-        fetchUTXO,
+        contracts: [contracts],
       };
     }
   });
@@ -40,19 +38,5 @@ export function getBalance(data: GetBalanceArgs): Promise<BalanceResults> {
   return sendMessage({
     command: Command.getBalance,
     data,
-  })
-  .then(data => (
-    // Update to dapi protocol, change scriptHash to assetID
-    // can be removed in the case that all wallets update to assetID,
-    // and none left using scriptHash, including already deployed versions
-    Object.keys(data).reduce((accum, key) => {
-      accum[key] = data[key].map(({assetID, scriptHash, symbol, amount, unspent}) => ({
-        assetID: assetID || scriptHash,
-        symbol,
-        amount,
-        unspent,
-      }));
-      return accum;
-    }, {})
-  ));
+  });
 }
