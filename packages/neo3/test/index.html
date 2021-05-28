@@ -139,6 +139,8 @@
                                                 href="#collapse-getStorage">getStorage</a></li>
                                         <li class="nav-item"><a class="nav-link"
                                                 href="#collapse-invokeRead">invokeRead</a></li>
+                                        <li class="nav-item"><a class="nav-link"
+                                          href="#collapse-invokeReadMulti">invokeReadMulti</a></li>
                                         <li class="nav-item"><a class="nav-link" href="#collapse-invoke">invoke</a></li>
                                         <li class="nav-item"><a class="nav-link"
                                                 href="#collapse-invokeMulti">invokeMulti</a></li>
@@ -356,6 +358,29 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div id="collapse-invokeReadMulti" class="method">
+                              <div class="card" id="invokeReadMulti">
+                                  <div class="card-header py-4">
+                                      <h3 class="mt-0">invokeReadMulti</h3>
+                                      <p class="small mb-0">Execute a contract invocation in read-only mode.</p>
+                                  </div>
+                                  <div>
+                                      <div class="card-body">
+                                          <h6>Input</h6>
+                                          <textarea class="form-control mb-2" id="invokeReadMulti-input"
+                                              placeholder="invokeReadMulti input"
+                                              rows="12">{{formatInput(invokeReadMultiInput)}}</textarea>
+                                          <button class="btn btn-primary btn-sm"
+                                              onclick="invokeReadMulti('invokeReadMulti-input','invokeReadMulti-result')">Run</button>
+                                      </div>
+                                      <div class="card-footer">
+                                          <h6>Result</h6>
+                                          <pre><div class="p-3 border rounded" id="invokeReadMulti-result"></div></pre>
+                                      </div>
+                                  </div>
+                              </div>
                             </div>
 
                             <div id="collapse-invoke" class="method">

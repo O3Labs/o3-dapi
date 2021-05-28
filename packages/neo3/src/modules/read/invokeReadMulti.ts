@@ -1,7 +1,7 @@
 import { sendMessage } from '../../messaging';
 import { ArgumentDataType, Command } from '../../constants';
 
-export interface InvokeReadArgs {
+export interface InvokeReadMultiArgs {
   scriptHash: string;
   operation: string;
   args?: Argument[];
@@ -22,7 +22,7 @@ interface Argument {
   value: any;
 }
 
-export function invokeRead(data: InvokeReadArgs[]): Promise<any> {
+export function invokeReadMulti(data: InvokeReadMultiArgs[]): Promise<any> {
   return sendMessage({
     command: Command.invokeReadMulti,
     data,

@@ -16,6 +16,7 @@ import {
   GetStorageOutput,
 } from './modules/read/getStorage';
 import { invokeRead, InvokeReadArgs } from './modules/read/invokeRead';
+import { invokeReadMulti, InvokeReadMultiArgs } from './modules/read/invokeReadMulti';
 import {
   verifyMessage,
   VerifyMessageInput,
@@ -69,6 +70,7 @@ class O3dapiNeo3 {
   getBalance: getBalance = methodSelector(this, 'getBalance', getBalance);
   getStorage: getStorage = methodSelector(this, 'getStorage', getStorage);
   invokeRead: invokeRead = methodSelector(this, 'invokeRead', invokeRead);
+  invokeReadMulti: invokeReadMulti = methodSelector(this, 'invokeReadMulti', invokeReadMulti);
   verifyMessage: verifyMessage = methodSelector(
     this,
     'verifyMessage',
@@ -127,6 +129,7 @@ export type getPublicKey = () => Promise<PublicKeyOutput>;
 export type getBalance = (data: GetBalanceArgs) => Promise<BalanceResults>;
 export type getStorage = (data: GetStorageArgs) => Promise<GetStorageOutput>;
 export type invokeRead = (data: InvokeReadArgs) => Promise<any>;
+export type invokeReadMulti = (data: InvokeReadMultiArgs) => Promise<any>;
 export type verifyMessage = (
   data: VerifyMessageInput
 ) => Promise<VerifyMessageOutput>;

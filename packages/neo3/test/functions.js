@@ -23,6 +23,27 @@ var app = new Vue({
       }],
       network: "TestNet",
     },
+    invokeReadMultiInput: {
+      invokeReadArgs: [
+        {
+          scriptHash: "0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5",
+          operation: "balanceOf",
+          args: [{
+            "type": "Address",
+            "value": "NYxb4fSZVKAz8YsgaPK2WkT3KcAE9b3Vag"
+          }],
+        },
+        {
+          scriptHash: "0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5",
+          operation: "balanceOf",
+          args: [{
+            "type": "Address",
+            "value": "NZHf1NJvz1tvELGLWZjhpb3NqZJFFUYpxT"
+          }]
+        }
+      ],
+      network: "TestNet",
+    },
     invokeInput: {
       scriptHash: "c36aee199dbba6c3f439983657558cfb67629599",
       operation: "transfer",
@@ -122,6 +143,7 @@ var app = new Vue({
       this.getStorageInput.network = value;
       this.getBalanceInput.network = value;
       this.invokeReadInput.network = value;
+      this.invokeReadMultiInput.network = value;
       this.invokeInput.network = value;
       this.invokeMultiInput.network = value;
       this.sendInput.network = value;
@@ -218,6 +240,21 @@ function getStorage(inputElement, resultElem) {
 function invokeRead(inputElement, resultElem) {
   try {
     neoDapi.invokeRead(JSON.parse(document.getElementById(inputElement).value))
+      .then(function (data) {
+        const formatted = syntaxHighlight(data);
+        document.getElementById(resultElem).innerHTML = formatted;
+      })
+      .catch(function (error) {
+        document.getElementById(resultElem).innerHTML = syntaxHighlight(error);
+      });
+  } catch (err) {
+    document.getElementById(resultElem).innerHTML = 'invalid JSON input';
+  }
+}
+
+function invokeReadMulti(inputElement, resultElem) {
+  try {
+    neoDapi.invokeReadMulti(JSON.parse(document.getElementById(inputElement).value))
       .then(function (data) {
         const formatted = syntaxHighlight(data);
         document.getElementById(resultElem).innerHTML = formatted;

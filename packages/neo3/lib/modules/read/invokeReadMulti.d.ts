@@ -1,5 +1,5 @@
 import { ArgumentDataType } from '../../constants';
-export interface InvokeReadArgs {
+export interface InvokeReadMultiArgs {
     scriptHash: string;
     operation: string;
     args?: Argument[];
@@ -16,6 +16,6 @@ interface Argument {
     type: ArgumentDataType;
     value: any;
 }
-export declare function invokeRead(data: InvokeReadArgs[]): Promise<any>;
+export declare function invokeReadMulti(data: InvokeReadMultiArgs[]): Promise<any>;
 export {};
 //# sourceMappingURL=invokeReadMulti.d.ts.map
