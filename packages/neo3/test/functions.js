@@ -45,21 +45,20 @@ var app = new Vue({
       network: "TestNet",
     },
     invokeInput: {
-      scriptHash: "c36aee199dbba6c3f439983657558cfb67629599",
+      scriptHash: "ef4073a0f2b305a38ec4050e4d3d28bc40ea63f5",
       operation: "transfer",
       args: [{
-        "type": "ByteArray",
-        "value": ""
+        "type": "Address",
+        "value": "NfuwpaQ1A2xaeVbxWe8FRtaRgaMa8yF3YM"
       }, {
-        "type": "ByteArray",
-        "value": ""
+        "type": "Address",
+        "value": "NNTgSE1MpRXLfbnHUryqjmFTyse2ThV2qj"
       }, {
-        "type": "ByteArray",
-        "value": "0100000000000000"
+        "type": "Integer",
+        "value": "1"
       }],
       fee: "0.11",
       network: "TestNet",
-      triggerContractVerification: false,
       broadcastOverride: false,
     },
     invokeMultiInput: {
@@ -105,13 +104,11 @@ var app = new Vue({
       broadcastOverride: false,
     },
     sendInput: {
-      fromAddress: "ANtdacYPFN6zkarDwVt5vH55FKsJU8SapW",
-      toAddress: "ANtdacYPFN6zkarDwVt5vH55FKsJU8SapW",
-      asset: "GAS",
+      fromAddress: "NfuwpaQ1A2xaeVbxWe8FRtaRgaMa8yF3YM",
+      toAddress: "NNTgSE1MpRXLfbnHUryqjmFTyse2ThV2qj",
+      asset: "NEO",
       amount: "1",
-      remark: "TestRemark",
       fee: "0.011",
-      network: "TestNet",
       broadcastOverride: false,
     },
     signMessageInput: {
@@ -302,10 +299,12 @@ function send(inputElement, resultElem) {
   try {
     neoDapi.send(JSON.parse(document.getElementById(inputElement).value))
       .then(function (data) {
+        console.log(data);
         const formatted = syntaxHighlight(data);
         document.getElementById(resultElem).innerHTML = formatted;
       })
       .catch(function (error) {
+        console.log(error);
         document.getElementById(resultElem).innerHTML = syntaxHighlight(error);
       });
   } catch (err) {

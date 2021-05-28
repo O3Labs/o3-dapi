@@ -3,9 +3,7 @@ export interface SendArgs {
     toAddress: string;
     asset: string;
     amount: string;
-    remark?: string;
     fee?: string;
-    network?: string;
     broadcastOverride?: boolean;
 }
 export interface SendOutput {

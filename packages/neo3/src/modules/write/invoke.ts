@@ -6,13 +6,7 @@ export interface InvokeArgs {
   operation: string;
   args?: Argument[];
   fee?: string;
-  network?: string;
-  attachedAssets?: AttachedAssets;
-  assetIntentOverrides?: AssetIntentOverrides;
-  triggerContractVerification?: boolean;
   broadcastOverride?: boolean;
-  txHashAttributes?: TxHashAttribute[];
-  remark?: string;
 }
 
 interface Argument {
@@ -21,7 +15,22 @@ interface Argument {
 }
 
 interface TxHashAttribute extends Argument {
-  txAttrUsage: 'Hash1'|'Hash2'|'Hash3'|'Hash4'|'Hash5'|'Hash6'|'Hash7'|'Hash8'|'Hash9'|'Hash10'|'Hash11'|'Hash12'|'Hash13'|'Hash14'|'Hash15';
+  txAttrUsage:
+    | 'Hash1'
+    | 'Hash2'
+    | 'Hash3'
+    | 'Hash4'
+    | 'Hash5'
+    | 'Hash6'
+    | 'Hash7'
+    | 'Hash8'
+    | 'Hash9'
+    | 'Hash10'
+    | 'Hash11'
+    | 'Hash12'
+    | 'Hash13'
+    | 'Hash14'
+    | 'Hash15';
 }
 
 interface AttachedAssets {
