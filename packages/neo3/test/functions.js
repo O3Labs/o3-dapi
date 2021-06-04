@@ -52,10 +52,13 @@ var app = new Vue({
         "value": "NfuwpaQ1A2xaeVbxWe8FRtaRgaMa8yF3YM"
       }, {
         "type": "Address",
-        "value": "NNTgSE1MpRXLfbnHUryqjmFTyse2ThV2qj"
+        "value": "NYMeJFcVKEkvG3Q89eBQCXqrYLHz4kTAdQ"
       }, {
         "type": "Integer",
         "value": "1"
+      }, {
+        "type": "String",
+        "value": "NEO"
       }],
       fee: "0.11",
       network: "TestNet",
@@ -63,40 +66,38 @@ var app = new Vue({
     },
     invokeMultiInput: {
       invokeArgs: [{
-          scriptHash: "c36aee199dbba6c3f439983657558cfb67629599",
+          scriptHash: "ef4073a0f2b305a38ec4050e4d3d28bc40ea63f5",
           operation: "transfer",
           args: [{
-            "type": "ByteArray",
-            "value": ""
+            "type": "Address",
+            "value": "NfuwpaQ1A2xaeVbxWe8FRtaRgaMa8yF3YM"
           }, {
-            "type": "ByteArray",
-            "value": ""
+            "type": "Address",
+            "value": "NYMeJFcVKEkvG3Q89eBQCXqrYLHz4kTAdQ"
           }, {
-            "type": "ByteArray",
-            "value": "0100000000000000"
-          }],
-          triggerContractVerification: false,
-          attachedAssets: {
-            'NEO': 1,
-          }
+            "type": "Integer",
+            "value": "1"
+          }, {
+            "type": "String",
+            "value": "NEO"
+          }]
         },
         {
-          scriptHash: "c36aee199dbba6c3f439983657558cfb67629599",
+          scriptHash: "ef4073a0f2b305a38ec4050e4d3d28bc40ea63f5",
           operation: "transfer",
           args: [{
-            "type": "ByteArray",
-            "value": ""
+            "type": "Address",
+            "value": "NfuwpaQ1A2xaeVbxWe8FRtaRgaMa8yF3YM"
           }, {
-            "type": "ByteArray",
-            "value": ""
+            "type": "Address",
+            "value": "NYMeJFcVKEkvG3Q89eBQCXqrYLHz4kTAdQ"
           }, {
-            "type": "ByteArray",
-            "value": "0100000000000000"
-          }],
-          triggerContractVerification: true,
-          attachedAssets: {
-            'NEO': 2,
-          }
+            "type": "Integer",
+            "value": "2"
+          }, {
+            "type": "String",
+            "value": "NEO"
+          }]
         }
       ],
       fee: "0.11",
@@ -105,7 +106,7 @@ var app = new Vue({
     },
     sendInput: {
       fromAddress: "NfuwpaQ1A2xaeVbxWe8FRtaRgaMa8yF3YM",
-      toAddress: "NNTgSE1MpRXLfbnHUryqjmFTyse2ThV2qj",
+      toAddress: "NYMeJFcVKEkvG3Q89eBQCXqrYLHz4kTAdQ",
       asset: "NEO",
       amount: "1",
       fee: "0.011",
