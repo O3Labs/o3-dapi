@@ -60,6 +60,12 @@ var app = new Vue({
         "type": "String",
         "value": "NEO"
       }],
+      signers: [
+        {
+          account: "0x85afbd7dcaa61d4ff1009912856abede476061db",
+          scopes: 128
+        }
+      ],
       fee: "0.11",
       network: "TestNet",
       broadcastOverride: false,
@@ -98,6 +104,12 @@ var app = new Vue({
             "type": "String",
             "value": "NEO"
           }]
+        }
+      ],
+      signers: [
+        {
+          account: "0x85afbd7dcaa61d4ff1009912856abede476061db",
+          scopes: 128
         }
       ],
       fee: "0.11",
