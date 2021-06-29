@@ -1,8 +1,8 @@
 {
   "name": "o3-dapi-n3",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "NEO3 Plugin for o3-dapi",
-  "main": "./lib/o3-dapi-neo.min.js",
+  "main": "./lib/o3-dapi-neo3.min.js",
   "types": "./lib/index.d.ts",
   "scripts": {
     "start": "webpack --mode development --watch",
