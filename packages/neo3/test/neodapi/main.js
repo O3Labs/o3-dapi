@@ -108,19 +108,19 @@ function stopLoading() {
 stopLoading();
 
 function isReady() {
-  neoDapi.isReady()
+  neoN3Dapi.isReady()
   .then(handleSuccess)
   .catch(handleError);
 }
 
 function getProvider() {
-  neoDapi.getProvider()
+  neoN3Dapi.getProvider()
   .then(handleSuccess)
   .catch(handleError);
 }
 
 function getNetworks() {
-  neoDapi.getNetworks()
+  neoN3Dapi.getNetworks()
   .then(handleSuccess)
   .catch(handleError);
 }
@@ -128,7 +128,7 @@ function getNetworks() {
 function getAccount() {
   startLoading();
 
-  neoDapi.getAccount()
+  neoN3Dapi.getAccount()
   .then(accountData => {
     accountEle.innerHTML = `Connected Account: ${accountData.address}`;
     disconnectEle.innerHTML = 'disconnect';
@@ -140,7 +140,7 @@ function getAccount() {
 function getPublicKey() {
   startLoading();
 
-  neoDapi.getPublicKey()
+  neoN3Dapi.getPublicKey()
   .then(handleSuccess)
   .catch(handleError);
 }
@@ -148,7 +148,7 @@ function getPublicKey() {
 function getBalance() {
   try {
     startLoading();
-    neoDapi.getBalance({
+    neoN3Dapi.getBalance({
       params: balanceInputEle.value && JSON.parse(balanceInputEle.value),
       network: networksEle.value,
     })
@@ -161,7 +161,7 @@ function getBalance() {
 
 function getStorage() {
   startLoading();
-  neoDapi.getStorage({
+  neoN3Dapi.getStorage({
     scriptHash: getStorageScriptHashEle.value,
     key: getStorageKeyEle.value,
     network: networksEle.value,
@@ -173,7 +173,7 @@ function getStorage() {
 function invokeRead() {
   try {
     startLoading();
-    neoDapi.invokeRead({
+    neoN3Dapi.invokeRead({
       scriptHash: invokeReadScriptHashEle.value,
       operation: invokeReadOperationEle.value,
       args: invokeReadArgsEle.value && JSON.parse(invokeReadArgsEle.value),
@@ -189,7 +189,7 @@ function invokeRead() {
 function invoke() {
   try {
     startLoading();
-    neoDapi.invoke({
+    neoN3Dapi.invoke({
       scriptHash: invokeScriptHashEle.value,
       operation: invokeOperationEle.value,
       args: invokeArgsEle.value && JSON.parse(invokeArgsEle.value),
@@ -208,7 +208,7 @@ function invoke() {
 
 function send() {
   startLoading();
-  neoDapi.send({
+  neoN3Dapi.send({
     fromAddress: sendFromAddressEle.value,
     toAddress: sendToAddressEle.value,
     asset: sendAssetEle.value,
@@ -224,7 +224,7 @@ function send() {
 function signMessage() {
   try {
     startLoading();
-    neoDapi.signMessage({
+    neoN3Dapi.signMessage({
       message: signMessageInputEle.value,
     })
     .then(handleSuccess)
@@ -237,7 +237,7 @@ function signMessage() {
 function verifyMessage() {
   try {
     startLoading();
-    neoDapi.verifyMessage({
+    neoN3Dapi.verifyMessage({
       message: verifyMessageInputEle.value,
       data: verifyMessageSignatureInputEle.value,
       publicKey: verifyMessagePiblicKeyInputEle.value,
@@ -252,7 +252,7 @@ function verifyMessage() {
 function deploy() {
   try {
     startLoading();
-    neoDapi.deploy({
+    neoN3Dapi.deploy({
       network: networksEle.value,
       name: deployNameEle.value,
       version: deployVersionEle.value,
@@ -274,7 +274,7 @@ function deploy() {
 }
 
 function disconnect() {
-  neoDapi.disconnect()
+  neoN3Dapi.disconnect()
   .then(data => {
     accountEle.innerHTML = '';
     disconnectEle.innerHTML = '';
@@ -285,30 +285,30 @@ function disconnect() {
 }
 
 function utilsString() {
-  const hex2strResult = utilsHex2strInputEle.value ? neoDapi.utils.hex2str(utilsHex2strInputEle.value) : '';
-  const str2hexResult = utilsStr2hexInputEle.value ? neoDapi.utils.str2hex(utilsStr2hexInputEle.value) : '';
+  const hex2strResult = utilsHex2strInputEle.value ? neoN3Dapi.utils.hex2str(utilsHex2strInputEle.value) : '';
+  const str2hexResult = utilsStr2hexInputEle.value ? neoN3Dapi.utils.str2hex(utilsStr2hexInputEle.value) : '';
 
   utilsHex2strOutputEle.innerHTML = hex2strResult;
   utilsStr2hexOutputEle.innerHTML = str2hexResult;
 }
 
 function utilsInteger() {
-  const hex2intResult = utilsHex2intInputEle.value ? neoDapi.utils.hex2int(utilsHex2intInputEle.value) : '';
-  const int2hexResult = utilsInt2hexInputEle.value ? neoDapi.utils.int2hex(utilsInt2hexInputEle.value) : '';
+  const hex2intResult = utilsHex2intInputEle.value ? neoN3Dapi.utils.hex2int(utilsHex2intInputEle.value) : '';
+  const int2hexResult = utilsInt2hexInputEle.value ? neoN3Dapi.utils.int2hex(utilsInt2hexInputEle.value) : '';
 
   utilsHex2intOutputEle.innerHTML = hex2intResult;
   utilsInt2hexOutputEle.innerHTML = int2hexResult;
 }
 
 function utilsReverseHex() {
-  const reversehexResult = utilsReverseHexInputEle.value ? neoDapi.utils.reverseHex(utilsReverseHexInputEle.value) : '';
+  const reversehexResult = utilsReverseHexInputEle.value ? neoN3Dapi.utils.reverseHex(utilsReverseHexInputEle.value) : '';
 
   utilsReverseHexOutputEle.innerHTML = reversehexResult;
 }
 
 function utilsAddress() {
-  const address2scriptHashResult = utilsAddress2scriptHashInputEle.value ? neoDapi.utils.address2scriptHash(utilsAddress2scriptHashInputEle.value) : '';
-  const scriptHash2addressResult = utilsScriptHash2addressInputEle.value ? neoDapi.utils.scriptHash2address(utilsScriptHash2addressInputEle.value) : '';
+  const address2scriptHashResult = utilsAddress2scriptHashInputEle.value ? neoN3Dapi.utils.address2scriptHash(utilsAddress2scriptHashInputEle.value) : '';
+  const scriptHash2addressResult = utilsScriptHash2addressInputEle.value ? neoN3Dapi.utils.scriptHash2address(utilsScriptHash2addressInputEle.value) : '';
 
   utilsAddress2scriptHashOutputEle.innerHTML = address2scriptHashResult;
   utilsScriptHash2addressOutputEle.innerHTML = scriptHash2addressResult;
@@ -352,21 +352,21 @@ function readSingleFile(evt) {
 
 deployAvmFileEle.addEventListener('change', readSingleFile, false);
 
-if (neoDapi.isAvailable) {
+if (neoN3Dapi.isAvailable) {
   console.log('in o3 dapp browser')
 }
 
-neoDapi.addEventListener(neoDapi.Constants.EventName.CONNECTED, data => {
+neoN3Dapi.addEventListener(neoN3Dapi.Constants.EventName.CONNECTED, data => {
   accountEle.innerHTML = `Connected Account: ${data.address}`;
   disconnectEle.innerHTML = 'disconnect';
 });
 
-neoDapi.addEventListener(neoDapi.Constants.EventName.ACCOUNT_CHANGED, data => {
+neoN3Dapi.addEventListener(neoN3Dapi.Constants.EventName.ACCOUNT_CHANGED, data => {
   accountEle.innerHTML = `Connected Account: ${data.address}`;
   disconnectEle.innerHTML = 'disconnect';
 });
 
-neoDapi.addEventListener(neoDapi.Constants.EventName.DISCONNECTED, data => {
+neoN3Dapi.addEventListener(neoN3Dapi.Constants.EventName.DISCONNECTED, data => {
   accountEle.innerHTML = '';
   disconnectEle.innerHTML = '';
   clearText();

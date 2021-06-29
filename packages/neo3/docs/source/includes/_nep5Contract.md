@@ -125,7 +125,7 @@ Note that this time we set the first parameter in the `sc deploy` command, after
 
 ### Invoke from testbed
 
-Once deployed, grab the contract hash (minus the `0x` prefix), and head back to the [dAPI testbed](https://neodapitestbed.o3.app).
+Once deployed, grab the contract hash (minus the `0x` prefix), and head back to the [dAPI testbed](https://neon3dapitestbed.o3.app).
 
 Update the input object with the reference to your new token contract script hash, and set the operation to `name`. We will not need any arguments, so leave the `args` array empty, or remove it from the object.
 

@@ -1,6 +1,6 @@
 ## Sample dApp
 
-Now that we have a token contract deployed on our private net, and we've tested it from the dAPI testbed, we can look into integrating this in to our own dApp. The code for the testbed is [open source](https://github.com/O3Labs/o3-dapi/blob/master/packages/neo/test/functions.js#L186), and can be used as an example. Or you can reference the [API documentation](https://neodapidocs.o3.network/#invoke) for usage examples.
+Now that we have a token contract deployed on our private net, and we've tested it from the dAPI testbed, we can look into integrating this in to our own dApp. The code for the testbed is [open source](https://github.com/O3Labs/o3-dapi/blob/master/packages/neo/test/functions.js#L186), and can be used as an example. Or you can reference the [API documentation](https://neon3dapidocs.o3.network/#invoke) for usage examples.
 
 Here we will use create a very simple dApp website which will interface with the token smart contract. This simple dApp will just be a basic website that imports the neo-dapi JS package from a CDN, and provides a user interface to interact with the contract.
 
@@ -32,12 +32,12 @@ Here we will use create a very simple dApp website which will interface with the
     const nameErrorEle = document.getElementById("nameError");
 
     function handleName() {
-      neoDapi.invokeRead({
+      neoN3Dapi.invokeRead({
         scriptHash: scriptHashEle.value,
         operation: 'name',
       })
       .then(res => res.stack[0].value)
-      .then(res => neoDapi.utils.hex2str(res))
+      .then(res => neoN3Dapi.utils.hex2str(res))
       .then(res => nameResultEle.innerHTML = res)
       .catch(err => nameErrorEle.innerHTML = err);
     }
@@ -89,7 +89,7 @@ This is what our simple UI should look like. Upon entering the script hash for y
     const initErrorEle = document.getElementById("initError");
 
     function handleInit() {
-      neoDapi.invoke({
+      neoN3Dapi.invoke({
         scriptHash: scriptHashEle.value,
         operation: 'init'
       })
@@ -154,20 +154,20 @@ Now that you have initialized the token contract, all the tokens should be in yo
     const transferErrorEle = document.getElementById("transferError");
 
     function handleTransfer() {
-      neoDapi.invoke({
+      neoN3Dapi.invoke({
         scriptHash: scriptHashEle.value,
         operation: 'transfer',
         args: [
           {
-            type: neoDapi.Constants.ArgumentDataType.ADDRESS,
+            type: neoN3Dapi.Constants.ArgumentDataType.ADDRESS,
             value: transferAddrFromEle.value,
           },
           {
-            type: neoDapi.Constants.ArgumentDataType.ADDRESS,
+            type: neoN3Dapi.Constants.ArgumentDataType.ADDRESS,
             value: transferAddrToEle.value,
           },
           {
-            type: neoDapi.Constants.ArgumentDataType.INTEGER,
+            type: neoN3Dapi.Constants.ArgumentDataType.INTEGER,
             value: transferAmountEle.value,
           }
         ]

@@ -108,19 +108,19 @@ function stopLoading() {
 stopLoading();
 
 function isReady() {
-  o3dapi.NEO.isReady()
+  o3dapi.NEO3.isReady()
   .then(handleSuccess)
   .catch(handleError);
 }
 
 function getProvider() {
-  o3dapi.NEO.getProvider()
+  o3dapi.NEO3.getProvider()
   .then(handleSuccess)
   .catch(handleError);
 }
 
 function getNetworks() {
-  o3dapi.NEO.getNetworks()
+  o3dapi.NEO3.getNetworks()
   .then(handleSuccess)
   .catch(handleError);
 }
@@ -128,7 +128,7 @@ function getNetworks() {
 function getAccount() {
   startLoading();
 
-  o3dapi.NEO.getAccount()
+  o3dapi.NEO3.getAccount()
   .then(accountData => {
     accountEle.innerHTML = `Connected Account: ${accountData.address}`;
     disconnectEle.innerHTML = 'disconnect';
@@ -140,7 +140,7 @@ function getAccount() {
 function getPublicKey() {
   startLoading();
 
-  o3dapi.NEO.getPublicKey()
+  o3dapi.NEO3.getPublicKey()
   .then(handleSuccess)
   .catch(handleError);
 }
@@ -148,7 +148,7 @@ function getPublicKey() {
 function getBalance() {
   try {
     startLoading();
-    o3dapi.NEO.getBalance({
+    o3dapi.NEO3.getBalance({
       params: balanceInputEle.value && JSON.parse(balanceInputEle.value),
       network: networksEle.value,
     })
@@ -161,7 +161,7 @@ function getBalance() {
 
 function getStorage() {
   startLoading();
-  o3dapi.NEO.getStorage({
+  o3dapi.NEO3.getStorage({
     scriptHash: getStorageScriptHashEle.value,
     key: getStorageKeyEle.value,
     network: networksEle.value,
@@ -173,7 +173,7 @@ function getStorage() {
 function invokeRead() {
   try {
     startLoading();
-    o3dapi.NEO.invokeRead({
+    o3dapi.NEO3.invokeRead({
       scriptHash: invokeReadScriptHashEle.value,
       operation: invokeReadOperationEle.value,
       args: invokeReadArgsEle.value && JSON.parse(invokeReadArgsEle.value),
@@ -189,7 +189,7 @@ function invokeRead() {
 function invoke() {
   try {
     startLoading();
-    o3dapi.NEO.invoke({
+    o3dapi.NEO3.invoke({
       scriptHash: invokeScriptHashEle.value,
       operation: invokeOperationEle.value,
       args: invokeArgsEle.value && JSON.parse(invokeArgsEle.value),
@@ -208,7 +208,7 @@ function invoke() {
 
 function send() {
   startLoading();
-  o3dapi.NEO.send({
+  o3dapi.NEO3.send({
     fromAddress: sendFromAddressEle.value,
     toAddress: sendToAddressEle.value,
     asset: sendAssetEle.value,
@@ -224,7 +224,7 @@ function send() {
 function signMessage() {
   try {
     startLoading();
-    o3dapi.NEO.signMessage({
+    o3dapi.NEO3.signMessage({
       message: signMessageInputEle.value,
     })
     .then(handleSuccess)
@@ -237,7 +237,7 @@ function signMessage() {
 function verifyMessage() {
   try {
     startLoading();
-    o3dapi.NEO.verifyMessage({
+    o3dapi.NEO3.verifyMessage({
       message: verifyMessageInputEle.value,
       data: verifyMessageSignatureInputEle.value,
       publicKey: verifyMessagePiblicKeyInputEle.value,
@@ -252,7 +252,7 @@ function verifyMessage() {
 function deploy() {
   try {
     startLoading();
-    o3dapi.NEO.deploy({
+    o3dapi.NEO3.deploy({
       network: networksEle.value,
       name: deployNameEle.value,
       version: deployVersionEle.value,
@@ -274,7 +274,7 @@ function deploy() {
 }
 
 function disconnect() {
-  o3dapi.NEO.disconnect()
+  o3dapi.NEO3.disconnect()
   .then(data => {
     accountEle.innerHTML = '';
     disconnectEle.innerHTML = '';
@@ -353,23 +353,23 @@ function readSingleFile(evt) {
 deployAvmFileEle.addEventListener('change', readSingleFile, false);
 
 o3dapi.initPlugins([o3dapiNeo]);
-o3dapi.NEO.setClientPlugin(o3dapiNeoClient)
+o3dapi.NEO3.setClientPlugin(o3dapiNeoClient)
 
-if (o3dapi.NEO.isAvailable) {
+if (o3dapi.NEO3.isAvailable) {
   console.log('in o3 dapp browser')
 }
 
-o3dapi.NEO.addEventListener(o3dapi.NEO.Constants.EventName.CONNECTED, data => {
+o3dapi.NEO3.addEventListener(o3dapi.NEO3.Constants.EventName.CONNECTED, data => {
   accountEle.innerHTML = `Connected Account: ${data.address}`;
   disconnectEle.innerHTML = 'disconnect';
 });
 
-o3dapi.NEO.addEventListener(o3dapi.NEO.Constants.EventName.ACCOUNT_CHANGED, data => {
+o3dapi.NEO3.addEventListener(o3dapi.NEO3.Constants.EventName.ACCOUNT_CHANGED, data => {
   accountEle.innerHTML = `Connected Account: ${data.address}`;
   disconnectEle.innerHTML = 'disconnect';
 });
 
-o3dapi.NEO.addEventListener(o3dapi.NEO.Constants.EventName.DISCONNECTED, data => {
+o3dapi.NEO3.addEventListener(o3dapi.NEO3.Constants.EventName.DISCONNECTED, data => {
   accountEle.innerHTML = '';
   disconnectEle.innerHTML = '';
   clearText();

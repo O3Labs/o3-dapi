@@ -74,12 +74,12 @@ const utilsAddress2scriptHashOutputEle = document.getElementById("utilsAddress2s
 const utilsScriptHash2addressOutputEle = document.getElementById("utilsScriptHash2addressOutput");
 
 
-o3dapi.initPlugins([o3dapiNeo3]);
+o3dapi.initPlugins([o3dapiNeoN3]);
 
 console.log(o3dapi);
 
-const neoDapi = o3dapi.NEO3;
-neoDapi.EventName = o3dapi.NEO3.Constants.EventName;
+const neoN3Dapi = o3dapi.NEO3;
+neoN3Dapi.EventName = o3dapi.NEO3.Constants.EventName;
 
 
 let isUtilsOpen;
@@ -123,7 +123,7 @@ function stopLoading() {
 stopLoading();
 
 function isReady() {
-  neoDapi.isReady()
+  neoN3Dapi.isReady()
     .then(handleSuccess)
     .catch(handleError);
 }
@@ -133,7 +133,7 @@ function isReady() {
 function deploy() {
   try {
     startLoading();
-    neoDapi.deploy({
+    neoN3Dapi.deploy({
         network: networksEle.value,
         name: deployNameEle.value,
         version: deployVersionEle.value,
@@ -156,7 +156,7 @@ function deploy() {
 }
 
 function disconnect() {
-  neoDapi.disconnect()
+  neoN3Dapi.disconnect()
     .then(data => {
       accountEle.innerHTML = '';
       disconnectEle.innerHTML = '';
@@ -168,8 +168,8 @@ function disconnect() {
 
 
 function utilsAddress() {
-  const address2scriptHashResult = utilsAddress2scriptHashInputEle.value ? neoDapi.utils.address2scriptHash(utilsAddress2scriptHashInputEle.value) : '';
-  const scriptHash2addressResult = utilsScriptHash2addressInputEle.value ? neoDapi.utils.scriptHash2address(utilsScriptHash2addressInputEle.value) : '';
+  const address2scriptHashResult = utilsAddress2scriptHashInputEle.value ? neoN3Dapi.utils.address2scriptHash(utilsAddress2scriptHashInputEle.value) : '';
+  const scriptHash2addressResult = utilsScriptHash2addressInputEle.value ? neoN3Dapi.utils.scriptHash2address(utilsScriptHash2addressInputEle.value) : '';
 
   utilsAddress2scriptHashOutputEle.innerHTML = address2scriptHashResult;
   utilsScriptHash2addressOutputEle.innerHTML = scriptHash2addressResult;
@@ -194,32 +194,32 @@ function readSingleFile(evt) {
 
 // deployAvmFileEle.addEventListener('change', readSingleFile, false);
 
-if (neoDapi.isAvailable) {
+if (neoN3Dapi.isAvailable) {
   console.log('in o3 dapp browser')
 }
 
-neoDapi.addEventListener(neoDapi.Constants.EventName.READY, onReady);
+neoN3Dapi.addEventListener(neoN3Dapi.Constants.EventName.READY, onReady);
 
-neoDapi.addEventListener(neoDapi.Constants.EventName.CONNECTED, data => {
+neoN3Dapi.addEventListener(neoN3Dapi.Constants.EventName.CONNECTED, data => {
   accountEle.innerHTML = `Connected Account: ${data.address}`;
   disconnectEle.innerHTML = 'disconnect';
 });
 
-neoDapi.addEventListener(neoDapi.Constants.EventName.ACCOUNT_CHANGED, data => {
+neoN3Dapi.addEventListener(neoN3Dapi.Constants.EventName.ACCOUNT_CHANGED, data => {
   accountEle.innerHTML = `Connected Account: ${data.address}`;
   disconnectEle.innerHTML = 'disconnect';
 });
 
-neoDapi.addEventListener(neoDapi.Constants.EventName.DISCONNECTED, data => {
+neoN3Dapi.addEventListener(neoN3Dapi.Constants.EventName.DISCONNECTED, data => {
   accountEle.innerHTML = '';
   disconnectEle.innerHTML = '';
   clearText();
 });
 
-neoDapi.addEventListener(neoDapi.Constants.EventName.NETWORK_CHANGED, handleNewNetworks);
+neoN3Dapi.addEventListener(neoN3Dapi.Constants.EventName.NETWORK_CHANGED, handleNewNetworks);
 
-neoDapi.addEventListener(neoDapi.Constants.EventName.TRANSACTION_CONFIRMED, data => {
-  console.log('neo tx confirmed: ', JSON.stringify(data));
+neoN3Dapi.addEventListener(neoN3Dapi.Constants.EventName.TRANSACTION_CONFIRMED, data => {
+  console.log('neo n3 tx confirmed: ', JSON.stringify(data));
 });
 
 function handleNewNetworks({
@@ -242,10 +242,10 @@ function handleNewNetworks({
 }
 
 function onReady() {
-  neoDapi.getNetworks()
+  neoN3Dapi.getNetworks()
     .then(handleNewNetworks);
-  neoDapi.addEventListener(neoDapi.Constants.EventName.BLOCK_HEIGHT_CHANGED, data => {
+  neoN3Dapi.addEventListener(neoN3Dapi.Constants.EventName.BLOCK_HEIGHT_CHANGED, data => {
     console.log(data)
-    console.log('neo block height changed: ', JSON.stringify(data));
+    console.log('neo n3 block height changed: ', JSON.stringify(data));
   });
 };

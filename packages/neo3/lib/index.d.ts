@@ -19,7 +19,7 @@ import { signMessage, SignMessageInput, Signature } from './modules/write/signMe
 import { disconnect } from './modules/disconnect';
 import { addEventListener, removeEventListener } from './modules/eventListener';
 import { ArgumentDataType, EventName } from './constants';
-declare class O3dapiNeo3 {
+declare class O3dapiNeoN3 {
     static blockchain: string;
     isAvailable: boolean;
     getProvider: typeof getProvider;
@@ -51,7 +51,7 @@ declare class O3dapiNeo3 {
     constructor(sendMessageMethod: any, addEventListenerMethod: any);
     setClientPlugin(plugin: any): void;
 }
-export default O3dapiNeo3;
+export default O3dapiNeoN3;
 export declare type getProvider = () => Promise<Provider>;
 export declare type getNetworks = () => Promise<GetNetworksOutput>;
 export declare type getAccount = () => Promise<Account>;

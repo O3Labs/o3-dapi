@@ -1,8 +1,8 @@
 {
-  "name": "o3-dapi-n3",
-  "version": "0.0.7",
-  "description": "NEO3 Plugin for o3-dapi",
-  "main": "./lib/o3-dapi-neo3.min.js",
+  "name": "o3-dapi-neo-n3",
+  "version": "1.0.0",
+  "description": "NEO N3 Plugin for o3-dapi",
+  "main": "./lib/o3-dapi-neo-n3.min.js",
   "types": "./lib/index.d.ts",
   "scripts": {
     "start": "webpack --mode development --watch",
@@ -29,6 +29,7 @@
   },
   "keywords": [
     "neo",
+    "neo n3",
     "web3"
   ],
   "dependencies": {

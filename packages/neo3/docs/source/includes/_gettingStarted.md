@@ -2,9 +2,9 @@
 
 ## What is the dAPI?
 
-The dAPI is a package interface for communicating with the NEO blockchain. The methods are handled by an existing wallet provider, such as the O3 wallet, and help to reduce the development overhead associated with creating dApps on NEO.
+The dAPI is a package interface for communicating with the NEO N3 blockchain. The methods are handled by an existing wallet provider, such as the O3 wallet, and help to reduce the development overhead associated with creating dApps on NEO N3.
 
-By offloading the responsibility of NEO blockchain interactions to a wallet provider, dApp developers do no have to worry about managing users private keys or how to format transactions to be signed and broadcast. The developer no long has to worry about user onboarding flows related to creating and managing a users secure credentials, and can just focus on the development of their core dApp.
+By offloading the responsibility of NEO N3 blockchain interactions to a wallet provider, dApp developers do no have to worry about managing users private keys or how to format transactions to be signed and broadcast. The developer no long has to worry about user onboarding flows related to creating and managing a users secure credentials, and can just focus on the development of their core dApp.
 
 On the user side, since all transactions that a dApp needs to broadcast to the blockchain will be handled by the users wallet proivder, they can feel safe knowing that they never need to copy and paste their private key into a dApp again. Any transaction that a user signs will be done so in the wallet, and their private key will never be provided to the dApp.
 
@@ -15,36 +15,36 @@ dAPI client integrations are currently facilited via a versioned JS package, and
 ### Install via CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/neo-dapi@2.0.4/lib/neo-dapi.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/neo-n3-dapi@1.0.1/lib/neo-n3-dapi.min.js"></script>
 ```
 ```typescript
-window.neoDapi
+window.neoN3Dapi
 ```
 
-[![](https://data.jsdelivr.com/v1/package/npm/neo-dapi/badge)](https://www.jsdelivr.com/package/npm/neo-dapi)
+[![](https://data.jsdelivr.com/v1/package/npm/neo-n3-dapi/badge)](https://www.jsdelivr.com/package/npm/neo-n3-dapi)
 
-When installing via CDN, it's always recommended to reference a specific version of the neo-dapi package, to protect your app from possible method interface updates. In this example the version referenced in the url is 2.0.4.
+When installing via CDN, it's always recommended to reference a specific version of the neo-n3-dapi package, to protect your app from possible method interface updates. In this example the version referenced in the url is 1.0.1.
 
 
 ### Install via NPM
 
 ```typescript
-npm i --save neo-dapi
+npm i --save neo-n3-dapi
 
 or
 
-yarn add neo-dapi
+yarn add neo-n3-dapi
 ```
 
 ```typescript
-var neoDapi = require('neo-dapi');
+var neoN3Dapi = require('neo-n3-dapi');
 
 or
 
-import neoDapi from 'neo-dapi';
+import neoN3Dapi from 'neo-n3-dapi';
 ```
 
-[![npm version](https://badge.fury.io/js/neo-dapi.svg)](https://badge.fury.io/js/neo-dapi)
+[![npm version](https://badge.fury.io/js/neo-n3-dapi.svg)](https://badge.fury.io/js/neo-n3-dapi)
 
 When installing via NPM, it's always advised to lockdown your package version to either the specific version only, or to patch updates.
 

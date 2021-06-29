@@ -7,7 +7,7 @@ Read methods do not alter the state of the blockchain. It can help you query inf
 ### getProvider
 
 ```typescript
-neoDapi.getProvider()
+neoN3Dapi.getProvider()
 .then((provider: Provider) => {
   const {
     name,
@@ -149,7 +149,7 @@ None
 ### getAccount
 
 ```typescript
-neoDapi.getAccount()
+neoN3Dapi.getAccount()
 .then((account: Account) => {
   const {
     address,
@@ -199,7 +199,7 @@ Return the Account that is currently connected to the dApp.
 ### getPublicKey
 
 ```typescript
-neoDapi.getPublicKey()
+neoN3Dapi.getPublicKey()
 .then((publicKeyData: PublicKeyData) => {
   const {
     address,
@@ -249,7 +249,7 @@ Return the public key of the Account that is currently connected to the dApp.
 ### getBalance
 
 ```typescript
-neoDapi.getBalance({
+neoN3Dapi.getBalance({
   params: {
     address: 'AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru',
     assets: ['NKN']
@@ -443,7 +443,7 @@ The amount of addresses is n where n is the number of addresses specified in you
 ### getStorage
 
 ```typescript
-neoDapi.getStorage({
+neoN3Dapi.getStorage({
   scriptHash: '505663a29d83663a838eee091249abd167e928f5',
   key: 'game.status',
   network: 'TestNet'
@@ -500,16 +500,16 @@ Returns the raw value located in contract storage
 ### invokeRead
 
 ```typescript
-neoDapi.invokeRead({
+neoN3Dapi.invokeRead({
   scriptHash: '505663a29d83663a838eee091249abd167e928f5',
   operation: 'calculatorAdd',
   args: [
     {
-      type: neoDapi.Constants.ArgumentDataType.INTEGER,
+      type: neoN3Dapi.Constants.ArgumentDataType.INTEGER,
       value: 2
     },
     {
-      type: neoDapi.Constants.ArgumentDataType.INTEGER,
+      type: neoN3Dapi.Constants.ArgumentDataType.INTEGER,
       value: 10
     }
   ],
@@ -590,7 +590,7 @@ The wallet will return the direct response from the RPC node.
 ### verifyMessage
 
 ```typescript
-neoDapi.verifyMessage({
+neoN3Dapi.verifyMessage({
   message: '058b9e03e7154e4db1e489c99256b7faHello World!',
   data: '0147fb89d0999e9d8a90edacfa26152fe695ec8b3770dcad522048297ab903822e12472364e254ff2e088fc3ebb641cc24722c563ff679bb1d1623d08bd5863d0d',
   publicKey: '0241392007396d6ef96159f047967c5a61f1af0871ecf9dc82afbedb68afbb949a',
@@ -644,7 +644,7 @@ Returns whether the provided signature data matches the provided message and was
 ### getBlock
 
 ```typescript
-neoDapi.getBlock({
+neoN3Dapi.getBlock({
   blockHeight: 2619690,
   network: 'TestNet'
 })
@@ -724,7 +724,7 @@ The wallet will return the direct response from the RPC node.
 ### getBlockHeight
 
 ```typescript
-neoDapi.getBlockHeight({
+neoN3Dapi.getBlockHeight({
   network: 'TestNet'
 })
 .then((res: {result: number}) => {
@@ -775,7 +775,7 @@ Execute a contract invocation in read-only mode.
 ### getTransaction
 
 ```typescript
-neoDapi.getTransaction({
+neoN3Dapi.getTransaction({
   txid: '7e049fd7c253dabf38e4156df30c78b30d49f307196aa89b99a47d2330789bf2',
   network: 'TestNet'
 })
@@ -853,7 +853,7 @@ The wallet will return the direct response from the RPC node.
 ### getApplicationLog
 
 ```typescript
-neoDapi.getApplicationLog({
+neoN3Dapi.getApplicationLog({
   txid: '7e049fd7c253dabf38e4156df30c78b30d49f307196aa89b99a47d2330789bf2',
   network: 'TestNet'
 })
@@ -966,7 +966,7 @@ Write methods will alter the state on the blockchain, and require a user signatu
 ### send
 
 ```typescript
-neoDapi.send({
+neoN3Dapi.send({
   fromAddress: 'ATaWxfUAiBcQixNPq6TvKHEHPQum9bx79d',
   toAddress: 'ATaWxfUAiBcQixNPq6TvKHEHPQum9bx79d',
   asset: 'GAS',
@@ -1055,12 +1055,12 @@ In the case where the "broadcastOverride" input argument is set to True.
 
 ### invoke
 ```typescript
-neoDapi.invoke({
+neoN3Dapi.invoke({
   scriptHash: '505663a29d83663a838eee091249abd167e928f5',
   operation: 'storeData',
   args: [
     {
-      type: neoDapi.Constants.ArgumentDataType.STRING,
+      type: neoN3Dapi.Constants.ArgumentDataType.STRING,
       value: 'hello'
     }
   ],
@@ -1206,14 +1206,14 @@ In the case where the "broadcastOverride" input argument is set to True.
 
 ### invokeMulti
 ```typescript
-neoDapi.invokeMulti({
+neoN3Dapi.invokeMulti({
   invokeArgs: [
     {
       scriptHash: '505663a29d83663a838eee091249abd167e928f5',
       operation: 'storeData',
       args: [
         {
-          type: neoDapi.Constants.ArgumentDataType.STRING,
+          type: neoN3Dapi.Constants.ArgumentDataType.STRING,
           value: 'hello'
         }
       ],
@@ -1228,7 +1228,7 @@ neoDapi.invokeMulti({
       operation: 'purchaseTicket',
       args: [
         {
-          type: neoDapi.Constants.ArgumentDataType.INTEGER,
+          type: neoN3Dapi.Constants.ArgumentDataType.INTEGER,
           value: '10'
         }
       ],
@@ -1239,7 +1239,7 @@ neoDapi.invokeMulti({
   broadcastOverride: false,
   txHashAttributes: [
     {
-      type: neoDapi.Constants.ArgumentDataType.BOOLEAN,
+      type: neoN3Dapi.Constants.ArgumentDataType.BOOLEAN,
       value: true,
       txAttrUsage: 'Hash1'
     }
@@ -1380,7 +1380,7 @@ In the case where the "broadcastOverride" input argument is set to True.
 ### signMessage
 
 ```typescript
-neoDapi.signMessage({
+neoN3Dapi.signMessage({
   message: 'Hello World!',
 })
 .then((signedMessage: SignedMessage) => {
@@ -1446,7 +1446,7 @@ Signs a provided messaged with an account selected by user. A salt prefix is add
 ### deploy
 
 ```typescript
-neoDapi.deploy({
+neoN3Dapi.deploy({
   network: 'PrivateNet',
   name: 'Hello world!',
   version: 'v0.0.1',
@@ -1537,7 +1537,7 @@ In the case where the "broadcastOverride" input argument is set to True.
 ### addEventListener
 
 ```typescript
-neoDapi.addEventListener(neoDapi.Constants.EventName.ACCOUNT_CHANGED, data => {
+neoN3Dapi.addEventListener(neoN3Dapi.Constants.EventName.ACCOUNT_CHANGED, data => {
   console.log(`Connected Account: ${data.address}`);
 });
 ```
@@ -1547,7 +1547,7 @@ Method is used to add a callback method to be triggered on a specified event.
 ### removeEventListener
 
 ```typescript
-neoDapi.removeEventListener(neoDapi.Constants.EventName.ACCOUNT_CHANGED);
+neoN3Dapi.removeEventListener(neoN3Dapi.Constants.EventName.ACCOUNT_CHANGED);
 ```
 
 Method is to remove existing callback event listeners.
@@ -1628,7 +1628,7 @@ On a TRANSACTION_CONFIRMED event, a previously broadcast transaction via the dap
 | blockTime   | Number | Timestamp of the new block                  |
 
 ## Errors
-The NEO dAPI will provide these basic errors. It is up to the wallet provider to provide additional information if they choose:
+The NEO N3 dAPI will provide these basic errors. It is up to the wallet provider to provide additional information if they choose:
 
 | Error Type         | Meaning                                                                     |
 | ------------------ | --------------------------------------------------------------------------- |
@@ -1649,7 +1649,7 @@ These are a collection of commonly used utilities for parsing responses from sma
 const hex2strInput = '68656c6c6f';
 const hex2strExpected = 'hello';
 
-const hex2strResult = neoDapi.utils.hex2str(hex2strInput);
+const hex2strResult = neoN3Dapi.utils.hex2str(hex2strInput);
 
 console.log('hex2str', hex2strExpected === hex2strResult);
 ```
@@ -1662,7 +1662,7 @@ Converts a hex string to a string.
 const str2hexInput = 'hello';
 const str2hexExpected = '68656c6c6f';
 
-const str2hexResult = neoDapi.utils.str2hex(str2hexInput);
+const str2hexResult = neoN3Dapi.utils.str2hex(str2hexInput);
 
 console.log('str2hex', str2hexExpected === str2hexResult);
 ```
@@ -1676,7 +1676,7 @@ Converts a string to a hex string.
 const hex2intInput = '00e1f505';
 const hex2intExpected = 100000000;
 
-const hex2intResult = neoDapi.utils.hex2int(hex2intInput);
+const hex2intResult = neoN3Dapi.utils.hex2int(hex2intInput);
 
 console.log('hex2int', hex2intExpected === hex2intResult);
 ```
@@ -1690,7 +1690,7 @@ Converts a hex string to an integer.
 const int2hexInput = 100000000;
 const int2hexExpected = '00e1f505';
 
-const int2hexResult = neoDapi.utils.int2hex(int2hexInput);
+const int2hexResult = neoN3Dapi.utils.int2hex(int2hexInput);
 
 console.log('int2hex', int2hexExpected === int2hexResult);
 ```
@@ -1703,7 +1703,7 @@ Converts an integer to a hex string.
 ```typescript
 const reverseHexInput = 'bc99b2a477e28581b2fd04249ba27599ebd736d3';
 const reverseHexExpected = 'd336d7eb9975a29b2404fdb28185e277a4b299bc';
-const reverseHexResult = neoDapi.utils.reverseHex(reverseHexInput);
+const reverseHexResult = neoN3Dapi.utils.reverseHex(reverseHexInput);
 
 console.log('reverseHex', reverseHexExpected === reverseHexResult);
 ```
@@ -1717,7 +1717,7 @@ Converts the endian of a hex string, big to little, or little to big.
 const address2scriptHashInput = 'Ab2fvZdmnM4HwDgVbdBrbTLz1wK5TcEyhU';
 const address2scriptHashExpected = 'd336d7eb9975a29b2404fdb28185e277a4b299bc';
 
-const address2scriptHashResult = neoDapi.utils.address2scriptHash(address2scriptHashInput);
+const address2scriptHashResult = neoN3Dapi.utils.address2scriptHash(address2scriptHashInput);
 
 console.log('address2scriptHash', address2scriptHashExpected === address2scriptHashResult);
 ```
@@ -1731,7 +1731,7 @@ Converts an address to a script hash.
 const scriptHash2addressInput = 'd336d7eb9975a29b2404fdb28185e277a4b299bc';
 const scriptHash2addressExpected = 'Ab2fvZdmnM4HwDgVbdBrbTLz1wK5TcEyhU';
 
-const scriptHash2addressResult = neoDapi.utils.scriptHash2address(scriptHash2addressInput);
+const scriptHash2addressResult = neoN3Dapi.utils.scriptHash2address(scriptHash2addressInput);
 
 console.log('scriptHash2address', scriptHash2addressExpected === scriptHash2addressResult);
 ```
