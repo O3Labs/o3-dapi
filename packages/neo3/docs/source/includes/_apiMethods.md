@@ -49,12 +49,13 @@ neoN3Dapi.getProvider()
   website: 'https://www.awesome.com',
   version: 'v0.0.1',
   compatibility: [
-    'NEP-14',
-    'NEP-23',
-    'NEP-29'
+    'NEP-dapi',
+    'OEP-6',
+    'ONT-STAKING',
+    'PAY'
   ],
   extra: {
-    theme: 'Dark Mode',
+    theme: 'Light Mode',
     currency: 'USD',
   }
 }
@@ -67,8 +68,9 @@ Returns information about the dAPI provider, including who this provider is, the
 None
 
 ##### Success Response
+
 | Parameter     | Type     | Description                                                      |
-|:------------- |:-------- |:---------------------------------------------------------------- |
+|:--------------|:---------|:-----------------------------------------------------------------|
 | name          | String   | The name of the wallet provider                                  |
 | website       | String   | The website of the wallet provider                               |
 | version       | String   | The version of the dAPI that the the wallet supports             |
@@ -76,14 +78,16 @@ None
 | extra         | Object   | Provider specific attributes                                     |
 
 ###### extra
+
 | Parameter | Type   | Description               |
-| --------- | ------ | ------------------------- |
+|-----------|--------|---------------------------|
 | theme     | string | UI theme of the provider  |
 | currency  | string | Base currency set by user |
 
 ##### Error Response
+
 | Parameter   | Type    | Description                                  |
-|:----------- |:------- |:-------------------------------------------- |
+|:------------|:--------|:---------------------------------------------|
 | type        | String  | The type of error which has occured          |
 | description | String? | A description of the error which has occured |
 | data        | String? | Any raw data associated with the error       |
@@ -91,18 +95,22 @@ None
 ### getNetworks
 
 ```typescript
-dapi.NEO.getNetworks()
+neoN3Dapi.getNetworks()
 .then(response => {
   const {
+    chainId,
     networks,
     defaultNetwork,
-  } = response.networks;
+  } = response;
+
+  console.log('chainId: ' + chainId);
+  // eg. 4
 
   console.log('Networks: ' + networks);
-  // eg. ["MainNet", "TestNet", "PrivateNet"]
+  // eg. ["MainNet", "TestNet", "N3TestNet"]
 
   console.log('Default network: ' + defaultNetwork);
-  // eg. "MainNet"
+  // eg. "N3TestNet"
 })
 .catch(({type: string, description: string, data: any}) => {
   switch(type) {
@@ -120,8 +128,9 @@ dapi.NEO.getNetworks()
 
 ```typescript
 {
-  networks: ["MainNet", "TestNet", "PrivateNet"],
-  defaultNetwork: "TestNet",
+  chainId: 4,
+  networks: ["MainNet", "TestNet", "N3TestNet"],
+  defaultNetwork: "N3TestNet"
 }
 ```
 
@@ -134,17 +143,29 @@ None
 ##### Success Response
 
 | Parameter      | Type     | Description                                                        |
-|:-------------- |:-------- |:------------------------------------------------------------------ |
+|:---------------|:---------|:-------------------------------------------------------------------|
 | networks       | String[] | A list of all networks which this wallet provider allows access to |
+| chainId        | Number   | ChainId the wallet is currently set to                             |
 | defaultNetwork | String   | Network the wallet is currently set to                             |
 
+###### Chain IDs Type
+
+These are the IDs of the Neo chain supported by O3 Desktop.
+
+| chainId | Description                                             |
+|:--------|:--------------------------------------------------------|
+| 1       | ChainId 1 is the Neo2 MainNet                           |
+| 1       | ChainId 2 is the Neo2 TestNet                           |
+| 1       | ChainId 3 is the N3 MainNet                             |
+| 1       | ChainId 4 is the N3 TestNet (Currently only N3 TestNet) |
+
 ##### Error Response
+
 | Parameter   | Type    | Description                                  |
-|:----------- |:------- |:-------------------------------------------- |
+|:------------|:--------|:---------------------------------------------|
 | type        | String  | The type of error which has occured          |
 | description | String? | A description of the error which has occured |
 | data        | String? | Any raw data associated with the error       |
-
 
 ### getAccount
 
@@ -175,7 +196,7 @@ neoN3Dapi.getAccount()
 
 ```typescript
 {
-  address: 'AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru',
+  address: 'NaUjKgf5vMuFt7Ffgfffcpc41uH3adx1jq',
   label: 'My Spending Wallet'
 }
 ```
@@ -183,18 +204,19 @@ neoN3Dapi.getAccount()
 Return the Account that is currently connected to the dApp.
 
 ##### Success Response
+
 | Parameter | Type   | Description                                                        |
-|:--------- |:------ |:------------------------------------------------------------------ |
+|:----------|:-------|:-------------------------------------------------------------------|
 | address   | String | The address of the account that is currently connected to the dapp |
 | label     | String | A label the users has set to identify their wallet                 |
 
 ##### Error Response
+
 | Parameter   | Type    | Description                                  |
-|:----------- |:------- |:-------------------------------------------- |
+|:------------|:--------|:---------------------------------------------|
 | type        | String  | The type of error which has occured          |
 | description | String? | A description of the error which has occured |
 | data        | String? | Any raw data associated with the error       |
-
 
 ### getPublicKey
 
@@ -225,46 +247,47 @@ neoN3Dapi.getPublicKey()
 
 ```typescript
 {
-  address: 'ATUaTd3LA4kZiyB6it9fdb5oJpZYMBF4DX',
-  publicKey: '03fa41b6ff75ebeff8464556629cfceae7402f5d815626a7a6542f786974b942e0'
+  address: 'NaUjKgf5vMuFt7Ffgfffcpc41uH3adx1jq',
+  publicKey: '6PYKGV4numxfoswwCedXzhb1oNCC8W4tEdfFPdtWtFa8WidpzYfeJkd2To'
 }
 ```
 
 Return the public key of the Account that is currently connected to the dApp.
 
 ##### Success Response
+
 | Parameter | Type   | Description                                                           |
-|:--------- |:------ |:--------------------------------------------------------------------- |
+|:----------|:-------|:----------------------------------------------------------------------|
 | address   | String | The address of the account that is currently connected to the dapp    |
 | publicKey | String | The public key of the account that is currently connected to the dapp |
 
 ##### Error Response
+
 | Parameter   | Type    | Description                                  |
-|:----------- |:------- |:-------------------------------------------- |
+|:------------|:--------|:---------------------------------------------|
 | type        | String  | The type of error which has occured          |
 | description | String? | A description of the error which has occured |
 | data        | String? | Any raw data associated with the error       |
-
 
 ### getBalance
 
 ```typescript
 neoN3Dapi.getBalance({
-  params: {
-    address: 'AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru',
-    assets: ['NKN']
-  },
-  network: 'MainNet',
+  params: [{
+    address: 'NaUjKgf5vMuFt7Ffgfffcpc41uH3adx1jq',
+    contracts: ['NEO']
+  }],
+  network: 'N3TestNet',
 })
 .then((results: BalanceResults) => {
   Object.keys(results).forEach(address => {
     const balances = results[address];
     balances.forEach(balance => {
-      const { assetID, symbol, amount } = balance
+      const { contract, symbol, amount } = balance
 
       console.log('Address: ' + address);
-      console.log('Asset ID: ' + assetID);
-      console.log('Asset symbol: ' + symbol);
+      console.log('Contract: ' + contract);
+      console.log('Contract symbol: ' + symbol);
       console.log('Amount: ' + amount);
     });
   });
@@ -286,20 +309,20 @@ neoN3Dapi.getBalance({
 ```typescript
 // input
 {
-  params: {
-    address: 'AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru',
-    assets: ['NKN']
-  },
-  network: 'MainNet',
+  params: [{
+    address: 'NaUjKgf5vMuFt7Ffgfffcpc41uH3adx1jq',
+    contracts: ['GAS']
+  }],
+  network: 'N3TestNet',
 }
 
 // output
 {
-  AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru: [
+  NaUjKgf5vMuFt7Ffgfffcpc41uH3adx1jq: [
     {
-      assetID: 'c36aee199dbba6c3f439983657558cfb67629599',
-      symbol: 'NKN',
-      amount: '0.00000233',
+      contract: '0xd2a4cff31913016155e38e474a2c06d08be276cf',
+      symbol: 'GAS',
+      amount: '432.4085032',
     }
   ],
 }
@@ -311,33 +334,23 @@ neoN3Dapi.getBalance({
 // input
 {
   params: {
-    address: 'AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru',
+    address: 'NaUjKgf5vMuFt7Ffgfffcpc41uH3adx1jq'
   },
-  network: 'MainNet',
+  network: 'N3TestNet',
 }
 
 // output
 {
-  AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru: [
+  NaUjKgf5vMuFt7Ffgfffcpc41uH3adx1jq: [
     {
-      assetID: 'c56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b',
+      contract: '0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5',
       symbol: 'NEO',
-      amount: '10',
+      amount: '0',
     },
     {
-      assetID: '602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7',
+      contract: '0xd2a4cff31913016155e38e474a2c06d08be276cf',
       symbol: 'GAS',
-      amount: '777.0001',
-    },
-    {
-      assetID: 'c36aee199dbba6c3f439983657558cfb67629599',
-      symbol: 'NKN',
-      amount: '0.00000233',
-    },
-    {
-      assetID: 'fc732edee1efdf968c23c20a9628eaa5a6ccb934',
-      symbol: 'NNC',
-      amount: '2000',
+      amount: '432.4085032',
     }
   ]
 }
@@ -350,69 +363,60 @@ neoN3Dapi.getBalance({
 {
   params: [
     {
-      address: 'AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru',
+      address: 'NaUjKgf5vMuFt7Ffgfffcpc41uH3adx1jq',
     },
     {
-      address: 'AbKNY45nRDy6B65YPVz1B6YXiTnzRqU2uQ',
-      assets: ['PHX'],
+      address: 'NYMeJFcVKEkvG3Q89eBQCXqrYLHz4kTAdQ',
+      contracts: ['NEO'],
     },
   ],
-  network: 'MainNet',
+  network: 'N3TestNet',
 }
 
 // output
 {
-  AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru: [
+  NaUjKgf5vMuFt7Ffgfffcpc41uH3adx1jq: [
     {
-      assetID: 'c56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b',
-      symbol: 'NEO',
-      amount: '10',
+      contract: "0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5",
+      symbol: "NEO",
+      amount: "0"
     },
     {
-      assetID: '602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7',
-      symbol: 'GAS',
-      amount: '777.0001',
-    },
-    {
-      assetID: 'c36aee199dbba6c3f439983657558cfb67629599',
-      symbol: 'NKN',
-      amount: '0.00000233',
-    },
-    {
-      assetID: 'fc732edee1efdf968c23c20a9628eaa5a6ccb934',
-      symbol: 'NNC',
-      amount: '2000',
+      contract: "0xd2a4cff31913016155e38e474a2c06d08be276cf",
+      symbol: "GAS",
+      amount: "432.4085032"
     }
   ],
-  AbKNY45nRDy6B65YPVz1B6YXiTnzRqU2uQ: [
+  NYMeJFcVKEkvG3Q89eBQCXqrYLHz4kTAdQ: [
     {
-      assetID: '1578103c13e39df15d0d29826d957e85d770d8c9',
-      symbol: 'PHX',
-      amount: '11000',
+      contract: "0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5",
+      symbol: "NEO",
+      amount: "52"
     }
   ]
 }
 ```
 
-
-Allows the DAPP to query the balance of a user, this includes both native assets (NEO/GAS) and NEP-5 tokens
+Allows the DAPP to query the balance of a user, this includes both native assets (NEO/GAS) and NEP-17 tokens
 
 ##### Input Arguments
+
 | Parameter | Type                               | Description                                                                              |
-|:--------- |:---------------------------------- |:---------------------------------------------------------------------------------------- |
+|:----------|:-----------------------------------|:-----------------------------------------------------------------------------------------|
 | params    | BalanceRequest or BalanceRequest[] | A list of Balance Request Objects, specifying which addresses, and which assets to query |
 | network   | String                             | The call will only work for the networks available in the GetNetworks command            |
 
 ###### Balance Request
-| Parameter  | Type     | Description                                                                   |
-|:---------- |:-------- |:----------------------------------------------------------------------------- |
-| address    | String   | The address whose balance you want to query                                   |
-| assets     | String[] | A list of contract hash (or symbold on MainNet only) to query the balance for |
-| fetchUTXO? | boolean  | The response will fetch NEO and GAS UTXO's if this attribute is true          |
+
+| Parameter | Type     | Description                                                   |
+|:----------|:---------|:--------------------------------------------------------------|
+| address   | String   | The address whose balance you want to query                   |
+| contracts | String[] | A list of contract hash (or symbold) to query the balance for |
 
 ##### Success Response
+
 | Parameter | Type              | Description                                                                          |
-|:--------- |:----------------- |:------------------------------------------------------------------------------------ |
+|:----------|:------------------|:-------------------------------------------------------------------------------------|
 | address_1 | BalanceResponse[] | This key is the actual address of the query eg. "AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru" |
 | address_2 | BalanceResponse[] | This key is the actual address of the query eg. "AbKNY45nRDy6B65YPVz1B6YXiTnzRqU2uQ" |
 | address_n | BalanceResponse[] | This key is the actual address of the query eg. "AUdawyrLMskxXMUE8osX9mSLKz8R7777kE" |
@@ -421,32 +425,21 @@ Allows the DAPP to query the balance of a user, this includes both native assets
 The amount of addresses is n where n is the number of addresses specified in your query
 </aside>
 
-
 ###### BalanceResponse
-| Parameter | Type    | Description                                                                                          |
-|:--------- |:------- |:---------------------------------------------------------------------------------------------------- |
-| assetID   | String  | ID of the given asset                                                                                |
-| symbol    | String  | Symbol of the given asset                                                                            |
-| amount    | String  | Double Value of the balance represented as a String                                                  |
-| unspent   | UTXO[]? | If fetch utxo's was turned on then the utxo array will be returned for the native assets NEO and GAS |
 
-###### UTXO
-| Parameter      | Type   | Description                                                           |
-|:-------------- |:------ |:--------------------------------------------------------------------- |
-| asset          | String | Script hash of the native asset                                       |
-| createdAtBlock | String | Block number where this utxo was created                              |
-| index          | Int    | Output index of the UTXO relative to the txid in which it was created |
-| txid           | String | The transaction id of this UTXO                                       |
-| value          | String | The double value of this UTXO represented as a String                 |
-
+| Parameter | Type   | Description                                         |
+|:----------|:-------|:----------------------------------------------------|
+| contract  | String | contract of the given hash                          |
+| symbol    | String | Symbol of the given contract                        |
+| amount    | String | Double Value of the balance represented as a String |
 
 ### getStorage
 
 ```typescript
 neoN3Dapi.getStorage({
-  scriptHash: '505663a29d83663a838eee091249abd167e928f5',
-  key: 'game.status',
-  network: 'TestNet'
+  scriptHash: '006b26dd0d2aa076b11082847a094772450f05af',
+  key: 'token0',
+  network: 'N3TestNet'
 })
 .then(res => {
   const value = res.result;
@@ -471,28 +464,30 @@ neoN3Dapi.getStorage({
 
 ```typescript
 {
-  result: 'hello world'
+  result: 'wYCMqLCTIUiax57E8Zd/O9xN3l8='
 }
 ```
-
 
 Returns the raw value located in contract storage
 
 ##### Input Arguments
+
 | Parameter  | Type   | Description                                                  |
-|:---------- |:------ |:------------------------------------------------------------ |
+|:-----------|:-------|:-------------------------------------------------------------|
 | scriptHash | String | Scripthash of the contract whose storage you are querying on |
 | key        | String | Key of the storage value to retrieve from the contract       |
 | network    | String | Network alias to submit this request to.                     |
 
 ##### Success Response
+
 | Parameter | Type   | Description                               |
-|:--------- |:------ |:----------------------------------------- |
+|:----------|:-------|:------------------------------------------|
 | result    | String | The raw value located in contract storage |
 
 ##### Error Response
+
 | Parameter   | Type    | Description                                  |
-|:----------- |:------- |:-------------------------------------------- |
+|:------------|:--------|:---------------------------------------------|
 | type        | String  | The type of error which has occured          |
 | description | String? | A description of the error which has occured |
 | data        | String? | Any raw data associated with the error       |
@@ -501,19 +496,15 @@ Returns the raw value located in contract storage
 
 ```typescript
 neoN3Dapi.invokeRead({
-  scriptHash: '505663a29d83663a838eee091249abd167e928f5',
-  operation: 'calculatorAdd',
+  scriptHash: "0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5",
+  operation: "balanceOf",
   args: [
     {
-      type: neoN3Dapi.Constants.ArgumentDataType.INTEGER,
-      value: 2
-    },
-    {
-      type: neoN3Dapi.Constants.ArgumentDataType.INTEGER,
-      value: 10
+      type: "Address",
+      value: "NYxb4fSZVKAz8YsgaPK2WkT3KcAE9b3Vag"
     }
   ],
-  network: 'PrivNet'
+  network: "N3TestNet"
 })
 .then((result: Object) => {
   console.log('Read invocation result: ' + JSON.stringify(result));
@@ -537,13 +528,14 @@ neoN3Dapi.invokeRead({
 
 ```typescript
 {
-  script: '8h89fh398f42f.....89hf2894hf9834',
-  state: 'HALT, BREAK',
-  gas_consumed: '0.13',
-  stack: [
+  "script": "DBSPGGqUKpybpotgzGQ8Z+jwK4ovdhHAHwwJYmFsYW5jZU9mDBT1Y+pAvCg9TQ4FxI6jBbPyoHNA70FifVtS",
+  "state": "HALT",
+  "gasconsumed": "2028330",
+  "exception": null,
+  "stack": [
     {
-      type: 'Integer',
-      value: '1337'
+      "type": "Integer",
+      "value": "48929339"
     }
   ]
 }
@@ -552,16 +544,19 @@ neoN3Dapi.invokeRead({
 Execute a contract invocation in read-only mode.
 
 ##### Input Arguments
+
 | Parameter  | Type       | Description                                                                                              |
-|:---------- |:---------- |:-------------------------------------------------------------------------------------------------------- |
+|:-----------|:-----------|:---------------------------------------------------------------------------------------------------------|
 | scriptHash | String     | The script hash of the contract you want to invoke a read on                                             |
 | operation  | String     | The operation on the smart contract that you want to invoke a read on                                    |
 | args       | Argument[] | The input arguments necessary to perform this operation                                                  |
+| signers    | Signers[]? | Sender and the effective scope of signature                                                              |
 | network    | String     | Network alias to submit this request to. If omitted, will default the network which the wallet is set to |
 
 ###### Argument
+
 | Parameter | Type   | Description                                               |
-|:--------- |:------ |:--------------------------------------------------------- |
+|:----------|:-------|:----------------------------------------------------------|
 | type      | String | The type of the argument with you are using               |
 | value     | String | String representation of the argument which you are using |
 
@@ -569,31 +564,195 @@ Execute a contract invocation in read-only mode.
 Available types are "String"|"Boolean"|"Hash160"|"Hash256"|"Integer"|"ByteArray"|"Array"|"Address"
 </aside>
 
+###### Signers
+
+| Parameter        | Type   | Description                                      |
+|:-----------------|:-------|:-------------------------------------------------|
+| account          | String | Script hash of the account                       |
+| scopes           | Number | Effective range of the signature                 |
+| allowedContracts | Array? | Signs array of the allowed contract scripts      |
+| allowedGroups    | Array? | Signs public keys of the allowed contract groups |
+
+###### Scopes
+
+| Field | Description                                                                                            |
+|:------|:-------------------------------------------------------------------------------------------------------|
+| 0     | The signature is used for transactions only, and is disabled in contracts                              |
+| 1     | The signature is only effective to the contract script called by Entry                                 |
+| 16    | The signature is only effective to the specified contract script                                       |
+| 32    | The signature is effective to contracts in the group.                                                  |
+| 128   | The signature is globally effective. It is the default value of Neo Legacy and is backward compatible. |
+
 ##### Success Response
+
 The wallet will return the direct response from the RPC node.
 
 | Parameter    | Type       | Description                                                                                   |
-|:------------ |:---------- |:--------------------------------------------------------------------------------------------- |
+|:-------------|:-----------|:----------------------------------------------------------------------------------------------|
 | script       | String     | The script which was run                                                                      |
 | state        | String     | Status of the executeion                                                                      |
 | gas_consumed | String     | Estimated amount of GAS to be used to execute the invocation. (Up to 10 free per transaction) |
 | stack        | Argument[] | An array of response arguments                                                                |
 
 ##### Error Response
+
 | Parameter   | Type    | Description                                  |
-|:----------- |:------- |:-------------------------------------------- |
+|:------------|:--------|:---------------------------------------------|
 | type        | String  | The type of error which has occured          |
 | description | String? | A description of the error which has occured |
 | data        | String? | Any raw data associated with the error       |
 
+### invokeReadMulti
+
+```typescript
+neoN3Dapi.invokeReadMulti({
+  invokeReadArgs: [
+    {
+      scriptHash: "0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5",
+      operation: "balanceOf",
+      args: [
+        {
+          type: "Address",
+          value: "NYxb4fSZVKAz8YsgaPK2WkT3KcAE9b3Vag"
+        }
+      ]
+    },
+    {
+      scriptHash: "0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5",
+      operation: "balanceOf",
+      args: [
+        {
+          type: "Address",
+          value: "NZHf1NJvz1tvELGLWZjhpb3NqZJFFUYpxT"
+        }
+      ]
+    }
+  ],
+  network: "N3TestNet"
+})
+.then((result: Object) => {
+  console.log('Read invocation result: ' + JSON.stringify(result));
+})
+.catch(({type: string, description: string, data: any}) => {
+  switch(type) {
+    case NO_PROVIDER:
+      console.log('No provider available.');
+      break;
+    case CONNECTION_REFUSED:
+      console.log('Connection dApp not connected. Please call the "connect" function.');
+      break;
+   case RPC_ERROR:
+    console.log('There was an error when broadcasting this transaction to the network.');
+    break;
+  }
+});
+```
+
+> Example Response
+
+```typescript
+[
+  {
+    "script": "DBSPGGqUKpybpotgzGQ8Z+jwK4ovdhHAHwwJYmFsYW5jZU9mDBT1Y+pAvCg9TQ4FxI6jBbPyoHNA70FifVtS",
+    "state": "HALT",
+    "gasconsumed": "2028330",
+    "exception": null,
+    "stack": [
+      {
+        "type": "Integer",
+        "value": "48929339"
+      }
+    ]
+  },
+  {
+    "script": "DBSSs5x3qmDym1fBc87ZF/F/0yGm6xHAHwwJYmFsYW5jZU9mDBT1Y+pAvCg9TQ4FxI6jBbPyoHNA70FifVtS",
+    "state": "HALT",
+    "gasconsumed": "2028330",
+    "exception": null,
+    "stack": [
+      {
+        "type": "Integer",
+        "value": "15000000"
+      }
+    ]
+  }
+]
+```
+
+Execute a contract invocation in read-only mode.
+
+##### Input Arguments
+
+| Parameter  | Type       | Description                                                                                              |
+|:-----------|:-----------|:---------------------------------------------------------------------------------------------------------|
+| invokeReadArgs | InvokeReadArguments[]     | The script hash of the contract you want to invoke a read on                               |
+| signers        | Signers[]  | Sender and the effective scope of signature                                                          |
+| network    | String     | Network alias to submit this request to. If omitted, will default the network which the wallet is set to |
+
+###### InvokeReadArguments
+
+| Parameter  | Type       | Description                                                                                              |
+|:-----------|:-----------|:---------------------------------------------------------------------------------------------------------|
+| scriptHash | String     | The script hash of the contract you want to invoke a read on                                             |
+| operation  | String     | The operation on the smart contract that you want to invoke a read on                                    |
+| args       | Argument[] | The input arguments necessary to perform this operation                                                  |
+
+###### Argument
+
+| Parameter | Type   | Description                                               |
+|:----------|:-------|:----------------------------------------------------------|
+| type      | String | The type of the argument with you are using               |
+| value     | String | String representation of the argument which you are using |
+
+<aside class =notice>
+Available types are "String"|"Boolean"|"Hash160"|"Hash256"|"Integer"|"ByteArray"|"Array"|"Address"
+</aside>
+
+###### Signers
+
+| Parameter        | Type   | Description                                      |
+|:-----------------|:-------|:-------------------------------------------------|
+| account          | String | Script hash of the account                       |
+| scopes           | Number | Effective range of the signature                 |
+| allowedContracts | Array? | Signs array of the allowed contract scripts      |
+| allowedGroups    | Array? | Signs public keys of the allowed contract groups |
+
+###### Scopes
+
+| Field | Description                                                                                            |
+|:------|:-------------------------------------------------------------------------------------------------------|
+| 0     | The signature is used for transactions only, and is disabled in contracts                              |
+| 1     | The signature is only effective to the contract script called by Entry                                 |
+| 16    | The signature is only effective to the specified contract script                                       |
+| 32    | The signature is effective to contracts in the group.                                                  |
+| 128   | The signature is globally effective. It is the default value of Neo Legacy and is backward compatible. |
+
+##### Success Response
+
+The wallet will return the direct response from the RPC node.
+
+| Parameter    | Type       | Description                                                                                   |
+|:-------------|:-----------|:----------------------------------------------------------------------------------------------|
+| script       | String     | The script which was run                                                                      |
+| state        | String     | Status of the executeion                                                                      |
+| gas_consumed | String     | Estimated amount of GAS to be used to execute the invocation. (Up to 10 free per transaction) |
+| stack        | Argument[] | An array of response arguments                                                                |
+
+##### Error Response
+
+| Parameter   | Type    | Description                                  |
+|:------------|:--------|:---------------------------------------------|
+| type        | String  | The type of error which has occured          |
+| description | String? | A description of the error which has occured |
+| data        | String? | Any raw data associated with the error       |
 
 ### verifyMessage
 
 ```typescript
 neoN3Dapi.verifyMessage({
-  message: '058b9e03e7154e4db1e489c99256b7faHello World!',
-  data: '0147fb89d0999e9d8a90edacfa26152fe695ec8b3770dcad522048297ab903822e12472364e254ff2e088fc3ebb641cc24722c563ff679bb1d1623d08bd5863d0d',
-  publicKey: '0241392007396d6ef96159f047967c5a61f1af0871ecf9dc82afbedb68afbb949a',
+  message: '15c06345eebb49cdbc14421e03491951Here is a message',
+  data: '7249925b8813e21fdfdd8c08d6b6c45c49c813e59c9cf64eec9a2d1b096c85baa874fb0b6eefc3f6c553a0b4f95c8c651607a7a416986c216f7175f45956d522',
+  publicKey: '027b18c5aaae6a66ce8ab1a41f0ea0db4ec5bb5d6501d51c86cc994aca5275a461',
 })
 .then(({result: bool}) => {
   console.log('Signature data matches provided message and public key: ' + result);
@@ -623,7 +782,7 @@ Returns whether the provided signature data matches the provided message and was
 ##### Input Arguments
 
 | Parameter | Type   | Description                                            |
-|:--------- |:------ |:------------------------------------------------------ |
+|:----------|:-------|:-------------------------------------------------------|
 | message   | String | The original signed message                            |
 | data      | String | The signature data                                     |
 | publicKey | String | The public key of the account used to sign the message |
@@ -631,12 +790,12 @@ Returns whether the provided signature data matches the provided message and was
 ##### Success Response
 
 | Parameter | Type    | Description                                                                |
-|:--------- |:------- |:-------------------------------------------------------------------------- |
+|:----------|:--------|:---------------------------------------------------------------------------|
 | result    | Boolean | Whether the provided signature matches the provided message and public key |
 
 ##### Error Response
 | Parameter   | Type    | Description                                   |
-|:----------- |:------- |:--------------------------------------------- |
+|:------------|:--------|:----------------------------------------------|
 | type        | String  | The type of error which has occurred          |
 | description | String  | A description of the error which has occurred |
 | data        | String? | Any raw data associated with the error        |
@@ -645,8 +804,8 @@ Returns whether the provided signature data matches the provided message and was
 
 ```typescript
 neoN3Dapi.getBlock({
-  blockHeight: 2619690,
-  network: 'TestNet'
+  blockHeight: 100,
+  network: 'N3TestNet'
 })
 .then((result: Object) => {
   console.log('Block information: ' + JSON.stringify(result));
@@ -669,63 +828,53 @@ Get information about a specific block.
 
 ```typescript
 {
-  "hash": "0xc1668a114ee680597196ed402a0e0507fd8348e6090a54250d7accfadbd74b6e",
-  "size": 686,
+  "hash": "0x881e36beda53f6e354516058cad52f26ba9c04e6e05eac8f61d0df25227a673b",
+  "size": 689,
   "version": 0,
-  "previousblockhash": "0xbae289c94e17ae90022673186fd6e1e48b7dd7afb89319bff0e2832db06d16b3",
-  "merkleroot": "0x07d70f7337d3869a7daa538425d78a47212fb8c6130d66d84ac48526853a4e51",
-  "time": 1557376153,
-  "index": 2619690,
-  "nonce": "8efd62ebb85ee68b",
-  "nextconsensus": "AWZo4qAxhT8fwKL93QATSjCYCgHmCY1XLB",
-  "script": {
-    "invocation": "402a1dab9e5593d1d7d2a22a36772d4541b8053d33f8b8474b7d5a20066c1bd821e051fc252ed16146930d55ecb17fbb74972fba4c4b27af81a707999ca1313dd2401520eba2dd3b54a74a798cbb716c484ba6f6f21218f099e3d622a0fbd15989f38f9b0b344daf9b89175055d3a92f49df65118e8598735d651bedd4f1811baeb140e6491c03f3057f404d2fe7db50e40e82ade405a9dc7fccd81f4ba0b499a4a29f8570d631b8d40c5995b17d9391fe9ff8c73f28a4e1eb922b7a1ce9d1a5dc0448402cfcdede54828875d45402120aa2d8f78c7bd40df5e5d3b1873fd7e4d03672ebd0904f90c90fa519c623968f55550ae55374de66dc0db9c9d865c593bb95be5640214db0cd3cea6f4ad866df4129d482b89583805d1bdb08ce8399881e70351778a3e4a4093cf69aa7b99b83347fbfd38d85ff45d6a78ca2ab8cacffbfbc8c2d16",
-    "verification": "5521030ef96257401b803da5dd201233e2be828795672b775dd674d69df83f7aec1e36210327da12b5c40200e9f65569476bbff2218da4f32548ff43b6387ec1416a231ee821025bdf3f181f53e9696227843950deb72dcd374ded17c057159513c3d0abe20b64210266b588e350ab63b850e55dbfed0feeda44410a30966341b371014b803a15af0721026ce35b29147ad09e4afe4ec4a7319095f08198fa8babbe3c56e970b143528d222103c089d7122b840a4935234e82e26ae5efd0c2acb627239dc9f207311337b6f2c12103fd95a9cb3098e6447d0de9f76cc97fd5e36830f9c7044457c15a0e81316bf28f57ae"
-  },
-  "tx": [
+  "previousblockhash": "0xbd40665daee6a2174b24628d5d7c3f94e488e51b0e3f1a416d6f870be68e7146",
+  "merkleroot": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "time": 1621309715037,
+  "index": 100,
+  "primary": 2,
+  "nextconsensus": "NZHf1NJvz1tvELGLWZjhpb3NqZJFFUYpxT",
+  "witnesses": [
     {
-      "txid": "0x07d70f7337d3869a7daa538425d78a47212fb8c6130d66d84ac48526853a4e51",
-      "size": 10,
-      "type": "MinerTransaction",
-      "version": 0,
-      "attributes": [],
-      "vin": [],
-      "vout": [],
-      "sys_fee": "0",
-      "net_fee": "0",
-      "scripts": [],
-      "nonce": 3093227147
+      "invocation": "DECgjHj1POZB2VcJLRYm6Q8aI3eafaSr/jU1f/hUKTB0DayFD4OR4X3n7coMj4ZHSJzmNS/UereRmGn8TgG/WGlWDEBYWZcda6ppsFJpG3u5Vj0YobqJHpWRSDq0Qg+1pE5xpkx66YVbFdYWfP/XWkAEd89gamNUhZiG03D0XdRyc6W+DECGGJCdl5ZREOojNqUpEe+ei7/6Vl9Yuj0xf3h+UOq9lZIrg4Ht0qGvDGSdKD6p2P9iN5yTRbYYpwKexfSNEc1dDEBGpAkyPGbrz+WrtkwYg3hn5leKYFMQpQbFRNd5uDQ6SFBFFSHLceJO/Iia2jD4PndYDmow5Xgj1yRapOR52jqpDEDjUTzO7v2FL8SxfWKA5Uf5LgVj6yQhf4S/A719sI43DtJp2JuSBC+oD8sHr2oZ3dD7MN+SD7QqPOYqW6ls3nYU",
+      "verification": "FQwhAwCbdUDhDyVi5f2PrJ6uwlFmpYsm5BI0j/WoaSe/rCKiDCEDAgXpzvrqWh38WAryDI1aokaLsBSPGl5GBfxiLIDmBLoMIQIUuvDO6jpm8X5+HoOeol/YvtbNgua7bmglAYkGX0T/AQwhAj6bMuqJuU0GbmSbEk/VDjlu6RNp6OKmrhsRwXDQIiVtDCEDQI3NQWOW9keDrFh+oeFZPFfZ/qiAyKahkg6SollHeAYMIQKng0vpsy4pgdFXy1u9OstCz9EepcOxAiTXpE6YxZEPGwwhAroscPWZbzV6QxmHBYWfriz+oT4RcpYoAHcrPViKnUq9F0Ge0Nw6"
     }
   ],
-  "confirmations": 70,
-  "nextblockhash": "0x2c9d6a107b21e83e09dd1b89df344a726895147d410120c46996290692ba29aa"
+  "tx": [],
+  "confirmations": 232520,
+  "nextblockhash": "0x6e4ccb0110b6e3d631b66ea45502253b0542be358aa6636ac202901e4da0c30c"
 }
 ```
 
 Execute a contract invocation in read-only mode.
 
 ##### Input Arguments
+
 | Parameter   | Type    | Description                                                                                              |
-|:----------- |:------- |:-------------------------------------------------------------------------------------------------------- |
+|:------------|:--------|:---------------------------------------------------------------------------------------------------------|
 | blockHeight | integer | The height of the block you would like to get information about.                                         |
 | network     | String  | Network alias to submit this request to. If omitted, will default the network which the wallet is set to |
 
 ##### Success Response
+
 The wallet will return the direct response from the RPC node.
 
 ##### Error Response
+
 | Parameter   | Type    | Description                                  |
-|:----------- |:------- |:-------------------------------------------- |
+|:------------|:--------|:---------------------------------------------|
 | type        | String  | The type of error which has occured          |
 | description | String? | A description of the error which has occured |
 | data        | String? | Any raw data associated with the error       |
-
 
 ### getBlockHeight
 
 ```typescript
 neoN3Dapi.getBlockHeight({
-  network: 'TestNet'
+  network: 'N3TestNet'
 })
 .then((res: {result: number}) => {
   console.log('Block height: ' + res.result);
@@ -748,36 +897,37 @@ Get the height of the current block.
 
 ```typescript
 {
-  "result": 2619690
+  "result": 232626
 }
 ```
 
 Execute a contract invocation in read-only mode.
 
 ##### Input Arguments
+
 | Parameter | Type   | Description                                                                                              |
-|:--------- |:------ |:-------------------------------------------------------------------------------------------------------- |
+|:----------|:-------|:---------------------------------------------------------------------------------------------------------|
 | network   | String | Network alias to submit this request to. If omitted, will default the network which the wallet is set to |
 
 ##### Success Response
+
 | Parameter | Type   | Description                 |
-|:--------- |:------ |:--------------------------- |
+|:----------|:-------|:----------------------------|
 | result    | Number | Height of the current block |
 
 ##### Error Response
 | Parameter   | Type    | Description                                  |
-|:----------- |:------- |:-------------------------------------------- |
+|:------------|:--------|:---------------------------------------------|
 | type        | String  | The type of error which has occured          |
 | description | String? | A description of the error which has occured |
 | data        | String? | Any raw data associated with the error       |
-
 
 ### getTransaction
 
 ```typescript
 neoN3Dapi.getTransaction({
-  txid: '7e049fd7c253dabf38e4156df30c78b30d49f307196aa89b99a47d2330789bf2',
-  network: 'TestNet'
+  txid: '0x3174b6a05a110986d09dfb418652fd454a1109db5b56feee382d9fa3c80231bd',
+  network: 'N3TestNet'
 })
 .then((result: Object) => {
   console.log('Transaction details: ' + JSON.stringify(result));
@@ -800,52 +950,51 @@ Get information about a specific transaction.
 
 ```typescript
 {
-  "txid": "0x7e049fd7c253dabf38e4156df30c78b30d49f307196aa89b99a47d2330789bf2",
-  "size": 556,
-  "type": "InvocationTransaction",
-  "version": 1,
-  "attributes": [
+  "hash": "0x3174b6a05a110986d09dfb418652fd454a1109db5b56feee382d9fa3c80231bd",
+  "size": 245,
+  "version": 0,
+  "nonce": 1053966309,
+  "sender": "NiULDRovMJYhFkUp6YLtiJYewk88ixDcjf",
+  "sysfee": "9977780",
+  "netfee": "1228520",
+  "validuntilblock": 50294,
+  "signers": [
     {
-      "usage": "Script",
-      "data": "296ac124021a71c449a9bad320c16429b08ad6ee"
-    },
-    {
-      "usage": "Remark",
-      "data": "cbb549adec34d741"
+      "account": "0x935ce5f249ac2771a3e9ec4b89934d6ecba171f7",
+      "scopes": "CalledByEntry"
     }
   ],
-  "vin": [],
-  "vout": [],
-  "sys_fee": "0",
-  "net_fee": "0",
-  "scripts": [
+  "attributes": [],
+  "script": "CxEMFIU5Il4pKR6Kf5xyOLaNS67/1PekDBT3caHLbk2TiUvs6aNxJ6xJ8uVckxTAHwwIdHJhbnNmZXIMFPVj6kC8KD1NDgXEjqMFs/Kgc0DvQWJ9W1I5",
+  "witnesses": [
     {
-      "invocation": "4072b83e8aca62c27dc36b032b895e757db00620384e26f43cd0ecc9904bff1e652dd94a03226d6dcb0b6f91104cb40be6455aa0fc3b474a8a8e5fa43ff4b10b8d40af726dc0976f15cd8a134634074c5613ab1e59979fec37b611392975c92afa11038fd9d96ddfb306df12ae200dc3c15fa17cb9530389e28f090fd8c9721c3307",
-      "verification": "53c56b6c766b00527ac46c766b51527ac4616c766b00c36121022949376faacb0c6783da8ab63548926cb3a2e8d786063a449833f927fa8853f0ac642f006c766b51c361210292a25f5f0772d73d3fb50d42bb3cb443505b15e106789d19efa4d09c5ddca756ac635f006c766b00c361210292a25f5f0772d73d3fb50d42bb3cb443505b15e106789d19efa4d09c5ddca756ac642f006c766b51c36121022949376faacb0c6783da8ab63548926cb3a2e8d786063a449833f927fa8853f0ac62040000620400516c766b52527ac46203006c766b52c3616c7566"
+      "invocation": "DECrDdebDa4YkryS+q0Xx3arFzxZQVLG3YMLOA0i8v68kHobxjPhS00Ap70rT6fcr/0DrKAHgNaLGjDu+1HAvKbp",
+      "verification": "DCEDuu8/R9rBJRzfJjOTME436fyss95SjCMzSXeqYPvY8sxBVuezJw=="
     }
   ],
-  "script": "0400e1f505147869ef9732cdf6f6d54adaa5cae3b55a9396bceb14296ac124021a71c449a9bad320c16429b08ad6ee53c1087472616e7366657267f1dfcf0051ec48ec95c8d0569e0b95075d099d84f10400e1f50514b1fdddf658ce5ff9f83e66ede2f333ecfcc0463e14296ac124021a71c449a9bad320c16429b08ad6ee53c1087472616e7366657267f1dfcf0051ec48ec95c8d0569e0b95075d099d84f1",
-  "gas": "0",
-  "blockhash": "0x4ea57fe267a392933d2b03fa733fbf1fa12c13f7e8ae2051e45465800e1a7cdb",
-  "confirmations": 9,
-  "blocktime": 1557377749
+  "blockhash": "0xb60a9a4ffe6fb097b3c253ee52a9b396316d486f3c0fb4a8ea9e1698ab620444",
+  "confirmations": 188093,
+  "blocktime": 1622015624544
 }
 ```
 
 Execute a contract invocation in read-only mode.
 
 ##### Input Arguments
+
 | Parameter | Type   | Description                                                                                              |
-|:--------- |:------ |:-------------------------------------------------------------------------------------------------------- |
+|:----------|:-------|:---------------------------------------------------------------------------------------------------------|
 | txid      | String | The id of the transaction you would like to get information about.                                       |
 | network   | String | Network alias to submit this request to. If omitted, will default the network which the wallet is set to |
 
 ##### Success Response
+
 The wallet will return the direct response from the RPC node.
 
 ##### Error Response
+
 | Parameter   | Type    | Description                                  |
-|:----------- |:------- |:-------------------------------------------- |
+|:------------|:--------|:---------------------------------------------|
 | type        | String  | The type of error which has occured          |
 | description | String? | A description of the error which has occured |
 | data        | String? | Any raw data associated with the error       |
@@ -854,8 +1003,8 @@ The wallet will return the direct response from the RPC node.
 
 ```typescript
 neoN3Dapi.getApplicationLog({
-  txid: '7e049fd7c253dabf38e4156df30c78b30d49f307196aa89b99a47d2330789bf2',
-  network: 'TestNet'
+  txid: '0x3174b6a05a110986d09dfb418652fd454a1109db5b56feee382d9fa3c80231bd',
+  network: 'N3TestNet'
 })
 .then((result: Object) => {
   console.log('Application log of transaction execution: ' + JSON.stringify(result));
@@ -878,59 +1027,52 @@ Get the application log for a given transaction.
 
 ```typescript
 {
-  "txid": "0x7e049fd7c253dabf38e4156df30c78b30d49f307196aa89b99a47d2330789bf2",
+  "txid": "0x3174b6a05a110986d09dfb418652fd454a1109db5b56feee382d9fa3c80231bd",
   "executions": [
     {
       "trigger": "Application",
-      "contract": "0x72985e7f2cea98b89af54d8607bc6400814c4b45",
       "vmstate": "HALT",
-      "gas_consumed": "5.292",
+      "exception": null,
+      "gasconsumed": "9977780",
       "stack": [],
       "notifications": [
         {
-          "contract": "0x849d095d07950b9e56d0c895ec48ec5100cfdff1",
+          "contract": "0xd2a4cff31913016155e38e474a2c06d08be276cf",
+          "eventname": "Transfer",
           "state": {
             "type": "Array",
             "value": [
               {
-                "type": "ByteArray",
-                "value": "7472616e73666572"
+                "type": "Any"
               },
               {
-                "type": "ByteArray",
-                "value": "296ac124021a71c449a9bad320c16429b08ad6ee"
+                "type": "ByteString",
+                "value": "93Ghy25Nk4lL7OmjcSesSfLlXJM="
               },
               {
-                "type": "ByteArray",
-                "value": "7869ef9732cdf6f6d54adaa5cae3b55a9396bceb"
-              },
-              {
-                "type": "ByteArray",
-                "value": "00e1f505"
+                "type": "Integer",
+                "value": "1100000"
               }
             ]
           }
         },
         {
-          "contract": "0x849d095d07950b9e56d0c895ec48ec5100cfdff1",
+          "contract": "0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5",
+          "eventname": "Transfer",
           "state": {
             "type": "Array",
             "value": [
               {
-                "type": "ByteArray",
-                "value": "7472616e73666572"
+                "type": "ByteString",
+                "value": "93Ghy25Nk4lL7OmjcSesSfLlXJM="
               },
               {
-                "type": "ByteArray",
-                "value": "296ac124021a71c449a9bad320c16429b08ad6ee"
+                "type": "ByteString",
+                "value": "hTkiXikpHop/nHI4to1Lrv/U96Q="
               },
               {
-                "type": "ByteArray",
-                "value": "b1fdddf658ce5ff9f83e66ede2f333ecfcc0463e"
-              },
-              {
-                "type": "ByteArray",
-                "value": "00e1f505"
+                "type": "Integer",
+                "value": "1"
               }
             ]
           }
@@ -944,17 +1086,20 @@ Get the application log for a given transaction.
 Execute a contract invocation in read-only mode.
 
 ##### Input Arguments
+
 | Parameter | Type   | Description                                                                                              |
-|:--------- |:------ |:-------------------------------------------------------------------------------------------------------- |
+|:----------|:-------|:---------------------------------------------------------------------------------------------------------|
 | txid      | String | The id of the transaction you would like to get the application logs for.                                |
 | network   | String | Network alias to submit this request to. If omitted, will default the network which the wallet is set to |
 
 ##### Success Response
+
 The wallet will return the direct response from the RPC node.
 
 ##### Error Response
+
 | Parameter   | Type    | Description                                  |
-|:----------- |:------- |:-------------------------------------------- |
+|:------------|:--------|:---------------------------------------------|
 | type        | String  | The type of error which has occured          |
 | description | String? | A description of the error which has occured |
 | data        | String? | Any raw data associated with the error       |
@@ -967,13 +1112,12 @@ Write methods will alter the state on the blockchain, and require a user signatu
 
 ```typescript
 neoN3Dapi.send({
-  fromAddress: 'ATaWxfUAiBcQixNPq6TvKHEHPQum9bx79d',
-  toAddress: 'ATaWxfUAiBcQixNPq6TvKHEHPQum9bx79d',
-  asset: 'GAS',
-  amount: '0.0001',
-  remark: 'Hash puppy clothing purchase. Invoice#abc123',
+  fromAddress: 'NfuwpaQ1A2xaeVbxWe8FRtaRgaMa8yF3YM',
+  toAddress: 'NYMeJFcVKEkvG3Q89eBQCXqrYLHz4kTAdQ',
+  asset: 'NEO',
+  amount: '1',
   fee: '0.0001',
-  network: 'MainNet',
+  network: 'N3TestNet',
   broadcastOverride: false,
 })
 .then(({txid, nodeUrl}: SendOutput) => {
@@ -1007,20 +1151,20 @@ neoN3Dapi.send({
 ```typescript
 {
   txid: 'ed54fb38dff371be6e3f96e4880405758c07fe6dd1295eb136fe15f311e9ff77',
-  nodeUrl: 'http://seed7.ngd.network:10332',
+  nodeUrl: 'https://neo3-testnet.o3node.org',
 }
 ```
 
 The send API can be used for accepting payments from the user in a cryptocurrency that is located on the NEO blockchain. It requires user authentication in order for the transaction to be relayed. The transaction will be relayed by the wallet.
 
 ##### Input Arguments
+
 | Parameter         | Type     | Description                                                                                                                                        |
-|:----------------- |:-------- |:-------------------------------------------------------------------------------------------------------------------------------------------------- |
+|:------------------|:---------|:---------------------------------------------------------------------------------------------------------------------------------------------------|
 | fromAddress       | String   | The address from where the transaction is being sent. This will be the same value as the one received from the getAccount API                      |
 | toAddress         | String   | The address to where the user should send their funds                                                                                              |
 | asset             | String   | The asset which is being requested for payment...e.g NEP5 scripHash, GAS or CGAS                                                                   |
 | amount            | String   | The amount which is being requested for payment                                                                                                    |
-| remark            | String?  | A transaction attribute remark which may be placed in the transaction, this data will appear in the transaction record on the blockchain           |
 | fee               | String?  | If a fee is specified then the wallet SHOULD NOT override it, if a fee is not specified the wallet SHOULD allow the user to attach an optional fee |
 | network           | String   | Network alias to submit this request to.                                                                                                           |
 | broadcastOverride | Boolean? | If this flag is set to True, the wallet provider will return the signed transaction rather than broadcasting to a node.                            |
@@ -1030,7 +1174,7 @@ The send API can be used for accepting payments from the user in a cryptocurrenc
 In the case where the "broadcastOverride" input argument is not set, or set to false.
 
 | Parameter | Type   | Description                                                                   |
-|:--------- |:------ |:----------------------------------------------------------------------------- |
+|:----------|:-------|:------------------------------------------------------------------------------|
 | txid      | String | The transaction id of the send request which can be queried on the blockchain |
 | nodeURL   | String | The node to which the transaction was submitted to                            |
 
@@ -1041,43 +1185,51 @@ It is recommended that the DAPP take appropriate levels of risk prevention when 
 In the case where the "broadcastOverride" input argument is set to True.
 
 | Parameter | Type   | Description                                                                   |
-|:--------- |:------ |:----------------------------------------------------------------------------- |
+|:----------|:-------|:------------------------------------------------------------------------------|
 | txid      | String | The transaction id of the send request which can be queried on the blockchain |
 | signedTx  | String | The serialized signed transaction                                             |
 
-
 ##### Error Response
+
 | Parameter   | Type    | Description                                  |
-|:----------- |:------- |:-------------------------------------------- |
+|:------------|:--------|:---------------------------------------------|
 | type        | String  | The type of error which has occured          |
 | description | String? | A description of the error which has occured |
 | data        | String? | Any raw data associated with the error       |
 
 ### invoke
+
 ```typescript
 neoN3Dapi.invoke({
-  scriptHash: '505663a29d83663a838eee091249abd167e928f5',
-  operation: 'storeData',
+  scriptHash: 'ef4073a0f2b305a38ec4050e4d3d28bc40ea63f5',
+  operation: 'transfer',
   args: [
     {
-      type: neoN3Dapi.Constants.ArgumentDataType.STRING,
-      value: 'hello'
+      type: "Address",
+      value: "NfuwpaQ1A2xaeVbxWe8FRtaRgaMa8yF3YM"
+    },
+    {
+      type: "Address",
+      value: "NYMeJFcVKEkvG3Q89eBQCXqrYLHz4kTAdQ"
+    },
+    {
+      type: "Integer",
+      value: "1"
+    },
+    {
+      type: "String",
+      value: "NEO"
     }
   ],
-  attachedAssets: {
-    NEO: '100',
-    GAS: '0.0001',
-  },
   fee: '0.001',
-  network: 'TestNet',
+  network: 'N3TestNet',
   broadcastOverride: false,
-  txHashAttributes: [
+  signers: [
     {
-      type: 'Boolean',
-      value: true,
-      txAttrUsage: 'Hash1'
+      account: "0x85afbd7dcaa61d4ff1009912856abede476061db",
+      scopes: 128
     }
-  ]
+  ],
 })
 .then(({txid, nodeUrl}: InvokeOutput) => {
   console.log('Invoke transaction success!');
@@ -1104,29 +1256,28 @@ neoN3Dapi.invoke({
 ```typescript
 {
   txid: 'ed54fb38dff371be6e3f96e4880405758c07fe6dd1295eb136fe15f311e9ff77',
-  nodeUrl: 'http://seed7.ngd.network:10332',
+  nodeUrl: 'https://neo3-testnet.o3node.org',
 }:
 ```
 
 Invoke allows for the generic execution of smart contracts on behalf of the user. It is recommended to have a general understanding of the NEO blockchain, and to be able successfully use all other commands listed previously in this document before attempting a generic contract execution.
 
 ##### Input arguments
-| Parameter                   | Type                 | Description                                                                                                                                        |
-|:--------------------------- |:-------------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------- |
-| scriptHash                  | String               | The script hash of the contract that you wish to invoke                                                                                            |
-| operation                   | String               | The operation on the smart contract that you wish to call. This can be fetched from the contract ABI                                               |
-| args                        | Argument[]           | A list of arguments necessary to perform on the operation you wish to call                                                                         |
-| fee                         | String?              | If a fee is specified then the wallet SHOULD NOT override it, if a fee is not specified the wallet SHOULD allow the user to attach an optional fee |
-| network                     | String               | Network alias to submit this request to.                                                                                                           |
-| attachedAssets              | AttachedAssets?      | Describes the assets to attach with the smart contract, e.g. attaching assets to mint tokens during a token sale                                   |
-| assetIntentOverrides        | AssetIntentOverrides | Used to specify the exact UTXO's to use for attached assets. If this is provided fee and attachedAssets will be ignored                            |
-| triggerContractVerification | Boolean?             | Adds the instruction to invoke the contract verifican trigger                                                                                      |
-| broadcastOverride           | Boolean?             | If this flag is set to True, the wallet provider will return the signed transaction rather than broadcasting to a node.                            |
-| txHashAttributes            | TxHashAttribute[]?   | Optional list of tx attribute hash values to be added                                                                                              |
+
+| Parameter         | Type       | Description                                                                                                                                        |
+|:------------------|:-----------|:---------------------------------------------------------------------------------------------------------------------------------------------------|
+| scriptHash        | String     | The script hash of the contract that you wish to invoke                                                                                            |
+| operation         | String     | The operation on the smart contract that you wish to call. This can be fetched from the contract ABI                                               |
+| args              | Argument[] | A list of arguments necessary to perform on the operation you wish to call                                                                         |
+| fee               | String?    | If a fee is specified then the wallet SHOULD NOT override it, if a fee is not specified the wallet SHOULD allow the user to attach an optional fee |
+| network           | String     | Network alias to submit this request to.                                                                                                           |
+| broadcastOverride | Boolean?   | If this flag is set to True, the wallet provider will return the signed transaction rather than broadcasting to a node.                            |
+| signers           | Signers[]  | Sender and the effective scope of signature                                                                                                        |
 
 ###### Argument
+
 | Parameter | Type   | Description                                               |
-|:--------- |:------ |:--------------------------------------------------------- |
+|:----------|:-------|:----------------------------------------------------------|
 | type      | String | The type of the argument with you are using               |
 | value     | String | String representation of the argument which you are using |
 
@@ -1134,49 +1285,31 @@ Invoke allows for the generic execution of smart contracts on behalf of the user
 Available types are "String"|"Boolean"|"Hash160"|"Hash256"|"Integer"|"ByteArray"|"Array"|"Address"
 </aside>
 
-###### TxHashAttribute
-| Parameter   | Type   | Description                                               |
-|:----------- |:------ |:--------------------------------------------------------- |
-| type        | String | The type of the argument with you are using               |
-| value       | String | String representation of the argument which you are using |
-| txAttrUsage | String | Attribute usage value                                     |
+###### Signers
 
-<aside class =notice>
-Available txAttrUsages are Hash1'|'Hash2'|'Hash3'|'Hash4'|'Hash5'|'Hash6'|'Hash7'|'Hash8'|'Hash9'|'Hash10'|'Hash11'|'Hash12'|'Hash13'|'Hash14'|'Hash15'
-</aside>
+| Parameter        | Type   | Description                                      |
+|:-----------------|:-------|:-------------------------------------------------|
+| account          | String | Script hash of the account                       |
+| scopes           | Number | Effective range of the signature                 |
+| allowedContracts | Array? | Signs array of the allowed contract scripts      |
+| allowedGroups    | Array? | Signs public keys of the allowed contract groups |
 
-###### AttachedAssets
-| Parameter | Type    | Description                                            |
-|:--------- |:------- |:------------------------------------------------------ |
-| NEO       | String? | The amount of NEO to attach to the contract invocation |
-| GAS       | String? | The amount of GAS to attach to the contract invocation |
+###### Scopes
 
-###### AssetIntentOverrides
-| Parameter | Type          | Description                                        |
-|:--------- |:------------- |:-------------------------------------------------- |
-| inputs    | AssetInput[]  | A list of UTXO inputs to use for this transaction  |
-| outputs   | AssetOutput[] | A list of UTXO outputs to use for this transaction |
-
-###### AssetInput
-| Parameter | Type   | Description                                              |
-|:--------- |:------ |:-------------------------------------------------------- |
-| txid      | String | Transaction id to be used as input                       |
-| index     | String | Index of the UTXO, can be found from transaction details |
-
-###### AssetOutput
-| Parameter | Type   | Description                                                           |
-|:--------- |:------ |:--------------------------------------------------------------------- |
-| asset     | String | Asset of the UTXO                                                     |
-| address   | String | Address to receive the UTXO                                           |
-| value     | String | String representation of double or integer value to be used as output |
-
+| Field | Description                                                                                            |
+|:------|:-------------------------------------------------------------------------------------------------------|
+| 0     | The signature is used for transactions only, and is disabled in contracts                              |
+| 1     | The signature is only effective to the contract script called by Entry                                 |
+| 16    | The signature is only effective to the specified contract script                                       |
+| 32    | The signature is effective to contracts in the group.                                                  |
+| 128   | The signature is globally effective. It is the default value of Neo Legacy and is backward compatible. |
 
 ##### Success Response
 
 In the case where the "broadcastOverride" input argument is not set, or set to false.
 
 | Parameter | Type   | Description                                                                   |
-|:--------- |:------ |:----------------------------------------------------------------------------- |
+|:----------|:-------|:------------------------------------------------------------------------------|
 | txid      | String | The transaction id of the send request which can be queried on the blockchain |
 | nodeURL   | String | The node to which the transaction was submitted to                            |
 
@@ -1187,64 +1320,85 @@ It is recommended that the DAPP take appropriate levels of risk prevention when 
 In the case where the "broadcastOverride" input argument is set to True.
 
 | Parameter | Type   | Description                                                                   |
-|:--------- |:------ |:----------------------------------------------------------------------------- |
+|:----------|:-------|:------------------------------------------------------------------------------|
 | txid      | String | The transaction id of the send request which can be queried on the blockchain |
 | signedTx  | String | The serialized signed transaction                                             |
 
 ###### Set script transaction attribute 0x20 according to the following conditions:
+
 - If triggerContractVerification is set to true, set 0x20 to scriptHash of the contract being invoked
 - If there is no fee, attachedAssets, or 'assetIntentOverrides', set 0x20 to the users address
 - If there are assetIntentOverrides but none of the inputs belong to the user address, set 0x20 to user address
 
 ##### Error Response
+
 | Parameter   | Type    | Description                                  |
-|:----------- |:------- |:-------------------------------------------- |
+|:------------|:--------|:---------------------------------------------|
 | type        | String  | The type of error which has occured          |
 | description | String? | A description of the error which has occured |
 | data        | String? | Any raw data associated with the error       |
 
-
 ### invokeMulti
+
 ```typescript
 neoN3Dapi.invokeMulti({
   invokeArgs: [
     {
-      scriptHash: '505663a29d83663a838eee091249abd167e928f5',
-      operation: 'storeData',
+      scriptHash: "ef4073a0f2b305a38ec4050e4d3d28bc40ea63f5",
+      operation: "transfer",
       args: [
         {
-          type: neoN3Dapi.Constants.ArgumentDataType.STRING,
-          value: 'hello'
+          type: "Address",
+          value: "NfuwpaQ1A2xaeVbxWe8FRtaRgaMa8yF3YM"
+        },
+        {
+          type: "Address",
+          value: "NYMeJFcVKEkvG3Q89eBQCXqrYLHz4kTAdQ"
+        },
+        {
+          type: "Integer",
+          value: "1"
+        },
+        {
+          type: "String",
+          value: "NEO"
         }
-      ],
-      attachedAssets: {
-        NEO: '100',
-        GAS: '0.0001',
-      },
-      triggerContractVerification: true,
+      ]
     },
     {
-      scriptHash: '505663a29d83663a838eee091249abd167e928f5',
-      operation: 'purchaseTicket',
+      scriptHash: "ef4073a0f2b305a38ec4050e4d3d28bc40ea63f5",
+      operation: "transfer",
       args: [
         {
-          type: neoN3Dapi.Constants.ArgumentDataType.INTEGER,
-          value: '10'
+          type: "Address",
+          value: "NfuwpaQ1A2xaeVbxWe8FRtaRgaMa8yF3YM"
+        },
+        {
+          type: "Address",
+          value: "NYMeJFcVKEkvG3Q89eBQCXqrYLHz4kTAdQ"
+        },
+        {
+          type: "Integer",
+          value: "2"
+        },
+        {
+          type: "String",
+          value: "NEO"
         }
-      ],
+      ]
     }
   ],
-  fee: '0.001',
-  network: 'TestNet',
-  broadcastOverride: false,
-  txHashAttributes: [
+  signers: [
     {
-      type: neoN3Dapi.Constants.ArgumentDataType.BOOLEAN,
-      value: true,
-      txAttrUsage: 'Hash1'
+      account: "0x85afbd7dcaa61d4ff1009912856abede476061db",
+      scopes: 128
     }
-  ]
-})
+  ],
+  fee: "0.11",
+  network: "N3TestNet",
+  broadcastOverride: false
+}
+)
 .then(({txid, nodeUrl}: InvokeOutput) => {
   console.log('Invoke transaction success!');
   console.log('Transaction ID: ' + txid);
@@ -1270,34 +1424,34 @@ neoN3Dapi.invokeMulti({
 ```typescript
 {
   txid: 'ed54fb38dff371be6e3f96e4880405758c07fe6dd1295eb136fe15f311e9ff77',
-  nodeUrl: 'http://seed7.ngd.network:10332',
+  nodeUrl: 'https://neo3-testnet.o3node.org',
 }:
 ```
 
 Invoke Multi functions the same as Invoke, but accepts inputs to execute multiple invokes in the same transaction.
 
 ##### Input arguments
+
 | Parameter            | Type                 | Description                                                                                                                                        |
-|:-------------------- |:-------------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------- |
+|:---------------------|:---------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------|
 | fee                  | String?              | If a fee is specified then the wallet SHOULD NOT override it, if a fee is not specified the wallet SHOULD allow the user to attach an optional fee |
 | network              | String               | Network alias to submit this request to.                                                                                                           |
-| assetIntentOverrides | AssetIntentOverrides | Used to specify the exact UTXO's to use for attached assets. If this is provided fee and attachedAssets will be ignored                            |
 | invokeArgs           | InvokeArguments[]    | Array of contract invoke inputs                                                                                                                    |
 | broadcastOverride    | Boolean?             | If this flag is set to True, the wallet provider will return the signed transaction rather than broadcasting to a node.                            |
-| txHashAttributes     | TxHashAttribute[]?   | Optional list of tx attribute hash values to be added                                                                                              |
+| signers           | Signers[]  | Sender and the effective scope of signature                                                                                                        |
 
 ###### InvokeArguments
+
 | Parameter                   | Type            | Description                                                                                                      |
-|:--------------------------- |:--------------- |:---------------------------------------------------------------------------------------------------------------- |
+|:----------------------------|:----------------|:-----------------------------------------------------------------------------------------------------------------|
 | scriptHash                  | String          | The script hash of the contract that you wish to invoke                                                          |
 | operation                   | String          | The operation on the smart contract that you wish to call. This can be fetched from the contract ABI             |
 | args                        | Argument[]      | A list of arguments necessary to perform on the operation you wish to call                                       |
-| attachedAssets              | AttachedAssets? | Describes the assets to attach with the smart contract, e.g. attaching assets to mint tokens during a token sale |
-| triggerContractVerification | Boolean?        | Adds the instruction to invoke the contract verifican trigger                                                    |
 
 ###### Argument
+
 | Parameter | Type   | Description                                               |
-|:--------- |:------ |:--------------------------------------------------------- |
+|:----------|:-------|:----------------------------------------------------------|
 | type      | String | The type of the argument with you are using               |
 | value     | String | String representation of the argument which you are using |
 
@@ -1305,49 +1459,31 @@ Invoke Multi functions the same as Invoke, but accepts inputs to execute multipl
 Available types are "String"|"Boolean"|"Hash160"|"Hash256"|"Integer"|"ByteArray"|"Array"|"Address"
 </aside>
 
-###### TxHashAttribute
-| Parameter   | Type   | Description                                               |
-|:----------- |:------ |:--------------------------------------------------------- |
-| type        | String | The type of the argument with you are using               |
-| value       | String | String representation of the argument which you are using |
-| txAttrUsage | String | Attribute usage value                                     |
+###### Signers
 
-<aside class =notice>
-Available txAttrUsages are Hash1'|'Hash2'|'Hash3'|'Hash4'|'Hash5'|'Hash6'|'Hash7'|'Hash8'|'Hash9'|'Hash10'|'Hash11'|'Hash12'|'Hash13'|'Hash14'|'Hash15'
-</aside>
+| Parameter        | Type   | Description                                      |
+|:-----------------|:-------|:-------------------------------------------------|
+| account          | String | Script hash of the account                       |
+| scopes           | Number | Effective range of the signature                 |
+| allowedContracts | Array? | Signs array of the allowed contract scripts      |
+| allowedGroups    | Array? | Signs public keys of the allowed contract groups |
 
-###### AttachedAssets
-| Parameter | Type    | Description                                            |
-|:--------- |:------- |:------------------------------------------------------ |
-| NEO       | String? | The amount of NEO to attach to the contract invocation |
-| GAS       | String? | The amount of GAS to attach to the contract invocation |
+###### Scopes
 
-###### AssetIntentOverrides
-| Parameter | Type          | Description                                        |
-|:--------- |:------------- |:-------------------------------------------------- |
-| inputs    | AssetInput[]  | A list of UTXO inputs to use for this transaction  |
-| outputs   | AssetOutput[] | A list of UTXO outputs to use for this transaction |
-
-###### AssetInput
-| Parameter | Type   | Description                                              |
-|:--------- |:------ |:-------------------------------------------------------- |
-| txid      | String | Transaction id to be used as input                       |
-| index     | String | Index of the UTXO, can be found from transaction details |
-
-###### AssetOutput
-| Parameter | Type   | Description                                                           |
-|:--------- |:------ |:--------------------------------------------------------------------- |
-| asset     | String | A list of UTXO inputs to use for this transaction                     |
-| address   | String | A list of UTXO outputs to use for this transaction                    |
-| value     | String | String representation of double or integer value to be used as output |
-
+| Field | Description                                                                                            |
+|:------|:-------------------------------------------------------------------------------------------------------|
+| 0     | The signature is used for transactions only, and is disabled in contracts                              |
+| 1     | The signature is only effective to the contract script called by Entry                                 |
+| 16    | The signature is only effective to the specified contract script                                       |
+| 32    | The signature is effective to contracts in the group.                                                  |
+| 128   | The signature is globally effective. It is the default value of Neo Legacy and is backward compatible. |
 
 ##### Success Response
 
 In the case where the "broadcastOverride" input argument is not set, or set to false.
 
 | Parameter | Type   | Description                                                                   |
-|:--------- |:------ |:----------------------------------------------------------------------------- |
+|:----------|:-------|:------------------------------------------------------------------------------|
 | txid      | String | The transaction id of the send request which can be queried on the blockchain |
 | nodeURL   | String | The node to which the transaction was submitted to                            |
 
@@ -1360,28 +1496,29 @@ dApp will be responsible for setting a network fee appropriate for the size of t
 In the case where the "broadcastOverride" input argument is set to True.
 
 | Parameter | Type   | Description                                                                   |
-|:--------- |:------ |:----------------------------------------------------------------------------- |
+|:----------|:-------|:------------------------------------------------------------------------------|
 | txid      | String | The transaction id of the send request which can be queried on the blockchain |
 | signedTx  | String | The serialized signed transaction                                             |
 
 ###### Set script transaction attribute 0x20 according to the following conditions:
+
 - If triggerContractVerification is set to true, set 0x20 to scriptHash of the contract being invoked
 - If there is no fee, attachedAssets, or 'assetIntentOverrides', set 0x20 to the users address
 - If there are assetIntentOverrides but none of the inputs belong to the user address, set 0x20 to user address
 
 ##### Error Response
+
 | Parameter   | Type    | Description                                  |
-|:----------- |:------- |:-------------------------------------------- |
+|:------------|:--------|:---------------------------------------------|
 | type        | String  | The type of error which has occured          |
 | description | String? | A description of the error which has occured |
 | data        | String? | Any raw data associated with the error       |
-
 
 ### signMessage
 
 ```typescript
 neoN3Dapi.signMessage({
-  message: 'Hello World!',
+  message: 'Here is a message',
 })
 .then((signedMessage: SignedMessage) => {
   const {
@@ -1409,41 +1546,39 @@ neoN3Dapi.signMessage({
 
 ```typescript
 {
-  publicKey: '0241392007396d6ef96159f047967c5a61f1af0871ecf9dc82afbedb68afbb949a',
-  data: '0147fb89d0999e9d8a90edacfa26152fe695ec8b3770dcad522048297ab903822e12472364e254ff2e088fc3ebb641cc24722c563ff679bb1d1623d08bd5863d0d',
-  salt: '058b9e03e7154e4db1e489c99256b7fa',
-  message: 'Hello World!',
+  publicKey: '027b18c5aaae6a66ce8ab1a41f0ea0db4ec5bb5d6501d51c86cc994aca5275a461',
+  data: '7249925b8813e21fdfdd8c08d6b6c45c49c813e59c9cf64eec9a2d1b096c85baa874fb0b6eefc3f6c553a0b4f95c8c651607a7a416986c216f7175f45956d522',
+  salt: '15c06345eebb49cdbc14421e03491951',
+  message: 'Here is a message',
 }
 ```
 
-Signs a provided messaged with an account selected by user. A salt prefix is added to the input string, and provided as a part of the data while signing. In the example, the signed value would be `058b9e03e7154e4db1e489c99256b7faHello World!`.
+Signs a provided messaged with an account selected by user. A salt prefix is added to the input string, and provided as a part of the data while signing. In the example, the signed value would be `15c06345eebb49cdbc14421e03491951Here is a message`.
 
 ##### Input Arguments
 
 | Parameter | Type   | Description         |
-|:--------- |:------ |:------------------- |
+|:----------|:-------|:--------------------|
 | message   | String | The message to sign |
 
 ##### Success Response
 
 | Parameter | Type   | Description                                                  |
-|:--------- |:------ |:------------------------------------------------------------ |
+|:----------|:-------|:-------------------------------------------------------------|
 | publicKey | String | The public key used to sign message                          |
 | data      | String | The signed data                                              |
 | salt      | String | The salt prefix added to the original message before signing |
 | message   | String | The original message                                         |
 
-
 ##### Error Response
 
 | Parameter   | Type    | Description                                   |
-|:----------- |:------- |:--------------------------------------------- |
+|:------------|:--------|:----------------------------------------------|
 | type        | String  | The type of error which has occurred          |
 | description | String  | A description of the error which has occurred |
 | data        | String? | Any raw data associated with the error        |
 
-
-### deploy
+<!-- ### deploy
 
 ```typescript
 neoN3Dapi.deploy({
@@ -1480,7 +1615,7 @@ neoN3Dapi.deploy({
 ```typescript
 {
   txid: 'ed54fb38dff371be6e3f96e4880405758c07fe6dd1295eb136fe15f311e9ff77',
-  nodeUrl: 'http://seed7.ngd.network:10332',
+  nodeUrl: 'https://neo3-testnet.o3node.org',
 }:
 ```
 
@@ -1489,7 +1624,7 @@ Will deploy a compiled smart contract to the blockchain with the provided input 
 ##### Input Arguments
 
 | Parameter         | Type     | Description                                                                                                             |
-|:----------------- |:-------- |:----------------------------------------------------------------------------------------------------------------------- |
+|:------------------|:---------|:------------------------------------------------------------------------------------------------------------------------|
 | network           | String   | Network alias to submit this request to.                                                                                |
 | name              | String   | The name of the contract to be deployed                                                                                 |
 | version           | String   | The version of the contract to be deployed                                                                              |
@@ -1510,7 +1645,7 @@ Will deploy a compiled smart contract to the blockchain with the provided input 
 In the case where the "broadcastOverride" input argument is not set, or set to false.
 
 | Parameter | Type   | Description                                                                   |
-|:--------- |:------ |:----------------------------------------------------------------------------- |
+|:----------|:-------|:------------------------------------------------------------------------------|
 | txid      | String | The transaction id of the send request which can be queried on the blockchain |
 | nodeURL   | String | The node to which the transaction was submitted to                            |
 
@@ -1521,16 +1656,17 @@ It is recommended that the DAPP take appropriate levels of risk prevention when 
 In the case where the "broadcastOverride" input argument is set to True.
 
 | Parameter | Type   | Description                                                                   |
-|:--------- |:------ |:----------------------------------------------------------------------------- |
+|:----------|:-------|:------------------------------------------------------------------------------|
 | txid      | String | The transaction id of the send request which can be queried on the blockchain |
 | signedTx  | String | The serialized signed transaction                                             |
 
 ##### Error Response
-| Parameter   | Type    | Description                                   |
-|:----------- |:------- |:--------------------------------------------- |
-| type        | String  | The type of error which has occurred          |
-| description | String  | A description of the error which has occurred |
-| data        | String? | Any raw data associated with the error        |
+
+| Parameter   | Type    | Description                                   |     |
+|:------------|:--------|:----------------------------------------------|-----|
+| type        | String  | The type of error which has occurred          |     |
+| description | String  | A description of the error which has occurred |     |
+| data        | String? | Any raw data associated with the error        | --> |
 
 ## Event Methods
 
@@ -1553,14 +1689,15 @@ neoN3Dapi.removeEventListener(neoN3Dapi.Constants.EventName.ACCOUNT_CHANGED);
 Method is to remove existing callback event listeners.
 
 ## Events
+
 Events are a way for the wallet to asynchronously with the DAPP when certain changes occur to the state of the wallet that might be relevant for the
 
-
 ### READY
+
 On a READY event, the callback will fire with a single argument with information about the wallet provider. At any time a READY event listener is added, it will immidiately be called if the provider is already in a ready state. This provides a single flow for dapp developers since this listener should start any and all interactions with the dapi protocol.
 
 | Parameter     | Type     | Description                                                      |
-|:------------- |:-------- |:---------------------------------------------------------------- |
+|:--------------|:---------|:-----------------------------------------------------------------|
 | name          | String   | The name of the wallet provider                                  |
 | website       | String   | The website of the wallet provider                               |
 | version       | String   | The version of the dAPI that the the wallet supports             |
@@ -1568,40 +1705,39 @@ On a READY event, the callback will fire with a single argument with information
 | extra         | Object   | Provider specific attributes                                     |
 
 ###### extra
+
 | Parameter | Type   | Description              |
-| --------- | ------ | ------------------------ |
+|-----------|--------|--------------------------|
 | theme     | string | UI theme of the provider |
 
 ### ACCOUNT_CHANGED
+
 On a ACCOUNT_CHANGED event, the callback will fire with a single argument of the new account. This occurs when an account is already connected to the dapp, and the user has changed the connected account from the dapi provider side.
 
 | Parameter | Type   | Description                                        |
-|:--------- |:------ |:-------------------------------------------------- |
+|:----------|:-------|:---------------------------------------------------|
 | address   | String | Address of the new account                         |
 | label     | String | A label the users has set to identify their wallet |
-
 
 ### CONNECTED
 
 On a CONNECTED event, the user has approved the connection of the dapp with one of their accounts. This will fire the first time any of one of the following methods are called from the dapp: `getAccount`, `invoke`, `send`.
 
 | Parameter | Type   | Description                                        |
-|:--------- |:------ |:-------------------------------------------------- |
+|:----------|:-------|:---------------------------------------------------|
 | address   | String | Address of the new account                         |
 | label     | String | A label the users has set to identify their wallet |
-
 
 ### DISCONNECTED
 
 On a DISCONNECTED event, the account connected to the dapp via the dapi provider has been disconnected (logged out).
-
 
 ### NETWORK_CHANGED
 
 On a NETWORK_CHANGED event, the user has changed the network their provider wallet is connected to. The event will return the updated network details.
 
 | Parameter      | Type     | Description                                                        |
-|:-------------- |:-------- |:------------------------------------------------------------------ |
+|:---------------|:---------|:-------------------------------------------------------------------|
 | networks       | String[] | A list of all networks which this wallet provider allows access to |
 | defaultNetwork | String   | Network the wallet is currently set to                             |
 
@@ -1610,7 +1746,7 @@ On a NETWORK_CHANGED event, the user has changed the network their provider wall
 On a BLOCK_HEIGHT_CHANGED event, the block has advanced to the next.
 
 | Parameter   | Type     | Description                                       |
-|:----------- |:-------- |:------------------------------------------------- |
+|:------------|:---------|:--------------------------------------------------|
 | network     | String   | Network of the block which changed                |
 | blockHeight | Number   | Height of the new block                           |
 | blockTime   | Number   | Timestamp of the new block                        |
@@ -1622,16 +1758,17 @@ On a BLOCK_HEIGHT_CHANGED event, the block has advanced to the next.
 On a TRANSACTION_CONFIRMED event, a previously broadcast transaction via the dapi has been confirmed by the blockchain.
 
 | Parameter   | Type   | Description                                 |
-|:----------- |:------ |:------------------------------------------- |
+|:------------|:-------|:--------------------------------------------|
 | txid        | String | Transaction id which was confirmed on chain |
 | blockHeight | Number | Height of the new block                     |
 | blockTime   | Number | Timestamp of the new block                  |
 
 ## Errors
+
 The NEO N3 dAPI will provide these basic errors. It is up to the wallet provider to provide additional information if they choose:
 
 | Error Type         | Meaning                                                                     |
-| ------------------ | --------------------------------------------------------------------------- |
+|--------------------|-----------------------------------------------------------------------------|
 | NO_PROVIDER        | Could not find an instance of the dAPI in the webpage                       |
 | CONNECTION_DENIED  | The dAPI provider refused to process this request                           |
 | RPC_ERROR          | An RPC error occured when submitting the request                            |
@@ -1669,7 +1806,6 @@ console.log('str2hex', str2hexExpected === str2hexResult);
 
 Converts a string to a hex string.
 
-
 ### hex2int
 
 ```typescript
@@ -1682,7 +1818,6 @@ console.log('hex2int', hex2intExpected === hex2intResult);
 ```
 
 Converts a hex string to an integer.
-
 
 ### int2hex
 
@@ -1697,7 +1832,6 @@ console.log('int2hex', int2hexExpected === int2hexResult);
 
 Converts an integer to a hex string.
 
-
 ### reverseHex
 
 ```typescript
@@ -1709,7 +1843,6 @@ console.log('reverseHex', reverseHexExpected === reverseHexResult);
 ```
 
 Converts the endian of a hex string, big to little, or little to big.
-
 
 ### address2scriptHash
 
@@ -1723,7 +1856,6 @@ console.log('address2scriptHash', address2scriptHashExpected === address2scriptH
 ```
 
 Converts an address to a script hash.
-
 
 ### scriptHash2address
 

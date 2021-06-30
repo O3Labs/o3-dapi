@@ -1,5 +1,5 @@
 ---
-title: NEO dAPI
+title: NEO N3 dAPI
 
 language_tabs: # must be one of https://git.io/vQNgJ
 
@@ -12,15 +12,15 @@ toc_footers:
 includes:
   - gettingStarted
   # - devEnv
-  - tutorials
-  - getAccountTutorial
-  - getBalanceTutorial
-  - sendAssetsTutorial
-  - privateNetSetupTutorial
-  - helloWorldTutorial
-  - dapiTestbed
-  - nep5Contract
-  - sampleDapp
+  # - tutorials
+  # - getAccountTutorial
+  # - getBalanceTutorial
+  # - sendAssetsTutorial
+  # - privateNetSetupTutorial
+  # - helloWorldTutorial
+  # - dapiTestbed
+  # - nep5Contract
+  # - sampleDapp
   - apiMethods
   # - write
   # - events
