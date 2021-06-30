@@ -1844,7 +1844,7 @@ console.log('reverseHex', reverseHexExpected === reverseHexResult);
 
 Converts the endian of a hex string, big to little, or little to big.
 
-### address2scriptHash
+<!-- ### address2scriptHash
 
 ```typescript
 const address2scriptHashInput = 'Ab2fvZdmnM4HwDgVbdBrbTLz1wK5TcEyhU';
@@ -1868,4 +1868,4 @@ const scriptHash2addressResult = neoN3Dapi.utils.scriptHash2address(scriptHash2a
 console.log('scriptHash2address', scriptHash2addressExpected === scriptHash2addressResult);
 ```
 
-Converts a script hash to an address.
+Converts a script hash to an address. -->
