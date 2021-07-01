@@ -32,9 +32,9 @@ neoDapi.getBalance({
 });
 ```
 
-Whether it be for the account the user has provided to your dApp via getAccount, or you would like to get asset balance information for another account, the `getBalance` method can be used. By default, for a provided address, the wallet provider will query the status of the NEO block for the latest asset balances for NEO, GAS, and any NEP5 tokens. This balance request does not require permission from the user, and will return the balances immidiately in the resolve of the returned Promise.
+Whether it be for the account the user has provided to your dApp via getAccount, or you would like to get asset balance information for another account, the `getBalance` method can be used. By default, for a provided address, the wallet provider will query the status of the NEO Legacy block for the latest asset balances for NEO, GAS, and any NEP5 tokens. This balance request does not require permission from the user, and will return the balances immidiately in the resolve of the returned Promise.
 
-In this first example, we have requested the default balances for the address `AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru` on `MainNet`. Similarly, you can change the network from which the balances are pulled from. For example, if you are still in development, you can change the network field to `TestNet`, and the asset balances for that account will be returned from the NEO test net.
+In this first example, we have requested the default balances for the address `AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru` on `MainNet`. Similarly, you can change the network from which the balances are pulled from. For example, if you are still in development, you can change the network field to `TestNet`, and the asset balances for that account will be returned from the NEO Legacy test net.
 
 ### Advanced attributes
 

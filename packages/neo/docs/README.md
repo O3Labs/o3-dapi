@@ -1,6 +1,6 @@
-# O3 dAPI NEO Plugin Documents Generator
+# O3 dAPI NEO Legacy Plugin Documents Generator
 
-This is the sub-repo to generate to interface documentation website for the O3 dAPI NEO plugin.
+This is the sub-repo to generate to interface documentation website for the O3 dAPI NEO Legacy plugin.
 
 ## Getting started
 If you would like to update and run the a local copy of the documents website:

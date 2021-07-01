@@ -1,5 +1,5 @@
 ---
-title: NEO dAPI
+title: NEO Legacy dAPI
 
 language_tabs: # must be one of https://git.io/vQNgJ
 

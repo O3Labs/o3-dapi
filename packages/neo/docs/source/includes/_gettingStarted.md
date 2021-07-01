@@ -2,9 +2,9 @@
 
 ## What is the dAPI?
 
-The dAPI is a package interface for communicating with the NEO blockchain. The methods are handled by an existing wallet provider, such as the O3 wallet, and help to reduce the development overhead associated with creating dApps on NEO.
+The dAPI is a package interface for communicating with the NEO Legacy blockchain. The methods are handled by an existing wallet provider, such as the O3 wallet, and help to reduce the development overhead associated with creating dApps on NEO Legacy.
 
-By offloading the responsibility of NEO blockchain interactions to a wallet provider, dApp developers do no have to worry about managing users private keys or how to format transactions to be signed and broadcast. The developer no long has to worry about user onboarding flows related to creating and managing a users secure credentials, and can just focus on the development of their core dApp.
+By offloading the responsibility of NEO Legacy blockchain interactions to a wallet provider, dApp developers do no have to worry about managing users private keys or how to format transactions to be signed and broadcast. The developer no long has to worry about user onboarding flows related to creating and managing a users secure credentials, and can just focus on the development of their core dApp.
 
 On the user side, since all transactions that a dApp needs to broadcast to the blockchain will be handled by the users wallet proivder, they can feel safe knowing that they never need to copy and paste their private key into a dApp again. Any transaction that a user signs will be done so in the wallet, and their private key will never be provided to the dApp.
 

@@ -31,9 +31,9 @@ neoDapi.getAccount()
 
 This method, like all methods on the dAPI return a JS Promise object. This promise will resolve or reject, based on whether the user has approve or denied your request.
 
-In the case that the request to `getAccount`, resolves the Promise, you will be returned an object with the parameters `address` and `label`. The `address` is the NEO address for the account which the user would like to interact with your dApp. The `label` is the name that they have given to refer to that account in their O3 wallet. This label can be useful when presenting information about the account that will be more familiar to the user.
+In the case that the request to `getAccount`, resolves the Promise, you will be returned an object with the parameters `address` and `label`. The `address` is the NEO Legacy address for the account which the user would like to interact with your dApp. The `label` is the name that they have given to refer to that account in their O3 wallet. This label can be useful when presenting information about the account that will be more familiar to the user.
 
-For example, in the O3 Ontology staking dApp, we display the label for the users account along side the shortened NEO address.
+For example, in the O3 Ontology staking dApp, we display the label for the users account along side the shortened NEO Legacy address.
 
 ![](/images/tutorials/getAccount/getAccountOntStake.png)
 

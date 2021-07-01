@@ -233,6 +233,6 @@ function onReady() {
   .then(handleNewNetworks);
   neoDapi.addEventListener(neoDapi.Constants.EventName.BLOCK_HEIGHT_CHANGED, data => {
     console.log(data)
-    console.log('neo block height changed: ', JSON.stringify(data));
+    console.log('neo legacy block height changed: ', JSON.stringify(data));
   });
 };

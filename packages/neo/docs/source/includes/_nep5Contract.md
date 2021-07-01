@@ -99,12 +99,12 @@ def init():
     OnTransfer(None, TOKEN_OWNER, TOTAL_SUPPLY)
     return True
 ```
-One of the first smart contracts that many developers want to test out deploying a a token contract. In the NEO ecosystem the standard for token contracts is called NEP5, and you will find a template of this smart contract in the neo-privatenet-docker, similar to how there was already a hello world smart contract.
+One of the first smart contracts that many developers want to test out deploying a a token contract. In the NEO Legacy ecosystem the standard for token contracts is called NEP5, and you will find a template of this smart contract in the neo-privatenet-docker, similar to how there was already a hello world smart contract.
 
-You can find details about all the methods on the NEP5 standard in the NEO proposals:
+You can find details about all the methods on the NEP5 standard in the NEO Legacy proposals:
 [https://github.com/neo-project/proposals/blob/master/nep-5.mediawiki](https://github.com/neo-project/proposals/blob/master/nep-5.mediawiki)
 
-For this basic example template, we have all the base methods, with the addition of a non-standard `init` method. This method will initialize the token contract, sending all 10m tokens to the contract owner (which is set to the master account on the neo-privatenet-docker). If reviewing other smart contract for NEP5 tokens in the NEO ecosystem, you will find that many of them are much more complex, as they also contain the code to facilitate the automated token sale.
+For this basic example template, we have all the base methods, with the addition of a non-standard `init` method. This method will initialize the token contract, sending all 10m tokens to the contract owner (which is set to the master account on the neo-privatenet-docker). If reviewing other smart contract for NEP5 tokens in the NEO Legacy ecosystem, you will find that many of them are much more complex, as they also contain the code to facilitate the automated token sale.
 
 For the purpose of this tutorial, we kept it to the base methods so your can test out reading and writing information to the smart contract using the dAPI.
 

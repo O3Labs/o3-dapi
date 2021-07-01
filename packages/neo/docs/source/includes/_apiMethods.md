@@ -1011,7 +1011,7 @@ neoDapi.send({
 }
 ```
 
-The send API can be used for accepting payments from the user in a cryptocurrency that is located on the NEO blockchain. It requires user authentication in order for the transaction to be relayed. The transaction will be relayed by the wallet.
+The send API can be used for accepting payments from the user in a cryptocurrency that is located on the NEO Legacy blockchain. It requires user authentication in order for the transaction to be relayed. The transaction will be relayed by the wallet.
 
 ##### Input Arguments
 | Parameter         | Type     | Description                                                                                                                                        |
@@ -1108,7 +1108,7 @@ neoDapi.invoke({
 }:
 ```
 
-Invoke allows for the generic execution of smart contracts on behalf of the user. It is recommended to have a general understanding of the NEO blockchain, and to be able successfully use all other commands listed previously in this document before attempting a generic contract execution.
+Invoke allows for the generic execution of smart contracts on behalf of the user. It is recommended to have a general understanding of the NEO Legacy blockchain, and to be able successfully use all other commands listed previously in this document before attempting a generic contract execution.
 
 ##### Input arguments
 | Parameter                   | Type                 | Description                                                                                                                                        |
@@ -1628,14 +1628,14 @@ On a TRANSACTION_CONFIRMED event, a previously broadcast transaction via the dap
 | blockTime   | Number | Timestamp of the new block                  |
 
 ## Errors
-The NEO dAPI will provide these basic errors. It is up to the wallet provider to provide additional information if they choose:
+The NEO Legacy dAPI will provide these basic errors. It is up to the wallet provider to provide additional information if they choose:
 
 | Error Type         | Meaning                                                                     |
 | ------------------ | --------------------------------------------------------------------------- |
 | NO_PROVIDER        | Could not find an instance of the dAPI in the webpage                       |
 | CONNECTION_DENIED  | The dAPI provider refused to process this request                           |
 | RPC_ERROR          | An RPC error occured when submitting the request                            |
-| MALFORMED_INPUT    | An input such as the address is not a valid NEO address                     |
+| MALFORMED_INPUT    | An input such as the address is not a valid NEO Legacy address                     |
 | CANCELED           | The user cancels, or refuses the dapps request                              |
 | INSUFFICIENT_FUNDS | The user does not have a sufficient balance to perform the requested action |
 

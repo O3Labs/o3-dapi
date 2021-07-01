@@ -1,5 +1,5 @@
 # o3-dapi-neo
-NEO Plugin for o3-dapi
+NEO Legacy Plugin for o3-dapi
 
 Requires o3-dapi-core to operate.
 
