@@ -1,6 +1,6 @@
 ## dAPI Testbed
 
-After you deploy your smart contract, and would like to start building the interface to call your smart contract from your dApp, you can start by using the dAPI Testbed @ [neon3dapitestbed.o3.app](https://neon3dapitestbed.o3.app/). This is a free open source testbed which allows you to quickly explore all the different methods on the dAPI. It can make all the same calls related to getting a user address, getting asset balances, and even transferring assets. However, one of the most important features of this testbed is that it allows you to test out your smart contract code by invoking it via the dAPI.
+After you deploy your smart contract, and would like to start building the interface to call your smart contract from your dApp, you can start by using the dAPI Testbed @ [neo3dapitestbed.o3.app](https://neo3dapitestbed.o3.app/). This is a free open source testbed which allows you to quickly explore all the different methods on the dAPI. It can make all the same calls related to getting a user address, getting asset balances, and even transferring assets. However, one of the most important features of this testbed is that it allows you to test out your smart contract code by invoking it via the dAPI.
 
 ![](/images/tutorials/testbed/testbedOverview.png)
 
@@ -22,7 +22,7 @@ When interacting with smart contracts there are generally two different types of
 
 For this case, lets call our hello world smart contract. First navigate to the dapi explorer, with your O3 wallet open in the background and your privatenet up.
 
-[neon3dapitestbed.o3.app](https://neon3dapitestbed.o3.app/)
+[neo3dapitestbed.o3.app](https://neo3dapitestbed.o3.app/)
 
 Navigate to the `invokeRead` method, either by scrolling down, or selecting it from the shortcut on the left side of the screen.
 
