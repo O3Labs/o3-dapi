@@ -155,9 +155,9 @@ These are the IDs of the Neo chain supported by O3 Desktop.
 | chainId | Description                                             |
 |:--------|:--------------------------------------------------------|
 | 1       | ChainId 1 is the Neo2 MainNet                           |
-| 1       | ChainId 2 is the Neo2 TestNet                           |
-| 1       | ChainId 3 is the N3 MainNet                             |
-| 1       | ChainId 4 is the N3 TestNet (Currently only N3 TestNet) |
+| 2       | ChainId 2 is the Neo2 TestNet                           |
+| 3       | ChainId 3 is the N3 MainNet                             |
+| 4       | ChainId 4 is the N3 TestNet (Currently only N3 TestNet) |
 
 ##### Error Response
 
