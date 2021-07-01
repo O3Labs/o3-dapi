@@ -56,7 +56,7 @@ phases:
       - cd ../../neo/docs/build
       - aws s3 sync . "s3://${NEO_DOCS_BUCKET_NAME}" --delete
       - aws cloudfront create-invalidation --distribution-id "${NEO_DOCS_DISTRIBUTION_ID}" --paths "/*"
-      - cd ../../neo3/docs/build
+      - cd ../../../neo3/docs/build
       - aws s3 sync . "s3://${NEO3_DOCS_BUCKET_NAME}" --delete
       - aws cloudfront create-invalidation --distribution-id "${NEO3_DOCS_DISTRIBUTION_ID}" --paths "/*"
       - cd ../../../ont/docs/build
