@@ -1,6 +1,6 @@
 ## Sample dApp
 
-Now that we have a token contract deployed on our private net, and we've tested it from the dAPI testbed, we can look into integrating this in to our own dApp. The code for the testbed is [open source](https://github.com/O3Labs/o3-dapi/blob/master/packages/neo/test/functions.js#L186), and can be used as an example. Or you can reference the [API documentation](https://neon3dapidocs.o3.network/#invoke) for usage examples.
+Now that we have a token contract deployed on our private net, and we've tested it from the dAPI testbed, we can look into integrating this in to our own dApp. The code for the testbed is [open source](https://github.com/O3Labs/o3-dapi/blob/master/packages/neo/test/functions.js#L186), and can be used as an example. Or you can reference the [API documentation](https://neo3dapidocs.o3.network/#invoke) for usage examples.
 
 Here we will use create a very simple dApp website which will interface with the token smart contract. This simple dApp will just be a basic website that imports the neo-dapi JS package from a CDN, and provides a user interface to interact with the contract.
 
