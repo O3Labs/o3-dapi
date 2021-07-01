@@ -9,8 +9,8 @@ var app = new Vue({
     },
     getBalanceInput: {
       params: [{
-        "address": "AScKxyXmNtEnTLTvbVhNQyTJmgytxhwSnM",
-        "assets": ["GAS"]
+        "address": "NfuwpaQ1A2xaeVbxWe8FRtaRgaMa8yF3YM",
+        "contracts": ["GAS"]
       }],
       network: "TestNet",
     },
