@@ -172,15 +172,12 @@ var app = new Vue({
 
 
 function getProvider(elem) {
-  console.log('------');
   neoN3Dapi.getProvider()
     .then(function (data) {
-      console.log(data);
       const formatted = syntaxHighlight(data);
       document.getElementById(elem).innerHTML = formatted;
     })
     .catch(function (error) {
-      console.log(error);
       document.getElementById(elem).innerHTML = syntaxHighlight(error);
     });
 }
@@ -312,12 +309,10 @@ function send(inputElement, resultElem) {
   try {
     neoN3Dapi.send(JSON.parse(document.getElementById(inputElement).value))
       .then(function (data) {
-        console.log(data);
         const formatted = syntaxHighlight(data);
         document.getElementById(resultElem).innerHTML = formatted;
       })
       .catch(function (error) {
-        console.log(error);
         document.getElementById(resultElem).innerHTML = syntaxHighlight(error);
       });
   } catch (err) {

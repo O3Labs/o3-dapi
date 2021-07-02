@@ -76,8 +76,6 @@ const utilsScriptHash2addressOutputEle = document.getElementById("utilsScriptHas
 
 o3dapi.initPlugins([o3dapiNeoN3]);
 
-console.log(o3dapi);
-
 const neoN3Dapi = o3dapi.NEO3;
 neoN3Dapi.EventName = o3dapi.NEO3.Constants.EventName;
 
@@ -229,7 +227,6 @@ function handleNewNetworks({
   const networksEle = document.getElementById("networks");
   [].slice.call(networksEle.children).forEach(child => networksEle.remove(child));
   networks.forEach(network => {
-    console.log(network);
     const option = document.createElement('option');
     if (network === defaultNetwork) {
       option.selected = 'selected';
@@ -245,7 +242,6 @@ function onReady() {
   neoN3Dapi.getNetworks()
     .then(handleNewNetworks);
   neoN3Dapi.addEventListener(neoN3Dapi.Constants.EventName.BLOCK_HEIGHT_CHANGED, data => {
-    console.log(data)
     console.log('neo n3 block height changed: ', JSON.stringify(data));
   });
 };
