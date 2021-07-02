@@ -7,7 +7,7 @@ One of the first basic tasks for any dapp is to get the address of the account w
 Assuming that you have already included the [neo-dapi](https://github.com/O3Labs/neo-dapi) JS package into your application, you can call the method `getAccount`, as follows:
 
 ```
-neoN3Dapi.getAccount()
+neo3Dapi.getAccount()
 .then((account: Account) => {
   const {
     address,

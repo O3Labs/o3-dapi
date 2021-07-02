@@ -118,29 +118,29 @@
     const initErrorEle = document.getElementById("initError");
 
     function handleName() {
-      neoN3Dapi.invokeRead({
+      neo3Dapi.invokeRead({
         scriptHash: scriptHashEle.value,
         operation: 'name',
       })
       .then(res => res.stack[0].value)
-      .then(res => neoN3Dapi.utils.hex2str(res))
+      .then(res => neo3Dapi.utils.hex2str(res))
       .then(res => nameResultEle.innerHTML = res)
       .catch(err => nameErrorEle.innerHTML = err);
     }
 
     function handleSymbol() {
-      neoN3Dapi.invokeRead({
+      neo3Dapi.invokeRead({
         scriptHash: scriptHashEle.value,
         operation: 'symbol',
       })
       .then(res => res.stack[0].value)
-      .then(res => neoN3Dapi.utils.hex2str(res))
+      .then(res => neo3Dapi.utils.hex2str(res))
       .then(res => symbolResultEle.innerHTML = res)
       .catch(err => symbolErrorEle.innerHTML = err);
     }
 
     function handleDecimals() {
-      neoN3Dapi.invokeRead({
+      neo3Dapi.invokeRead({
         scriptHash: scriptHashEle.value,
         operation: 'decimals',
       })
@@ -151,11 +151,11 @@
 
     function handleTotalSupply() {
       Promise.all([
-        neoN3Dapi.invokeRead({
+        neo3Dapi.invokeRead({
           scriptHash: scriptHashEle.value,
           operation: 'totalSupply',
-        }).then(res => neoN3Dapi.utils.hex2int(res.stack[0].value || 0)),
-        neoN3Dapi.invokeRead({
+        }).then(res => neo3Dapi.utils.hex2int(res.stack[0].value || 0)),
+        neo3Dapi.invokeRead({
           scriptHash: scriptHashEle.value,
           operation: 'decimals',
         }).then(res => res.stack[0].value)
@@ -167,17 +167,17 @@
 
     function handleBalanceOf() {
       Promise.all([
-        neoN3Dapi.invokeRead({
+        neo3Dapi.invokeRead({
           scriptHash: scriptHashEle.value,
           operation: 'balanceOf',
           args: [
             {
-              type: neoN3Dapi.Constants.ArgumentDataType.ADDRESS,
+              type: neo3Dapi.Constants.ArgumentDataType.ADDRESS,
               value: balanceOfAddressEle.value,
             }
           ]
-        }).then(res => neoN3Dapi.utils.hex2int(res.stack[0].value || 0)),
-        neoN3Dapi.invokeRead({
+        }).then(res => neo3Dapi.utils.hex2int(res.stack[0].value || 0)),
+        neo3Dapi.invokeRead({
           scriptHash: scriptHashEle.value,
           operation: 'decimals',
         }).then(res => res.stack[0].value)
@@ -188,20 +188,20 @@
     }
 
     function handleTransfer() {
-      neoN3Dapi.invoke({
+      neo3Dapi.invoke({
         scriptHash: scriptHashEle.value,
         operation: 'transfer',
         args: [
           {
-            type: neoN3Dapi.Constants.ArgumentDataType.ADDRESS,
+            type: neo3Dapi.Constants.ArgumentDataType.ADDRESS,
             value: transferAddrFromEle.value,
           },
           {
-            type: neoN3Dapi.Constants.ArgumentDataType.ADDRESS,
+            type: neo3Dapi.Constants.ArgumentDataType.ADDRESS,
             value: transferAddrToEle.value,
           },
           {
-            type: neoN3Dapi.Constants.ArgumentDataType.INTEGER,
+            type: neo3Dapi.Constants.ArgumentDataType.INTEGER,
             value: transferAmountEle.value,
           }
         ]
@@ -212,7 +212,7 @@
     }
 
     function handleInit() {
-      neoN3Dapi.invoke({
+      neo3Dapi.invoke({
         scriptHash: scriptHashEle.value,
         operation: 'init'
       })

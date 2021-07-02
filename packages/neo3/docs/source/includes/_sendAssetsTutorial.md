@@ -1,7 +1,7 @@
 ## Request assets from user
 
 ```
-neoN3Dapi.send({
+neo3Dapi.send({
   fromAddress: 'AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru',
   toAddress: 'ATaWxfUAiBcQixNPq6TvKHEHPQum9bx79d',
   asset: 'GAS',
@@ -41,7 +41,7 @@ In this basic example, we are conducting a basic send of 0.01 GAS from the addre
 ### Advanced attributes
 
 ```
-neoN3Dapi.send({
+neo3Dapi.send({
   fromAddress: 'ATaWxfUAiBcQixNPq6TvKHEHPQum9bx79d',
   toAddress: 'ATaWxfUAiBcQixNPq6TvKHEHPQum9bx79d',
   asset: 'GAS',

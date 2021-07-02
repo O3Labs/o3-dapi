@@ -1,7 +1,7 @@
 ## Getting asset balances
 
 ```
-neoN3Dapi.getBalance({
+neo3Dapi.getBalance({
   params: {
     address: 'AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru',
   },
@@ -39,7 +39,7 @@ In this first example, we have requested the default balances for the address `A
 ### Advanced attributes
 
 ```
-neoN3Dapi.getBalance({
+neo3Dapi.getBalance({
   params: {
     address: 'AeysVbKWiLSuSDhg7DTzUdDyYYKfgjojru',
     assets: ['GAS'],

@@ -32,12 +32,12 @@ Here we will use create a very simple dApp website which will interface with the
     const nameErrorEle = document.getElementById("nameError");
 
     function handleName() {
-      neoN3Dapi.invokeRead({
+      neo3Dapi.invokeRead({
         scriptHash: scriptHashEle.value,
         operation: 'name',
       })
       .then(res => res.stack[0].value)
-      .then(res => neoN3Dapi.utils.hex2str(res))
+      .then(res => neo3Dapi.utils.hex2str(res))
       .then(res => nameResultEle.innerHTML = res)
       .catch(err => nameErrorEle.innerHTML = err);
     }
@@ -89,7 +89,7 @@ This is what our simple UI should look like. Upon entering the script hash for y
     const initErrorEle = document.getElementById("initError");
 
     function handleInit() {
-      neoN3Dapi.invoke({
+      neo3Dapi.invoke({
         scriptHash: scriptHashEle.value,
         operation: 'init'
       })
@@ -154,20 +154,20 @@ Now that you have initialized the token contract, all the tokens should be in yo
     const transferErrorEle = document.getElementById("transferError");
 
     function handleTransfer() {
-      neoN3Dapi.invoke({
+      neo3Dapi.invoke({
         scriptHash: scriptHashEle.value,
         operation: 'transfer',
         args: [
           {
-            type: neoN3Dapi.Constants.ArgumentDataType.ADDRESS,
+            type: neo3Dapi.Constants.ArgumentDataType.ADDRESS,
             value: transferAddrFromEle.value,
           },
           {
-            type: neoN3Dapi.Constants.ArgumentDataType.ADDRESS,
+            type: neo3Dapi.Constants.ArgumentDataType.ADDRESS,
             value: transferAddrToEle.value,
           },
           {
-            type: neoN3Dapi.Constants.ArgumentDataType.INTEGER,
+            type: neo3Dapi.Constants.ArgumentDataType.INTEGER,
             value: transferAmountEle.value,
           }
         ]

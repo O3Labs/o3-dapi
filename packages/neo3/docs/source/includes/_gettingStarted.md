@@ -15,36 +15,36 @@ dAPI client integrations are currently facilited via a versioned JS package, and
 ### Install via CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/neo-n3-dapi@1.0.2/lib/neo-n3-dapi.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/neo3-dapi@1.0.2/lib/neo3-dapi.min.js"></script>
 ```
 ```typescript
-window.neoN3Dapi
+window.neo3Dapi
 ```
 
-[![](https://data.jsdelivr.com/v1/package/npm/neo-n3-dapi/badge)](https://www.jsdelivr.com/package/npm/neo-n3-dapi)
+[![](https://data.jsdelivr.com/v1/package/npm/neo3-dapi/badge)](https://www.jsdelivr.com/package/npm/neo3-dapi)
 
-When installing via CDN, it's always recommended to reference a specific version of the neo-n3-dapi package, to protect your app from possible method interface updates. In this example the version referenced in the url is 1.0.2.
+When installing via CDN, it's always recommended to reference a specific version of the neo3-dapi package, to protect your app from possible method interface updates. In this example the version referenced in the url is 1.0.2.
 
 
 ### Install via NPM
 
 ```typescript
-npm i --save neo-n3-dapi
+npm i --save neo3-dapi
 
 or
 
-yarn add neo-n3-dapi
+yarn add neo3-dapi
 ```
 
 ```typescript
-var neoN3Dapi = require('neo-n3-dapi');
+var neo3Dapi = require('neo3-dapi');
 
 or
 
-import neoN3Dapi from 'neo-n3-dapi';
+import neo3Dapi from 'neo3-dapi';
 ```
 
-[![npm version](https://badge.fury.io/js/neo-n3-dapi.svg)](https://badge.fury.io/js/neo-n3-dapi)
+[![npm version](https://badge.fury.io/js/neo3-dapi.svg)](https://badge.fury.io/js/neo3-dapi)
 
 When installing via NPM, it's always advised to lockdown your package version to either the specific version only, or to patch updates.
 
