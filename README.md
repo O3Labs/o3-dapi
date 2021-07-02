@@ -30,7 +30,7 @@ In a browser - cdn [![](https://data.jsdelivr.com/v1/package/npm/neo-dapi/badge)
 
 Install via npm [![npm version](https://badge.fury.io/js/neo-dapi.svg)](https://badge.fury.io/js/neo-dapi)
 
-### neo-n3-dapi
+### neo3-dapi
 
 A single bundle for interfacing with the NEO N3 blockchain.
 
@@ -39,9 +39,9 @@ When to use:
 - You would like to have the clientside logic to make calls to the NEO N3 blockchain without a O3 wallet open.
   - Results in larger package size, but more functionality
 
-In a browser - cdn [![](https://data.jsdelivr.com/v1/package/npm/neo-n3-dapi/badge)](https://www.jsdelivr.com/package/npm/neo-n3-dapi)
+In a browser - cdn [![](https://data.jsdelivr.com/v1/package/npm/neo3-dapi/badge)](https://www.jsdelivr.com/package/npm/neo3-dapi)
 
-Install via npm [![npm version](https://badge.fury.io/js/neo-n3-dapi.svg)](https://badge.fury.io/js/neo-n3-dapi)
+Install via npm [![npm version](https://badge.fury.io/js/neo3-dapi.svg)](https://badge.fury.io/js/neo3-dapi)
 
 
 ### ont-dapi
@@ -108,7 +108,7 @@ In a browser - cdn [![](https://data.jsdelivr.com/v1/package/npm/o3-dapi-neoclie
 
 Install via npm [![npm version](https://badge.fury.io/js/o3-dapi-neoclient.svg)](https://badge.fury.io/js/o3-dapi-neoclient)
 
-### o3-dapi-neo-n3 (o3-dapi-core plugin)
+### o3-dapi-neo3 (o3-dapi-core plugin)
 
 NEO N3 dAPI interface plugin for o3-dapi-core
 
@@ -117,9 +117,9 @@ When to use:
   - Smaller package size, but requires a O3 wallet open to make any calls
 - Your app interfaces with more than one chain (eg. NEO N3 & Ontology)
 
-In a browser - cdn [![](https://data.jsdelivr.com/v1/package/npm/o3-dapi-neo-n3/badge)](https://www.jsdelivr.com/package/npm/o3-dapi-neo-n3)
+In a browser - cdn [![](https://data.jsdelivr.com/v1/package/npm/o3-dapi-neo3/badge)](https://www.jsdelivr.com/package/npm/o3-dapi-neo3)
 
-Install via npm [![npm version](https://badge.fury.io/js/o3-dapi-neo.svg)](https://badge.fury.io/js/o3-dapi-neo-n3)
+Install via npm [![npm version](https://badge.fury.io/js/o3-dapi-neo.svg)](https://badge.fury.io/js/o3-dapi-neo3)
 
 ### o3-dapi-ont (o3-dapi-core plugin)
 

@@ -74,7 +74,7 @@ const utilsAddress2scriptHashOutputEle = document.getElementById("utilsAddress2s
 const utilsScriptHash2addressOutputEle = document.getElementById("utilsScriptHash2addressOutput");
 
 
-o3dapi.initPlugins([o3dapiNeoN3]);
+o3dapi.initPlugins([o3dapiNeo3]);
 
 const neo3Dapi = o3dapi.NEO3;
 neo3Dapi.EventName = o3dapi.NEO3.Constants.EventName;

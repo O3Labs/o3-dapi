@@ -10,7 +10,7 @@ In a browser - cdn [![](https://data.jsdelivr.com/v1/package/npm/o3-dapi-neo3/ba
 <script src="https://cdn.jsdelivr.net/npm/o3-dapi-neo3/lib/o3-dapi-neo3.min.js"></script>
 ```
 ```
-window.o3dapiNeoN3
+window.o3dapiNeo3
 ```
 
 Install via npm [![npm version](https://badge.fury.io/js/o3-dapi-neo.svg)](https://badge.fury.io/js/o3-dapi-neo3)
@@ -23,17 +23,17 @@ yarn add o3-dapi-neo3
 ```
 
 ```
-var o3dapiNeoN3 = require('o3-dapi-neo3');
+var o3dapiNeo3 = require('o3-dapi-neo3');
 
-import o3dapiNeoN3 from 'o3-dapi-neo3';
+import o3dapiNeo3 from 'o3-dapi-neo3';
 ```
 
 ## Example
 ```
 import o3dapi from 'o3-dapi-core';
-import o3dapiNeoN3 from 'o3-dapi-neo3';
+import o3dapiNeo3 from 'o3-dapi-neo3';
 
-o3dapi.initPlugins([o3dapiNeoN3]);
+o3dapi.initPlugins([o3dapiNeo3]);
 
 o3dapi.NEO3.getNetworks()
 .then(networks => console.log(networks));

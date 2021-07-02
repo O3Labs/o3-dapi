@@ -31,7 +31,7 @@ module.exports = (env) => {
             path: path.join(__dirname, DISTRIBUTION ? 'lib' : 'build'),
             filename: DISTRIBUTION ? 'o3-dapi-neo3.min.js' : 'bundle.js',
             libraryTarget: "umd",
-            library: 'o3dapiNeoN3',
+            library: 'o3dapiNeo3',
             libraryExport: 'default',
             globalObject: 'typeof self !== \'undefined\' ? self : this',
         },

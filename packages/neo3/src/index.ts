@@ -58,7 +58,7 @@ import { ArgumentDataType, EventName, BLOCKCHAIN } from './constants';
 import { initMessaging } from './messaging';
 import { methodSelector } from './modules/utils';
 
-class O3dapiNeoN3 {
+class O3dapiNeo3 {
   static blockchain = BLOCKCHAIN;
 
   isAvailable = Boolean(safeWindow._o3dapi.isAvailable);
@@ -123,7 +123,7 @@ class O3dapiNeoN3 {
   }
 }
 
-export default O3dapiNeoN3;
+export default O3dapiNeo3;
 export type getProvider = () => Promise<Provider>;
 export type getNetworks = () => Promise<GetNetworksOutput>;
 export type getAccount = () => Promise<Account>;
