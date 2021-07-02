@@ -218,6 +218,57 @@ Return the Account that is currently connected to the dApp.
 | description | String? | A description of the error which has occured |
 | data        | String? | Any raw data associated with the error       |
 
+### pickAddress
+
+```typescript
+neoN3Dapi.pickAddress()
+.then((account: Account) => {
+  const {
+    address,
+    label,
+  } = account;
+
+  console.log('Account address: ' + address);
+  console.log('Account label: ' + label);
+})
+.catch(({type: string, description: string, data: any}) => {
+  switch(type) {
+    case NO_PROVIDER:
+      console.log('No provider available.');
+      break;
+    case CONNECTION_DENIED:
+      console.log('The user rejected the request to connect with your dApp');
+      break;
+  }
+});
+```
+
+> Example Response
+
+```typescript
+{
+  address: 'NaUjKgf5vMuFt7Ffgfffcpc41uH3adx1jq',
+  label: 'My Spending Wallet'
+}
+```
+
+Return a Neo N3 Account.
+
+##### Success Response
+
+| Parameter | Type   | Description                                                        |
+|:----------|:-------|:-------------------------------------------------------------------|
+| address   | String | A NEO N3 address of your choice |
+| label     | String | A label the users has set to identify their wallet                 |
+
+##### Error Response
+
+| Parameter   | Type    | Description                                  |
+|:------------|:--------|:---------------------------------------------|
+| type        | String  | The type of error which has occured          |
+| description | String? | A description of the error which has occured |
+| data        | String? | Any raw data associated with the error       |
+
 ### getPublicKey
 
 ```typescript

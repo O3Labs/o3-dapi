@@ -204,6 +204,17 @@ function getAccount(elem) {
     });
 }
 
+function pickAddress(elem) {
+  neoN3Dapi.pickAddress()
+    .then(accountData => {
+      const formatted = syntaxHighlight(accountData);
+      document.getElementById(elem).innerHTML = formatted;
+    })
+    .catch(function (error) {
+      document.getElementById(elem).innerHTML = syntaxHighlight(error);
+    });
+}
+
 
 function getPublicKey(elem) {
   neoN3Dapi.getPublicKey()

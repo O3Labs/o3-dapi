@@ -1,6 +1,7 @@
 import { getProvider, Provider } from './modules/read/getProvider';
 import { getNetworks, GetNetworksOutput } from './modules/read/getNetworks';
 import { getAccount, Account } from './modules/read/getAccount';
+import { pickAddress } from './modules/read/pickAddress';
 import { getPublicKey, PublicKeyOutput } from './modules/read/getPublicKey';
 import { GetBalanceArgs, BalanceResults } from './modules/read/getBalance';
 import { GetStorageArgs, GetStorageOutput } from './modules/read/getStorage';
@@ -25,6 +26,7 @@ declare class O3dapiNeoN3 {
     getProvider: typeof getProvider;
     getNetworks: typeof getNetworks;
     getAccount: typeof getAccount;
+    pickAddress: typeof pickAddress;
     getPublicKey: typeof getPublicKey;
     getBalance: getBalance;
     getStorage: getStorage;
@@ -55,6 +57,7 @@ export default O3dapiNeoN3;
 export declare type getProvider = () => Promise<Provider>;
 export declare type getNetworks = () => Promise<GetNetworksOutput>;
 export declare type getAccount = () => Promise<Account>;
+export declare type pickAddress = () => Promise<Account>;
 export declare type getPublicKey = () => Promise<PublicKeyOutput>;
 export declare type getBalance = (data: GetBalanceArgs) => Promise<BalanceResults>;
 export declare type getStorage = (data: GetStorageArgs) => Promise<GetStorageOutput>;

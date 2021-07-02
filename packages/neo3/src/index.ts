@@ -4,6 +4,7 @@ const safeWindow = isBrowser ? window : global;
 import { getProvider, Provider } from './modules/read/getProvider';
 import { getNetworks, GetNetworksOutput } from './modules/read/getNetworks';
 import { getAccount, Account } from './modules/read/getAccount';
+import { pickAddress } from './modules/read/pickAddress';
 import { getPublicKey, PublicKeyOutput } from './modules/read/getPublicKey';
 import {
   getBalance,
@@ -65,6 +66,7 @@ class O3dapiNeoN3 {
   getProvider = getProvider;
   getNetworks = getNetworks;
   getAccount = getAccount;
+  pickAddress = pickAddress;
   getPublicKey = getPublicKey;
 
   getBalance: getBalance = methodSelector(this, 'getBalance', getBalance);
@@ -125,6 +127,7 @@ export default O3dapiNeoN3;
 export type getProvider = () => Promise<Provider>;
 export type getNetworks = () => Promise<GetNetworksOutput>;
 export type getAccount = () => Promise<Account>;
+export type pickAddress = () => Promise<Account>;
 export type getPublicKey = () => Promise<PublicKeyOutput>;
 export type getBalance = (data: GetBalanceArgs) => Promise<BalanceResults>;
 export type getStorage = (data: GetStorageArgs) => Promise<GetStorageOutput>;

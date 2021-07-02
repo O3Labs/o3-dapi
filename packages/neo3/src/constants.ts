@@ -17,6 +17,7 @@ export enum Command {
   getProvider = 'getProvider',
   getNetworks = 'getNetworks',
   getAccount = 'getAccount',
+  pickAddress = 'pickAddress',
   getPublicKey = 'getPublicKey',
   getBalance = 'getBalance',
   getStorage = 'getStorage',

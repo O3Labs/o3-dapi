@@ -137,6 +137,18 @@ function getAccount() {
   .catch(handleError);
 }
 
+function pickAddress() {
+  startLoading();
+
+  o3dapi.NEO3.pickAddress()
+  .then(accountData => {
+    accountEle.innerHTML = `Connected Account: ${accountData.address}`;
+    disconnectEle.innerHTML = 'disconnect';
+    handleSuccess(accountData);
+  })
+  .catch(handleError);
+}
+
 function getPublicKey() {
   startLoading();
 

@@ -15,9 +15,9 @@
     <link rel="stylesheet" href="./docs.css" id="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/o3-dapi-core@0.3.13/lib/o3-dapi-core.min.js"></script>
     <!-- <script type="text/javascript" src="../../core/build/bundle.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/o3-dapi-neo-n3@1.0.1/lib/o3-dapi-neo-n3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/o3-dapi-neo-n3@1.0.2/lib/o3-dapi-neo-n3.min.js"></script>
     <!-- <script type="text/javascript" src="../build/bundle.js"></script> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/neo-n3-dapi@1.0.1/lib/neo-n3-dapi.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/neo-n3-dapi@1.0.2/lib/neo-n3-dapi.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <style type="text/css">
         .string {
@@ -131,6 +131,8 @@
                                                 href="#collapse-getNetworks">getNetworks</a></li>
                                         <li class="nav-item"><a class="nav-link"
                                                 href="#collapse-getAccount">getAccount</a></li>
+                                        <li class="nav-item"><a class="nav-link"
+                                                href="#collapse-pickAddress">pickAddress</a></li>
                                         <li class="nav-item"><a class="nav-link"
                                                 href="#collapse-getPublicKey">getPublicKey</a></li>
                                         <li class="nav-item"><a class="nav-link"
@@ -266,6 +268,27 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div id="collapse-pickAddress" class="method">
+                              <div class="card" id="pickAddress">
+                                  <div class="card-header py-4">
+                                      <h3 class="mt-0">pickAddress</h3>
+                                      <p class="small mb-0">Return a Neo N3 Account</p>
+                                  </div>
+                                  <div>
+                                      <div class="card-body">
+
+                                          <button class="btn btn-primary btn-sm"
+                                              onclick="pickAddress('pickAddress-result')">Run</button>
+                                      </div>
+                                      <div class="card-footer">
+
+                                          <h6>Result</h6>
+                                          <pre><div class="p-3 border rounded" id="pickAddress-result"></div></pre>
+                                      </div>
+                                  </div>
+                              </div>
                             </div>
 
                             <div id="collapse-getPublicKey" class="method">
