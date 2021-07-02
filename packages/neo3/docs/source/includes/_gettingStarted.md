@@ -15,7 +15,7 @@ dAPI client integrations are currently facilited via a versioned JS package, and
 ### Install via CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/neo3-dapi@1.0.3/lib/neo3-dapi.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/neo3-dapi@1.0.1/lib/neo3-dapi.min.js"></script>
 ```
 ```typescript
 window.neo3Dapi
