@@ -1,6 +1,6 @@
 {
   "name": "o3-dapi-neo3",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "NEO N3 Plugin for o3-dapi",
   "main": "./lib/o3-dapi-neo3.min.js",
   "types": "./lib/index.d.ts",

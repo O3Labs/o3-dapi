@@ -15,7 +15,7 @@ dAPI client integrations are currently facilited via a versioned JS package, and
 ### Install via CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/neo3-dapi@1.0.2/lib/neo3-dapi.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/neo3-dapi@1.0.3/lib/neo3-dapi.min.js"></script>
 ```
 ```typescript
 window.neo3Dapi
@@ -23,7 +23,7 @@ window.neo3Dapi
 
 [![](https://data.jsdelivr.com/v1/package/npm/neo3-dapi/badge)](https://www.jsdelivr.com/package/npm/neo3-dapi)
 
-When installing via CDN, it's always recommended to reference a specific version of the neo3-dapi package, to protect your app from possible method interface updates. In this example the version referenced in the url is 1.0.2.
+When installing via CDN, it's always recommended to reference a specific version of the neo3-dapi package, to protect your app from possible method interface updates. In this example the version referenced in the url is 1.0.3.
 
 
 ### Install via NPM
