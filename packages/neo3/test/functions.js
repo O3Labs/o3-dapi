@@ -172,7 +172,7 @@ var app = new Vue({
 
 
 function getProvider(elem) {
-  neoN3Dapi.getProvider()
+  neo3Dapi.getProvider()
     .then(function (data) {
       const formatted = syntaxHighlight(data);
       document.getElementById(elem).innerHTML = formatted;
@@ -183,7 +183,7 @@ function getProvider(elem) {
 }
 
 function getNetworks(elem) {
-  neoN3Dapi.getNetworks()
+  neo3Dapi.getNetworks()
     .then(function (data) {
       const formatted = syntaxHighlight(data);
       document.getElementById(elem).innerHTML = formatted;
@@ -194,7 +194,7 @@ function getNetworks(elem) {
 }
 
 function getAccount(elem) {
-  neoN3Dapi.getAccount()
+  neo3Dapi.getAccount()
     .then(accountData => {
       const formatted = syntaxHighlight(accountData);
       document.getElementById(elem).innerHTML = formatted;
@@ -205,7 +205,7 @@ function getAccount(elem) {
 }
 
 function pickAddress(elem) {
-  neoN3Dapi.pickAddress()
+  neo3Dapi.pickAddress()
     .then(accountData => {
       const formatted = syntaxHighlight(accountData);
       document.getElementById(elem).innerHTML = formatted;
@@ -217,7 +217,7 @@ function pickAddress(elem) {
 
 
 function getPublicKey(elem) {
-  neoN3Dapi.getPublicKey()
+  neo3Dapi.getPublicKey()
     .then(function (data) {
       const formatted = syntaxHighlight(data);
       document.getElementById(elem).innerHTML = formatted;
@@ -230,7 +230,7 @@ function getPublicKey(elem) {
 
 function getBalance(inputElement, resultElem) {
   try {
-    neoN3Dapi.getBalance(JSON.parse(document.getElementById(inputElement).value))
+    neo3Dapi.getBalance(JSON.parse(document.getElementById(inputElement).value))
       .then(function (data) {
         const formatted = syntaxHighlight(data);
         document.getElementById(resultElem).innerHTML = formatted;
@@ -244,7 +244,7 @@ function getBalance(inputElement, resultElem) {
 }
 
 function getStorage(inputElement, resultElem) {
-  neoN3Dapi.getStorage(JSON.parse(document.getElementById(inputElement).value))
+  neo3Dapi.getStorage(JSON.parse(document.getElementById(inputElement).value))
     .then(function (data) {
       const formatted = syntaxHighlight(data);
       document.getElementById(resultElem).innerHTML = formatted;
@@ -257,7 +257,7 @@ function getStorage(inputElement, resultElem) {
 
 function invokeRead(inputElement, resultElem) {
   try {
-    neoN3Dapi.invokeRead(JSON.parse(document.getElementById(inputElement).value))
+    neo3Dapi.invokeRead(JSON.parse(document.getElementById(inputElement).value))
       .then(function (data) {
         const formatted = syntaxHighlight(data);
         document.getElementById(resultElem).innerHTML = formatted;
@@ -272,7 +272,7 @@ function invokeRead(inputElement, resultElem) {
 
 function invokeReadMulti(inputElement, resultElem) {
   try {
-    neoN3Dapi.invokeReadMulti(JSON.parse(document.getElementById(inputElement).value))
+    neo3Dapi.invokeReadMulti(JSON.parse(document.getElementById(inputElement).value))
       .then(function (data) {
         const formatted = syntaxHighlight(data);
         document.getElementById(resultElem).innerHTML = formatted;
@@ -287,7 +287,7 @@ function invokeReadMulti(inputElement, resultElem) {
 
 function invoke(inputElement, resultElem) {
   try {
-    neoN3Dapi.invoke(JSON.parse(document.getElementById(inputElement).value))
+    neo3Dapi.invoke(JSON.parse(document.getElementById(inputElement).value))
       .then(function (data) {
         const formatted = syntaxHighlight(data);
         document.getElementById(resultElem).innerHTML = formatted;
@@ -302,7 +302,7 @@ function invoke(inputElement, resultElem) {
 
 function invokeMulti(inputElement, resultElem) {
   try {
-    neoN3Dapi.invokeMulti(JSON.parse(document.getElementById(inputElement).value))
+    neo3Dapi.invokeMulti(JSON.parse(document.getElementById(inputElement).value))
       .then(function (data) {
         const formatted = syntaxHighlight(data);
         document.getElementById(resultElem).innerHTML = formatted;
@@ -318,7 +318,7 @@ function invokeMulti(inputElement, resultElem) {
 
 function send(inputElement, resultElem) {
   try {
-    neoN3Dapi.send(JSON.parse(document.getElementById(inputElement).value))
+    neo3Dapi.send(JSON.parse(document.getElementById(inputElement).value))
       .then(function (data) {
         const formatted = syntaxHighlight(data);
         document.getElementById(resultElem).innerHTML = formatted;
@@ -333,7 +333,7 @@ function send(inputElement, resultElem) {
 
 function signMessage(inputElement, resultElem) {
   try {
-    neoN3Dapi.signMessage(JSON.parse(document.getElementById(inputElement).value))
+    neo3Dapi.signMessage(JSON.parse(document.getElementById(inputElement).value))
       .then(function (data) {
         const formatted = syntaxHighlight(data);
         document.getElementById(resultElem).innerHTML = formatted;
@@ -349,7 +349,7 @@ function signMessage(inputElement, resultElem) {
 
 function verifyMessage(inputElement, resultElem) {
   try {
-    neoN3Dapi.verifyMessage(JSON.parse(document.getElementById(inputElement).value))
+    neo3Dapi.verifyMessage(JSON.parse(document.getElementById(inputElement).value))
       .then(function (data) {
         const formatted = syntaxHighlight(data);
         document.getElementById(resultElem).innerHTML = formatted;
@@ -364,7 +364,7 @@ function verifyMessage(inputElement, resultElem) {
 
 function getBlock(inputElement, resultElem) {
   try {
-    neoN3Dapi.getBlock(JSON.parse(document.getElementById(inputElement).value))
+    neo3Dapi.getBlock(JSON.parse(document.getElementById(inputElement).value))
       .then(function (data) {
         const formatted = syntaxHighlight(data);
         document.getElementById(resultElem).innerHTML = formatted;
@@ -379,7 +379,7 @@ function getBlock(inputElement, resultElem) {
 
 function getBlockHeight(inputElement, resultElem) {
   try {
-    neoN3Dapi.getBlockHeight(JSON.parse(document.getElementById(inputElement).value))
+    neo3Dapi.getBlockHeight(JSON.parse(document.getElementById(inputElement).value))
       .then(function (data) {
         const formatted = syntaxHighlight(data);
         document.getElementById(resultElem).innerHTML = formatted;
@@ -394,7 +394,7 @@ function getBlockHeight(inputElement, resultElem) {
 
 function getTransaction(inputElement, resultElem) {
   try {
-    neoN3Dapi.getTransaction(JSON.parse(document.getElementById(inputElement).value))
+    neo3Dapi.getTransaction(JSON.parse(document.getElementById(inputElement).value))
       .then(function (data) {
         const formatted = syntaxHighlight(data);
         document.getElementById(resultElem).innerHTML = formatted;
@@ -409,7 +409,7 @@ function getTransaction(inputElement, resultElem) {
 
 function getApplicationLog(inputElement, resultElem) {
   try {
-    neoN3Dapi.getApplicationLog(JSON.parse(document.getElementById(inputElement).value))
+    neo3Dapi.getApplicationLog(JSON.parse(document.getElementById(inputElement).value))
       .then(function (data) {
         const formatted = syntaxHighlight(data);
         document.getElementById(resultElem).innerHTML = formatted;

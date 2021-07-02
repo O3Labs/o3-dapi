@@ -1,37 +1,37 @@
-# o3-dapi-neo-n3
+# o3-dapi-neo3
 NEO N3 Plugin for o3-dapi
 
 Requires o3-dapi-core to operate.
 
 ## Usage
 
-In a browser - cdn [![](https://data.jsdelivr.com/v1/package/npm/o3-dapi-neo-n3/badge)](https://www.jsdelivr.com/package/npm/o3-dapi-neo-n3)
+In a browser - cdn [![](https://data.jsdelivr.com/v1/package/npm/o3-dapi-neo3/badge)](https://www.jsdelivr.com/package/npm/o3-dapi-neo3)
 ```
-<script src="https://cdn.jsdelivr.net/npm/o3-dapi-neo-n3/lib/o3-dapi-neo-n3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/o3-dapi-neo3/lib/o3-dapi-neo3.min.js"></script>
 ```
 ```
 window.o3dapiNeoN3
 ```
 
-Install via npm [![npm version](https://badge.fury.io/js/o3-dapi-neo.svg)](https://badge.fury.io/js/o3-dapi-neo-n3)
+Install via npm [![npm version](https://badge.fury.io/js/o3-dapi-neo.svg)](https://badge.fury.io/js/o3-dapi-neo3)
 ```
-npm i --save o3-dapi-neo-n3
+npm i --save o3-dapi-neo3
 
 or
 
-yarn add o3-dapi-neo-n3
+yarn add o3-dapi-neo3
 ```
 
 ```
-var o3dapiNeoN3 = require('o3-dapi-neo-n3');
+var o3dapiNeoN3 = require('o3-dapi-neo3');
 
-import o3dapiNeoN3 from 'o3-dapi-neo-n3';
+import o3dapiNeoN3 from 'o3-dapi-neo3';
 ```
 
 ## Example
 ```
 import o3dapi from 'o3-dapi-core';
-import o3dapiNeoN3 from 'o3-dapi-neo-n3';
+import o3dapiNeoN3 from 'o3-dapi-neo3';
 
 o3dapi.initPlugins([o3dapiNeoN3]);
 

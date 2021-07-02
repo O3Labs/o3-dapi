@@ -1,8 +1,8 @@
 {
-  "name": "o3-dapi-neo-n3",
-  "version": "1.0.2",
+  "name": "o3-dapi-neo3",
+  "version": "1.0.0",
   "description": "NEO N3 Plugin for o3-dapi",
-  "main": "./lib/o3-dapi-neo-n3.min.js",
+  "main": "./lib/o3-dapi-neo3.min.js",
   "types": "./lib/index.d.ts",
   "scripts": {
     "start": "webpack --mode development --watch",
@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/O3Labs/o3-dapi.git"
   },
-  "author": "Nick Fujita",
+  "author": "o3.network",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/O3Labs/o3-dapi/issues"

@@ -76,8 +76,8 @@ const utilsScriptHash2addressOutputEle = document.getElementById("utilsScriptHas
 
 o3dapi.initPlugins([o3dapiNeoN3]);
 
-const neoN3Dapi = o3dapi.NEO3;
-neoN3Dapi.EventName = o3dapi.NEO3.Constants.EventName;
+const neo3Dapi = o3dapi.NEO3;
+neo3Dapi.EventName = o3dapi.NEO3.Constants.EventName;
 
 
 let isUtilsOpen;
@@ -121,7 +121,7 @@ function stopLoading() {
 stopLoading();
 
 function isReady() {
-  neoN3Dapi.isReady()
+  neo3Dapi.isReady()
     .then(handleSuccess)
     .catch(handleError);
 }
@@ -131,7 +131,7 @@ function isReady() {
 function deploy() {
   try {
     startLoading();
-    neoN3Dapi.deploy({
+    neo3Dapi.deploy({
         network: networksEle.value,
         name: deployNameEle.value,
         version: deployVersionEle.value,
@@ -154,7 +154,7 @@ function deploy() {
 }
 
 function disconnect() {
-  neoN3Dapi.disconnect()
+  neo3Dapi.disconnect()
     .then(data => {
       accountEle.innerHTML = '';
       disconnectEle.innerHTML = '';
@@ -166,8 +166,8 @@ function disconnect() {
 
 
 function utilsAddress() {
-  const address2scriptHashResult = utilsAddress2scriptHashInputEle.value ? neoN3Dapi.utils.address2scriptHash(utilsAddress2scriptHashInputEle.value) : '';
-  const scriptHash2addressResult = utilsScriptHash2addressInputEle.value ? neoN3Dapi.utils.scriptHash2address(utilsScriptHash2addressInputEle.value) : '';
+  const address2scriptHashResult = utilsAddress2scriptHashInputEle.value ? neo3Dapi.utils.address2scriptHash(utilsAddress2scriptHashInputEle.value) : '';
+  const scriptHash2addressResult = utilsScriptHash2addressInputEle.value ? neo3Dapi.utils.scriptHash2address(utilsScriptHash2addressInputEle.value) : '';
 
   utilsAddress2scriptHashOutputEle.innerHTML = address2scriptHashResult;
   utilsScriptHash2addressOutputEle.innerHTML = scriptHash2addressResult;
@@ -192,31 +192,31 @@ function readSingleFile(evt) {
 
 // deployAvmFileEle.addEventListener('change', readSingleFile, false);
 
-if (neoN3Dapi.isAvailable) {
+if (neo3Dapi.isAvailable) {
   console.log('in o3 dapp browser')
 }
 
-neoN3Dapi.addEventListener(neoN3Dapi.Constants.EventName.READY, onReady);
+neo3Dapi.addEventListener(neo3Dapi.Constants.EventName.READY, onReady);
 
-neoN3Dapi.addEventListener(neoN3Dapi.Constants.EventName.CONNECTED, data => {
+neo3Dapi.addEventListener(neo3Dapi.Constants.EventName.CONNECTED, data => {
   accountEle.innerHTML = `Connected Account: ${data.address}`;
   disconnectEle.innerHTML = 'disconnect';
 });
 
-neoN3Dapi.addEventListener(neoN3Dapi.Constants.EventName.ACCOUNT_CHANGED, data => {
+neo3Dapi.addEventListener(neo3Dapi.Constants.EventName.ACCOUNT_CHANGED, data => {
   accountEle.innerHTML = `Connected Account: ${data.address}`;
   disconnectEle.innerHTML = 'disconnect';
 });
 
-neoN3Dapi.addEventListener(neoN3Dapi.Constants.EventName.DISCONNECTED, data => {
+neo3Dapi.addEventListener(neo3Dapi.Constants.EventName.DISCONNECTED, data => {
   accountEle.innerHTML = '';
   disconnectEle.innerHTML = '';
   clearText();
 });
 
-neoN3Dapi.addEventListener(neoN3Dapi.Constants.EventName.NETWORK_CHANGED, handleNewNetworks);
+neo3Dapi.addEventListener(neo3Dapi.Constants.EventName.NETWORK_CHANGED, handleNewNetworks);
 
-neoN3Dapi.addEventListener(neoN3Dapi.Constants.EventName.TRANSACTION_CONFIRMED, data => {
+neo3Dapi.addEventListener(neo3Dapi.Constants.EventName.TRANSACTION_CONFIRMED, data => {
   console.log('neo n3 tx confirmed: ', JSON.stringify(data));
 });
 
@@ -239,9 +239,9 @@ function handleNewNetworks({
 }
 
 function onReady() {
-  neoN3Dapi.getNetworks()
+  neo3Dapi.getNetworks()
     .then(handleNewNetworks);
-  neoN3Dapi.addEventListener(neoN3Dapi.Constants.EventName.BLOCK_HEIGHT_CHANGED, data => {
+  neo3Dapi.addEventListener(neo3Dapi.Constants.EventName.BLOCK_HEIGHT_CHANGED, data => {
     console.log('neo n3 block height changed: ', JSON.stringify(data));
   });
 };
