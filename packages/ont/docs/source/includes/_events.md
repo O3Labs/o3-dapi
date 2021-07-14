@@ -23,6 +23,7 @@ On a ACCOUNT_CHANGED event, the callback will fire with a single argument of the
 
 | Parameter | Type   | Description                                        |
 |:--------- |:------ |:-------------------------------------------------- |
+| chainType | String | Chain type of the new account                      |
 | address   | String | Address of the new account                         |
 | label     | String | A label the users has set to identify their wallet |
 

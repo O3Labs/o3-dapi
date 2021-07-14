@@ -1767,6 +1767,7 @@ On a ACCOUNT_CHANGED event, the callback will fire with a single argument of the
 
 | Parameter | Type   | Description                                        |
 |:----------|:-------|:---------------------------------------------------|
+| chainType | String | Chain type of the new account                      |
 | address   | String | Address of the new account                         |
 | label     | String | A label the users has set to identify their wallet |
 
@@ -1826,97 +1827,3 @@ The NEO N3 dAPI will provide these basic errors. It is up to the wallet provider
 | MALFORMED_INPUT    | An input such as the address is not a valid NEO address                     |
 | CANCELED           | The user cancels, or refuses the dapps request                              |
 | INSUFFICIENT_FUNDS | The user does not have a sufficient balance to perform the requested action |
-
-## Utils
-
-These are a collection of commonly used utilities for parsing responses from smart contracts.
-
-### hex2str
-
-```typescript
-const hex2strInput = '68656c6c6f';
-const hex2strExpected = 'hello';
-
-const hex2strResult = neo3Dapi.utils.hex2str(hex2strInput);
-
-console.log('hex2str', hex2strExpected === hex2strResult);
-```
-
-Converts a hex string to a string.
-
-### str2hex
-
-```typescript
-const str2hexInput = 'hello';
-const str2hexExpected = '68656c6c6f';
-
-const str2hexResult = neo3Dapi.utils.str2hex(str2hexInput);
-
-console.log('str2hex', str2hexExpected === str2hexResult);
-```
-
-Converts a string to a hex string.
-
-### hex2int
-
-```typescript
-const hex2intInput = '00e1f505';
-const hex2intExpected = 100000000;
-
-const hex2intResult = neo3Dapi.utils.hex2int(hex2intInput);
-
-console.log('hex2int', hex2intExpected === hex2intResult);
-```
-
-Converts a hex string to an integer.
-
-### int2hex
-
-```typescript
-const int2hexInput = 100000000;
-const int2hexExpected = '00e1f505';
-
-const int2hexResult = neo3Dapi.utils.int2hex(int2hexInput);
-
-console.log('int2hex', int2hexExpected === int2hexResult);
-```
-
-Converts an integer to a hex string.
-
-### reverseHex
-
-```typescript
-const reverseHexInput = 'bc99b2a477e28581b2fd04249ba27599ebd736d3';
-const reverseHexExpected = 'd336d7eb9975a29b2404fdb28185e277a4b299bc';
-const reverseHexResult = neo3Dapi.utils.reverseHex(reverseHexInput);
-
-console.log('reverseHex', reverseHexExpected === reverseHexResult);
-```
-
-Converts the endian of a hex string, big to little, or little to big.
-
-<!-- ### address2scriptHash
-
-```typescript
-const address2scriptHashInput = 'Ab2fvZdmnM4HwDgVbdBrbTLz1wK5TcEyhU';
-const address2scriptHashExpected = 'd336d7eb9975a29b2404fdb28185e277a4b299bc';
-
-const address2scriptHashResult = neo3Dapi.utils.address2scriptHash(address2scriptHashInput);
-
-console.log('address2scriptHash', address2scriptHashExpected === address2scriptHashResult);
-```
-
-Converts an address to a script hash.
-
-### scriptHash2address
-
-```typescript
-const scriptHash2addressInput = 'd336d7eb9975a29b2404fdb28185e277a4b299bc';
-const scriptHash2addressExpected = 'Ab2fvZdmnM4HwDgVbdBrbTLz1wK5TcEyhU';
-
-const scriptHash2addressResult = neo3Dapi.utils.scriptHash2address(scriptHash2addressInput);
-
-console.log('scriptHash2address', scriptHash2addressExpected === scriptHash2addressResult);
-```
-
-Converts a script hash to an address. -->
