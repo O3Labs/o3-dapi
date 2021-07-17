@@ -1,0 +1,1 @@
+o3dapi.initPlugins([o3dapiNeo]);

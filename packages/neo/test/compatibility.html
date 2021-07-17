@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="O3 dApp Platform — NEO">
+  <meta name="author" content="O3">
+  <title>O3 dApp Platform — NEO</title>
+
+  <link rel="stylesheet" href="https://cdn.o3.app/css/purpose2.0/assets/libs/@fortawesome/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.o3.app/css/purpose2.0/assets/css/purpose.css" id="stylesheet">
+  <link rel="stylesheet" href="https://cdn.o3.app/css/purpose2.0/assets/css/purpose-blue-light.css" id="stylesheet">
+  <link rel="stylesheet" href="./docs.css" id="stylesheet">
+  <link href="https://unpkg.com/mocha@4.0.1/mocha.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/o3-dapi-core@0.3.0/lib/o3-dapi-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/o3-dapi-neo@0.4.2/lib/o3-dapi-neo.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://unpkg.com/chai@4.2.0/chai.js"></script>
+  <script src="https://unpkg.com/mocha@6.0.2/mocha.js"></script>
+  <style type="text/css">
+  .string {
+    color: #000;
+  }
+
+  .number {
+    color: #0000ff;
+  }
+
+  .boolean {
+    color: #b22222;
+  }
+
+  .null {
+    color: #808080;
+  }
+
+  .key {
+    color: #008000;
+  }
+</style>
+<style type="text/css">
+[v-cloak] {
+  display: none
+}
+
+*,
+body {
+  color: #000;
+}
+
+a {
+  color: #000 !important;
+}
+
+.form-control, .form-control:focus{
+  color:#000;
+}
+.docs-content>div.method[id]:before {
+  display: block;
+  height: 6rem;
+  margin-top: -6rem;
+  visibility: hidden;
+  content: "";
+}
+
+</style>
+</head>
+  </header>
+  <div id="mocha" class="mt-10"></div>
+  <script>mocha.setup('bdd')</script>
+  <script src="compatibility.js"></script>
+  <script src="compatibility.test.js"></script>
+  <script>
+        mocha.run();
+    </script>
+  </div>
+</body>
+
+<script>
+    var app = new Vue({
+	el: '#app',
+	data: {
+        
+    }, 
+    methods: {
+       
+    },  mounted: function () {
+
+    }
+})
+</script>
